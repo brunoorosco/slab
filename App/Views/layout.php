@@ -85,7 +85,7 @@
 <?php
 //            var_dump($arquivoCentro);
 
-  //  require $arquivoCentro;
+    require $arquivoCentro;
 ?>
 
 

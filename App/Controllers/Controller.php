@@ -10,15 +10,15 @@ class Controller{
         View::exibir('home.php');
     }
 
-    public static function sobre()
+    public static function empresa()
     {
        // $vagas = VagaModel::obterAtivas();
-        View::exibir('home.php');
+        View::exibir('./empresas/index.php');
     }
-    public static function teste()
+    public static function ensaio()
     {
        // $vagas = VagaModel::obterAtivas();
-        View::exibir('teste.php');
+        View::exibir('./ensaios/index.php');
     }
     public static function login()
     {

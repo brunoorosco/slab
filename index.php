@@ -33,16 +33,19 @@ require_once 'App/Controllers/controller.php';
 $app->get('/', function () { 
     Controller::index();
   }); 
-$app->get('/sobre', function () { 
-    Controller::sobre();
+$app->get('/empresa', function () { 
+    Controller::empresa();
   }); 
 
 $app->get('/login', function () { 
     Controller::login();
   }); 
 
-$app->get('/teste', function () { 
-    Controller::teste();
+$app->get('/ensaio', function () { 
+    Controller::ensaio();
+  }); 
+$app->get('/users', function () { 
+    Controller::ensaio();
   }); 
   //rode a aplicação Slim 
   $app->run();

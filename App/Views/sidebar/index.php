@@ -17,6 +17,9 @@
 <body>
 
 	<div class="wrapper">
+		<a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+			<i class="fa fa-bars"></i>
+		</a>
 		<nav id="sidebar">
 			<div class="sidebar-content">
 				<div class="sidebar-brand">
@@ -57,11 +60,14 @@
 						</ul>
 					</li>
 
-					<li class="active">
+					<li>
 						<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Consulta</a>
 						<ul class="collapse list-unstyled" id="homeSubmenu">
 							<li>
-								<a href="#">Ensaios</a>
+								<a href="./empresa">Empresas</a>
+							</li>
+							<li>
+								<a href="./ensaio">Ensaios</a>
 							</li>
 							<li>
 								<a href="#">Orçamentos</a>
@@ -74,6 +80,10 @@
 
 					<li>
 						<a href="#">Orçamento</a>
+					</li>
+
+					<li>
+						<a href="#">Impressão de Etiquetas</a>
 					</li>
 
 					<li>
@@ -93,7 +103,17 @@
 
 
 
+		<main class="page-content">
+			<div class="container-fluid">
+				<?php
+				// var_dump($arquivoCentro);
+				require $arquivoCentro;
+				?>
+			</div>
+
+		</main>
 	</div>
+
 
 
 	<!-- Optional JavaScript -->
@@ -103,17 +123,22 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 	<script>
-		$(document).ready(function() {
-			$('#sidebarCollapse').on('click', function() {
+		// $(document).ready(function() {
+		// 	$('#sidebarCollapse').on('click', function() {
+		// 		$('#sidebar').toggleClass('active');
+		// 	});
+		// });
+		jQuery(function($) {
+			$("#close-sidebar").click(function() {
+				//$("#sidebar").removeClass("toggled");
 				$('#sidebar').toggleClass('active');
-			});
-		});
+				$('#show-sidebar').toggleClass('active');
 
-		$("#close-sidebar").click(function() {
-			$(".sidebar").removeClass("toggled");
-		});
-		$("#show-sidebar").click(function() {
-			$("#sidebar").addClass("toggled");
+			});
+			$("#show-sidebar").click(function() {
+				$("#sidebar").removeClass("active");
+				$("#show-sidebar").removeClass("active");
+			});
 		});
 	</script>
 

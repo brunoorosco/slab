@@ -1,10 +1,25 @@
 {
+    "name": "brunoorosco/slab",
+    "description": "Sistema Laboratório SENAI 1.07",
+    "license": "MIT",
+    "version":"1.0",
+    "authors": [
+        {
+            "name": "Bruno Orosco",
+            "email": "brunoorosco@gmail.com"
+        }
+    ],
     "require": {
-        "slim/slim": "3.12"
+        "slim/slim": "3.12",
+        "php": ">=7.2.18",
+        "coffeecode/datalayer": "^1.1"   
     },
     "autoload": {
         "psr-4": {
             "Src\\": "App"           
-        }
+        },
+        "files":[
+            "./App/lib/config_dev.php"
+        ]
     }
 }

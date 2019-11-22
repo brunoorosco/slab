@@ -13,6 +13,7 @@ class ComposerStaticInit71162249168773caaad9634c1d941585
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+            'Src\\' => 4,
             'Slim\\' => 5,
         ),
         'P' => 
@@ -28,9 +29,17 @@ class ComposerStaticInit71162249168773caaad9634c1d941585
         array (
             'FastRoute\\' => 10,
         ),
+        'C' => 
+        array (
+            'CoffeeCode\\DataLayer\\' => 21,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Src\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App',
+        ),
         'Slim\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
@@ -50,6 +59,10 @@ class ComposerStaticInit71162249168773caaad9634c1d941585
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
+        'CoffeeCode\\DataLayer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/coffeecode/datalayer/src',
         ),
     );
 
