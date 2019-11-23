@@ -15,7 +15,7 @@ session_start();
 //session_destroy();
 
 // Conectar com o banco de dados
-Db::conectar($dbname, $user, $password, $host);
+//Db::conectar($dbname, $user, $password, $host);
 
 
 $config = ['settings' => [

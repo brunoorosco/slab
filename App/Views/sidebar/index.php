@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="./app/views/sidebar/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
-	<title>bootstrap 4 sidebar</title>
+	<title>SLab System</title>
 </head>
 
 <body>

@@ -15,11 +15,11 @@
 
 define("DATA_LAYER_CONFIG", [
     "driver" => "mysql",
-    "host" => "10.104.68.9",
+    "host" => "localhost",
     "port" => "3306",
-    "dbname" => "slab",
-    "username" => "slab",
-    "passwd" => "sen@i1045bd",
+    "dbname" => "db_igreja",
+    "username" => "brunoorosco",
+    "passwd" => "123456",
     "options" => [
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

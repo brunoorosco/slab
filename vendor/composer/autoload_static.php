@@ -8,6 +8,7 @@ class ComposerStaticInit71162249168773caaad9634c1d941585
 {
     public static $files = array (
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
+        '171f0349741791ee4b47cf78e542eba3' => __DIR__ . '/../..' . '/App/lib/config_dev.php',
     );
 
     public static $prefixLengthsPsr4 = array (
