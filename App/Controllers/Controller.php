@@ -1,6 +1,6 @@
 <?php 
 
-require dirname(__FILE__) . '/../Views/View.php';
+require_once dirname(__FILE__) . '/../Views/View.php';
 
 
 class Controller{
@@ -13,6 +13,11 @@ class Controller{
     public static function empresa()
     {
        // $vagas = VagaModel::obterAtivas();
+        View::exibir('./empresas/index.php');
+    }
+    public static function empresaConsulta()
+    {
+        $empresas = Empresa::consulta();
         View::exibir('./empresas/index.php');
     }
     public static function ensaio()
