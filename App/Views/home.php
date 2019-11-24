@@ -1,4 +1,3 @@
-<section id="portfolio">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -10,4 +9,3 @@
          
         </div>
     </div>
-</section>
