@@ -15,17 +15,26 @@ class ComposerStaticInit957562f4c4be68de0fad397e19f0a507
         'bdc465a053da7f7ddb072631f6d41d45' => __DIR__ . '/..' . '/league/plates/src/Extension/LayoutSections/layout-sections.php',
         'afa76803f24616d7599be3b7b0846adc' => __DIR__ . '/..' . '/league/plates/src/Extension/Folders/folders.php',
         '16c5be35e32c6cf916d875518b909210' => __DIR__ . '/..' . '/league/plates/src/Util/util.php',
-        '68e74547a8bf18649868e0193df92031' => __DIR__ . '/../..' . '/source/Config.php',
+        'c068b4bc8950576e88a71df2814df7d3' => __DIR__ . '/../..' . '/source/Config.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+            'Svg\\' => 4,
             'Source\\' => 7,
         ),
         'L' => 
         array (
             'League\\Plates\\' => 14,
+        ),
+        'F' => 
+        array (
+            'FontLib\\' => 8,
+        ),
+        'D' => 
+        array (
+            'Dompdf\\' => 7,
         ),
         'C' => 
         array (
@@ -35,6 +44,10 @@ class ComposerStaticInit957562f4c4be68de0fad397e19f0a507
     );
 
     public static $prefixDirsPsr4 = array (
+        'Svg\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
+        ),
         'Source\\' => 
         array (
             0 => __DIR__ . '/../..' . '/source',
@@ -42,6 +55,14 @@ class ComposerStaticInit957562f4c4be68de0fad397e19f0a507
         'League\\Plates\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/plates/src',
+        ),
+        'FontLib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
+        ),
+        'Dompdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
         ),
         'CoffeeCode\\Router\\' => 
         array (
@@ -53,11 +74,32 @@ class ComposerStaticInit957562f4c4be68de0fad397e19f0a507
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'Sabberworm\\CSS' => 
+            array (
+                0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/lib',
+            ),
+        ),
+    );
+
+    public static $classMap = array (
+        'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
+        'HTML5_Data' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Data.php',
+        'HTML5_InputStream' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/InputStream.php',
+        'HTML5_Parser' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Parser.php',
+        'HTML5_Tokenizer' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Tokenizer.php',
+        'HTML5_TreeBuilder' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/TreeBuilder.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit957562f4c4be68de0fad397e19f0a507::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit957562f4c4be68de0fad397e19f0a507::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit957562f4c4be68de0fad397e19f0a507::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit957562f4c4be68de0fad397e19f0a507::$classMap;
 
         }, null, ClassLoader::class);
     }

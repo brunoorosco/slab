@@ -64,6 +64,17 @@ class Web
             
         ]);
     }
+
+    public function etiqueta($data)
+    {
+      
+      //var_dump($data);
+        echo $this->view->render("atendimento/printEtiquetas",[
+             "title" => "Etiquetas | ". SITE
+            
+         ]);
+    }
+    
     public function error($data):void 
     {
         echo $this->view->render("error",[
