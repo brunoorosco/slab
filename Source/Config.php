@@ -1,6 +1,6 @@
 <?php
 
-define("ROOT", "https://www.localhost/www/_SLAB");
+define("ROOT", "https://www.localhost/www/SLAB");
 
 define("SITE", "#S-LAB");
 

@@ -21,10 +21,12 @@
 
 <body>
 
+
   <div class="wrapper">
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
       <i class="fa fa-bars"></i>
     </a>
+
     <nav id="sidebar">
       <div class="sidebar-content">
         <div class="sidebar-brand">
@@ -54,7 +56,7 @@
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cadastro</a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
               <li>
-                <a href="<?= url("empresa/add");?>">Empresa</a>
+                <a href="<?= url("empresa/add"); ?>">Empresa</a>
               </li>
               <li>
                 <a href="#">Normas</a>
@@ -69,13 +71,13 @@
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Consulta</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
               <li>
-                <a href="<?= url("empresa");?>">Empresas</a>
+                <a href="<?= url("empresa"); ?>">Empresas</a>
               </li>
               <li>
                 <a href="./ensaio">Ensaios</a>
               </li>
               <li>
-                <a href="#">Orçamentos</a>
+                <a href="<?= url("orcamento"); ?>">Orçamentos</a>
               </li>
               <li>
                 <a href="#">Outros</a>
@@ -84,7 +86,7 @@
           </li>
 
           <li>
-            <a href="#">Orçamento</a>
+            <a href="<?= url("orcamento"); ?>">Orçamento</a>
           </li>
 
           <li>
@@ -107,9 +109,9 @@
     </nav>
 
 
-
     <main class="page-content">
       <div class="container-fluid">
+       
         <?= $v->section("content"); ?>
       </div>
     </main>

@@ -18,7 +18,7 @@ $route->get("/", "Web:home");
 $route->get("/contato", "Web:contact");
 $route->get("/teste", "Web:layout");
 $route->get("/login", "Web:layout");
-
+$route->get("/orcamento","Web:orcamento");
 /**
  * web
  * Empresa

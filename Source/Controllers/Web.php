@@ -55,6 +55,15 @@ class Web
         $url = URL_BASE;
         require __DIR__."../../Views/contato.php";
     }
+
+    public function orcamento($data):void
+    {
+        //var_dump($data);
+        echo $this->view->render("atendimento/orcamento",[
+            "title" => "Orçamento | ". SITE
+            
+        ]);
+    }
     public function error($data):void 
     {
         echo $this->view->render("error",[
