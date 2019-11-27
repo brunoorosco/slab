@@ -74,6 +74,16 @@ class Web
             
          ]);
     }
+
+    public function buscaEtiqueta($data)
+    {
+        
+      //var_dump($data);
+        echo $this->view->render("atendimento/buscaEtiqueta",[
+             "title" => "Etiquetas | ". SITE
+            
+         ]);
+    }
     
     public function error($data):void 
     {

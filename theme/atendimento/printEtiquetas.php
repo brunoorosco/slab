@@ -13,7 +13,7 @@ $options->set('isRemoteEnabled', TRUE);
 $dompdf = new Dompdf($options);
 // $dompdf->set_base_path('./assests/');
 ob_start();
-require __DIR__."/etiquetas.php";
+require __DIR__."/htmlEtiquetas.php";
 $dompdf->loadHtml(ob_get_clean());
 
 $customPaper = array(0, 0, 297, 240);

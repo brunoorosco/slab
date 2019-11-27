@@ -19,7 +19,10 @@ $route->get("/contato", "Web:contact");
 $route->get("/teste", "Web:layout");
 $route->get("/login", "Web:layout");
 $route->get("/orcamento","Web:orcamento");
-$route->get("/etiqueta","Web:etiqueta");
+
+$route->group("etiqueta");
+$route->get("/","Web:etiqueta");
+$route->get("/busca","Web:buscaEtiqueta");
 /**
  * web
  * Empresa

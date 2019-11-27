@@ -90,7 +90,7 @@
           </li>
 
           <li>
-            <a href="#">Impressão de Etiquetas</a>
+            <a href="<?= url("etiqueta/busca");?>">Impressão de Etiquetas</a>
           </li>
 
           <li>
