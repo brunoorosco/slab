@@ -1,82 +1,45 @@
 <?php
 
-require 'vendor/autoload.php';
-require 'App/lib/Db.php';
+require __DIR__ . "/vendor/autoload.php";
 
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+$route = new \CoffeeCode\Router\Router(ROOT);
 
+/**
+ * APP
+ */
+$route->namespace("Source\Controllers");
 
-if ($_SERVER['SERVER_NAME'] == 'localhost')
-  require 'App/lib/config_dev.php';
-else
-  require 'App/lib/config_prod.php';
-session_start();
-//session_destroy();
+/**
+ * web
+ */
+$route->group(null);
+//$route->get("/", "Web:home");
+$route->get("/", "Web:home");
+$route->get("/contato", "Web:contact");
+$route->get("/teste", "Web:layout");
+$route->get("/login", "Web:layout");
 
-// Conectar com o banco de dados
-//Db::conectar($dbname, $user, $password, $host);
+/**
+ * web
+ * Empresa
+ */
+$route->group("empresa");
+$route->get("/", "WebEmpresa:empresa");
+$route->get("/add", "WebEmpresa:adicionar");
+$route->post("/add", "WebEmpresa:adicionar");
+$route->put("/edit", "WebEmpresa:editar");
 
+/**
+ * ERROR
+ */
+$route->group("ops");
+$route->get("/{errcode}", "Web:error");
 
-$config = ['settings' => [
-  'addContentLengthHeader' => false,
-  'displayErrorDetails' => true,
+/**
+ * PROCESS
+ */
+$route->dispatch();
 
-]];
-
-$c = new \Slim\Container($config);
-$app = new \Slim\App($c);
-
-// Define app routes
-require_once 'App/Controllers/controller.php';
-require_once 'App/Controllers/empresaController.php';
-
-//defina a rota
-$app->get('/', function () {
-  Controller::index();
-});
-// $app->get('/empresa', function () {
-//   Controller::empresa();
-// });
-
-$app->get('/login', function () {
-  Controller::login();
-});
-
-$app->get('/ensaio', function () {
-  Controller::ensaio();
-});
-$app->get('/users', function () {
-  Controller::ensaio();
-});
-
-// API group
-
-$app->group('/empresa', function ($app) {
-
-  $app->get('/add', function ($request, $response) {
-    empresaController::adicionar();
-  });
-  $app->get('', function ($request, $response) {
-    empresaController::consultar();
-  });
-
-  $app->get('/:id', function ($request, $response, $args) { 
-
-  });
-
-  $app->post('/', function ($request, $response) { 
-
-  });
-
-  $app->put('/:id', function ($request, $response, $args) { 
-
-  });
-
-  $app->delete('/:id', function ($request, $response, $args) { 
-
-  });
-});
-
-//rode a aplicação Slim 
-$app->run();
+if ($route->error()) {
+    $route->redirect("/ops/{$route->error()}");
+}

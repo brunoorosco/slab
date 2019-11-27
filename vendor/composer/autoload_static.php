@@ -4,77 +4,60 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit71162249168773caaad9634c1d941585
+class ComposerStaticInit957562f4c4be68de0fad397e19f0a507
 {
     public static $files = array (
-        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
-        '171f0349741791ee4b47cf78e542eba3' => __DIR__ . '/../..' . '/App/lib/config_dev.php',
+        'e471bf351add62873bc0289ccd6a937f' => __DIR__ . '/..' . '/league/plates/src/Template/match.php',
+        '152c98af9456eeb8f53697d6a7dfd689' => __DIR__ . '/..' . '/league/plates/src/Extension/Data/data.php',
+        'e20239a76b73b9912f51f0005956d1db' => __DIR__ . '/..' . '/league/plates/src/Extension/Path/path.php',
+        'd513f8e004e152493580ca1917e308ba' => __DIR__ . '/..' . '/league/plates/src/Extension/RenderContext/func.php',
+        '27980683f1626a3fd1405d27b171c0fe' => __DIR__ . '/..' . '/league/plates/src/Extension/RenderContext/render-context.php',
+        'bdc465a053da7f7ddb072631f6d41d45' => __DIR__ . '/..' . '/league/plates/src/Extension/LayoutSections/layout-sections.php',
+        'afa76803f24616d7599be3b7b0846adc' => __DIR__ . '/..' . '/league/plates/src/Extension/Folders/folders.php',
+        '16c5be35e32c6cf916d875518b909210' => __DIR__ . '/..' . '/league/plates/src/Util/util.php',
+        '68e74547a8bf18649868e0193df92031' => __DIR__ . '/../..' . '/source/Config.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
             'Source\\' => 7,
-            'Slim\\' => 5,
         ),
-        'P' => 
+        'L' => 
         array (
-            'Psr\\Http\\Message\\' => 17,
-            'Psr\\Container\\' => 14,
+            'League\\Plates\\' => 14,
         ),
-        'I' => 
+        'C' => 
         array (
-            'Interop\\Container\\' => 18,
-        ),
-        'F' => 
-        array (
-            'FastRoute\\' => 10,
+            'CoffeeCode\\Router\\' => 18,
+            'CoffeeCode\\DataLayer\\' => 21,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Source\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/App',
+            0 => __DIR__ . '/../..' . '/source',
         ),
-        'Slim\\' => 
+        'League\\Plates\\' => 
         array (
-            0 => __DIR__ . '/..' . '/slim/slim/Slim',
+            0 => __DIR__ . '/..' . '/league/plates/src',
         ),
-        'Psr\\Http\\Message\\' => 
+        'CoffeeCode\\Router\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/coffeecode/router/src',
         ),
-        'Psr\\Container\\' => 
+        'CoffeeCode\\DataLayer\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
-        'Interop\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
-        ),
-        'FastRoute\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/nikic/fast-route/src',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'P' => 
-        array (
-            'Pimple' => 
-            array (
-                0 => __DIR__ . '/..' . '/pimple/pimple/src',
-            ),
+            0 => __DIR__ . '/..' . '/coffeecode/datalayer/src',
         ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit71162249168773caaad9634c1d941585::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit71162249168773caaad9634c1d941585::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit71162249168773caaad9634c1d941585::$prefixesPsr0;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit957562f4c4be68de0fad397e19f0a507::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit957562f4c4be68de0fad397e19f0a507::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

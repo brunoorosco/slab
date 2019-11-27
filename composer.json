@@ -1,27 +1,27 @@
 {
-    "name": "brunoorosco/slab",
-    "description": "Sistema Laboratório SENAI 1.07",
-    "license": "MIT",
-    "version":"1.0",
-    "authors": [
-        {
-            "name": "Bruno Orosco",
-            "email": "brunoorosco@gmail.com"
-        }
-    ],
-    "config":{
-        "vendor-dir": "vendor"
-    },
-    "require": {
-        "slim/slim": "^3.12",
-        "php": ">=7.2.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Source\\": "App"           
-        },
-        "files":[
-            "./App/lib/config_dev.php"
-        ]
+  "name": "brunoorosco/slab001",
+  "description": "GESTÃO DE RESULTADOS LABORATÓRIAIS",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bruno Orosco",
+      "email": "brunoorosco@gmail.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Source\\": "source/"
+    },
+    "files": [
+      "source/Config.php"
+    ]
+  },
+  "require": {
+    "php": "^7.2",
+    "ext-pdo": "*",
+    "coffeecode/datalayer": "1.1.*",
+    "coffeecode/router": "1.0.*",
+    "league/plates": "v4.0.0-alpha"
+  }
 }
