@@ -33,5 +33,15 @@ class Atendimento
 
 
     }
+    public function plano($data):void
+    {
+    //    $users = (new User())->find()->fetch(true);
+        echo $this->view->render("atendimento/consultaPlano",[
+            "title" => "Ordem de Serv | ". SITE,
+          //  "users" => $users
+        ]);
+
+
+    }
 
 }

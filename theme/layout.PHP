@@ -75,6 +75,9 @@
                 <a href="./ensaio">Ensaios</a>
               </li>
               <li>
+                <a href="./atendimento/plano">Plano de Atendimento</a>
+              </li>
+              <li>
                 <a href="<?= url("orcamento"); ?>">Orçamentos</a>
               </li>
               <li>
