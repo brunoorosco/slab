@@ -58,7 +58,7 @@ class Web
 
     public function orcamento($data):void
     {
-        //var_dump($data);
+        $users = (new User())->find()->fetch(true);
         echo $this->view->render("atendimento/orcamento",[
             "title" => "Orçamento | ". SITE
             

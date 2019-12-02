@@ -18,11 +18,18 @@ $route->get("/", "Web:home");
 $route->get("/contato", "Web:contact");
 $route->get("/teste", "Web:layout");
 $route->get("/login", "Web:layout");
-$route->get("/orcamento","Web:orcamento");
 
 $route->group("etiqueta");
 $route->get("/","Web:etiqueta");
 $route->get("/busca","Web:buscaEtiqueta");
+/**
+ * web
+ * Atendimento de empresas
+ */
+$route->group("atendimento");
+$route->get("/", "Atendimento:atendimento");
+$route->get("/plano", "Atendimento:imprimirPlano");
+
 /**
  * web
  * Empresa

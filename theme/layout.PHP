@@ -84,7 +84,7 @@
           </li>
 
           <li>
-            <a href="<?= url("orcamento"); ?>">Orçamento</a>
+            <a href="<?= url("atendimento"); ?>">Plano de Atendimento</a>
           </li>
 
           <li>

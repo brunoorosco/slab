@@ -9,7 +9,7 @@ define("DATA_LAYER_CONFIG", [
     "host" => "localhost",
     "port" => "3306",
     "dbname" => "slab",
-    "username" => "root",
+    "username" => "brunoorosco",
     "passwd" => "123456",
     "options" => [
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
