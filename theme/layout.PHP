@@ -55,15 +55,13 @@
           <li>
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cadastro</a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
-              <li>
-                <a href="<?= url("empresa/add"); ?>">Empresa</a>
-              </li>
-              <li>
-                <a href="#">Normas</a>
-              </li>
-              <li>
-                <a href="#">RH</a>
-              </li>
+              <li><a href="../composicoes/" class="lk_lista">Composições</a></li>
+              <li><a href="<?= url("empresa/add"); ?>">Empresas</a></li>
+              <li><a href="../funcionarios" class="lk_lista">Funcionários</a></li>
+              <li><a href="#">Normas</a> </li>
+              <li><a href="../produtos/" class="lk_lista">Produtos</a></li>
+              <li><a href="../ensaios/" class="lk_lista">Tipos de Ensaios</a></li>
+              <li><a href="../tiposTecido/" class="lk_lista">Tipos de Tecidos</a></li>
             </ul>
           </li>
 
@@ -90,14 +88,19 @@
           </li>
 
           <li>
-            <a href="<?= url("etiqueta/busca");?>">Impressão de Etiquetas</a>
+            <a href="<?= url("etiqueta/busca"); ?>">Impressão de Etiquetas</a>
           </li>
 
           <li>
             <a href="#">Liberação de Pedidos</a>
           </li>
           <li>
-            <a href="#">Outros</a>
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relatórios</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+              <li><a href="../relatorios/planoAtendimento/" class="lk_lista">Plano de atendimento</a></li>
+              <li><a href="../relatorios/etiquetas/" class="lk_lista">Etiquetas para amostras</a></li>
+              <li><a href="../relatorios/recebimentoItens/" class="lk_lista">Recebimento de itens para ensaio</a></li>
+            </ul>
           </li>
         </ul>
 
@@ -111,7 +114,7 @@
 
     <main class="page-content">
       <div class="container-fluid">
-       
+
         <?= $v->section("content"); ?>
       </div>
     </main>

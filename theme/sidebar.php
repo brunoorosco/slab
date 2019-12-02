@@ -35,6 +35,13 @@
               <li>
                 <a href="#">RH</a>
               </li>
+              <li><a href="../empresas/" class="lk_lista">Empresas</a></li>
+								<li><a href="../ensaios/" class="lk_lista">Tipos de ensaios</a></li>
+								<li><a href="../funcionarios" class="lk_lista">FuncionÃ¡rios</a></li>
+								<li><a href="../tiposTecido/" class="lk_lista">Tipos de tecidos</a></li>
+								<li><a href="../normas/" class="lk_lista">Normas</a></li>
+								<li><a href="../produtos/" class="lk_lista">Produtos</a></li>
+								<li><a href="../composicoes/" class="lk_lista">Composições</a></li>
             </ul>
           </li>
 
