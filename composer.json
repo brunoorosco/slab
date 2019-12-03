@@ -23,6 +23,7 @@
     "coffeecode/datalayer": "1.1.*",
     "coffeecode/router": "1.0.*",
     "league/plates": "v4.0.0-alpha",
-    "dompdf/dompdf": "^0.8.3"
+    "dompdf/dompdf": "^0.8.3",
+    "fpdf/fpdf": "^1.81"
   }
 }

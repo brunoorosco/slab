@@ -28,7 +28,11 @@ $route->get("/busca","Web:buscaEtiqueta");
  */
 $route->group("atendimento");
 $route->get("/", "Atendimento:atendimento");
+<<<<<<< HEAD
 $route->get("/plano", "Atendimento:plano");
+=======
+$route->get("/plano", "Atendimento:imprimirPlano");
+>>>>>>> fef7d235439f03b2290f9f0af242ee7d6428b6f4
 $route->post("/plano", "Atendimento:imprimirPlano");
 
 /**
