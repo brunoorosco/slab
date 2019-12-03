@@ -52,7 +52,7 @@ class Web
     {
         echo "<h1>Contato</h1>";
         //var_dump($data);
-        $url = URL_BASE;
+        $url = ROOT;
         require __DIR__."../../Views/contato.php";
     }
 

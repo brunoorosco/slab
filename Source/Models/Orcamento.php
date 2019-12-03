@@ -4,7 +4,7 @@ namespace Source\Models;
 
 use CoffeeCode\DataLayer\DataLayer;
 
-class Empresa extends DataLayer
+class Orcamento extends DataLayer
 {
     public function __construct()
     {

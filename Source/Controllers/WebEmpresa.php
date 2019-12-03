@@ -4,6 +4,7 @@ namespace Source\Controllers;
 
 use League\Plates\Engine;
 use Source\Models\Empresa;
+use Source\Models\User;
 
 class WebEmpresa
 {

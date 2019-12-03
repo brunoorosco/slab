@@ -1,30 +1,18 @@
 <?php 
 
-use Fpdf\Fpdf;
+require_once getcwd().'/vendor/autoload.php';
 
-//include_once("_fonts/ funcoes.php");
+// $fileName = "./source/img/planodeatendimento.doc";
 
-header('Content-Type: text/html; charset=utf-8');
+// $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
+//$templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor($fileName);
 
-//Connect to your database
-// include ('../../_fonts/config/banco.php');
-// Connect to database...
+//require_once getcwd().'/vendor/autoload.php';
 
-//Define informações locais 
-setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
-date_default_timezone_set('America/Sao_Paulo');
+// $templateProcessor->setValue('empresa', 'John');
+// $templateProcessor->setValue('CNPJ', '00.000.000/0001-00');
 
 
-$str = date('d-m-Y');
-//resultado: Mar
-
-$pdf = new FPDF();
-$pdf->AliasNbPages();
-$pdf->AddPage();
-
-//$pdf->Image('./../img/planodeatendimento1.jpg', -2, 0,100); //primeiro valor posição em X,segundo valor posição em Y, terceiro valor tamanho
-
-
-
-$pdf->Output('I', 'Plano de Atendimento - .pdf');
+// $docxFile = "files/exp_" . $dt['id'] . ".docx";
+// $templateProcessor->saveAs($docxFile);
