@@ -30,6 +30,7 @@ class ComposerStaticInit957562f4c4be68de0fad397e19f0a507
         ),
         'F' => 
         array (
+            'Fpdf\\' => 5,
             'FontLib\\' => 8,
         ),
         'D' => 
@@ -55,6 +56,10 @@ class ComposerStaticInit957562f4c4be68de0fad397e19f0a507
         'League\\Plates\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/plates/src',
+        ),
+        'Fpdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf',
         ),
         'FontLib\\' => 
         array (
