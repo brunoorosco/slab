@@ -7,6 +7,7 @@ use Source\Models\Orcamento;
 use PhpOffice\Common;
 use Phpoffice\PhpWord;
 
+
 class Atendimento
 {
     private $view;

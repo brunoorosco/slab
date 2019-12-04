@@ -17,7 +17,7 @@ class WebEmpresa
     public function empresa($data):void
     {
         $empresas = (new Empresa())->find()->fetch(true);
-        echo $this->view->render("empresas/consulta",[
+        echo $this->view->render("empresas/listar",[
             "title" => "Empresas | ". SITE,
             "empresas" => $empresas
         ]);

@@ -1,5 +1,6 @@
-<?php $v->layout("layout"); ?>
+<?php $v->layout("layout",['title' => 'User Profile']); ?>
 
+<title>teste</title>
 <div id="principal">
     <span class="subtitulo2" id="aut_tit1"><?php echo ('Área de acesso'); ?></span>
 

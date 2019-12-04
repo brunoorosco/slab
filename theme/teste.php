@@ -1,4 +1,4 @@
-<?php $v->layout("layout");?>
+<?php $v->layout("layout2");?>
 
 <div class="users">
     <?php if ($users):

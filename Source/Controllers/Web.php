@@ -13,8 +13,10 @@ class Web
     {
         $this->view = Engine::create(__DIR__."/../../theme","php");
     }
+
     public function home($data):void
-    {
+    {  
+      // $user = User::login() 
        $users = (new User())->find()->fetch(true);
        echo $this->view->render("home",[
            "title" => "Home | ". SITE,
@@ -24,9 +26,9 @@ class Web
 
     public function login($data):void
     {
-       $users = (new User())->find()->fetch(true);
+      // $users = (new User())->find()->fetch(true);
        echo $this->view->render("login/login",[
-           "title" => "Autenticacao | ". SITE,
+           "title" => "Login | ",
            
        ]);
     }
