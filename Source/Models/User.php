@@ -16,17 +16,17 @@ class User extends DataLayer
         // Sanitizar
         $email = filter_var($email,FILTER_VALIDATE_EMAIL);
         $senha = filter_var($senha,FILTER_SANITIZE_STRING);
-        //$candidato = CandidatoModel::obterPorEmail($email);
-        $candidato = User::obterPorEmail($email);
+        //$usuario = CandidatoModel::obterPorEmail($email);
+        $usuario = User::obterPorEmail($email);
         $retorno = array();
-        if ($candidato!=false){
-            if ($candidato->password==md5($senha)) {
+        if ($usuario!=false){
+            if ($usuario->password==md5($senha)) {
                 // Autentica-lo
                 $retorno['sucesso'] = true;
-                $retorno['nome'] = $candidato->nome;
-                $_SESSION['id_candidato'] = $candidato->id;
+                $retorno['nome'] = $usuario->nome;
+                $_SESSION['id_candidato'] = $usuario->id;
                 //            "autenticado: true";
-                //            var_dump($candidato);
+                //            var_dump($usuario);
             } else {
                 $retorno['sucesso']=false;
                 $retorno['mensagem']="Senha incorreta!";
@@ -42,7 +42,7 @@ class User extends DataLayer
     public static function obterPorEmail($email)
     {
         $sql = "select *
-                from candidatos
+                from funcionarios
                 where email = '$email'";
         //$result = Db::query($sql);
         $result = "";

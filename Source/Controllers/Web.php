@@ -14,13 +14,14 @@ class Web
         $this->view = Engine::create(__DIR__."/../../theme","php");
     }
 
-    public function home($data):void
+    public function home($email):void
     {  
-      // $user = User::login() 
-       $users = (new User())->find()->fetch(true);
+        echo $email;
+       //$user = User::login($email,$senha);
+     //$users = (new User())->find()->fetch(true);
        echo $this->view->render("home",[
-           "title" => "Home | ". SITE,
-           "users" => $users
+           "title" => "Home | ". SITE
+           
        ]);
     }
 
