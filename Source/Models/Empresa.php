@@ -9,15 +9,17 @@ class Empresa extends DataLayer
 {
     public function __construct()
     {
-        parent::__construct("tbl_empresas", ["CodigoCliente", "Nome","Endereco","Numero","CNPJ","Contato", 
-        "Email", "Telefone", "Ie","CEP","Fax","Ramal","Bairro","Cidade","Estado","Sgset","Status","CPF","Telefone2","Celular"], "Codigo");
+        //parent::__construct("tbl_empresas", ["CodigoCliente", "Nome","Endereco","Numero","CNPJ","Contato", 
+        // "Email", "Telefone", "Ie","CEP","Fax","Ramal","Bairro","Cidade","Estado","Sgset","Status","CPF","Telefone2","Celular"], "Codigo");
+        parent::__construct("tbl_empresas", ["CodigoCliente", "Nome", "Endereco", "Numero", "CNPJ", "Telefone"], "Codigo");
     }
     /**Executa pesquisa das ordens de serviço da empresa escolhida */
     public function OsEmpresa()
     {
-        return (new Address())->find("CodigoCliente = :uid","uid={$this->id}")->fetch(true);
-    }   
+        return (new Address())->find("CodigoCliente = :uid", "uid={$this->id}")->fetch(true);
+    }
 
+   
 }
 
 

@@ -1,5 +1,7 @@
 <?php $v->layout("layout2"); ?>
 
+<div class="ajax_load"></div>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
@@ -49,18 +51,24 @@
                                 <td class="text-left" scope="row"><?= $empresa->Telefone ?></td>
                                 <td class="text-left" scope="row"><?= $empresa->CNPJ ?></td>
                                 <td>
-                                    <a href="./admin/empresa/<?= $empresa->Codigo ?>/editar/">
+                                    <!--<a href="<?= url("empresa/") . $empresa->Codigo ?>/editar">
+                                        <i class="fa fa-pencil text-navy"></i>
+                                    </a>-->
+                                    <a data-action="<?= url("empresa/") ?>/editar" data-id=<?= $empresa->Codigo ?>>
                                         <i class="fa fa-pencil text-navy"></i>
                                     </a>
-                                    <a href="./admin/empresa/<?= $empresa->Codigo ?>/excluir/">
+                                    <a data-action="<?= url("empresa/excluir") ?>" data-id=<?= $empresa->Codigo ?> data-nome=<?= $empresa->Nome ?>>
                                         <i class="fa fa-trash text-navy"></i>
                                     </a>
+                                    <!-- <a href="<?= url("empresa/") . $empresa->Codigo ?>/excluir">
+                                        <i class="fa fa-trash text-navy"></i>
+                                    </a> -->
                                 </td>
                             </tr>
 
                         <?php
                         endforeach; ?>
-                        
+
                     </tbody>
                 </table>
 
@@ -68,3 +76,73 @@
         </div>
     </div>
 </div>
+
+<?php $v->start("js"); ?>
+<script src="js/sweetalert.min.js"></script>
+<script>
+    $(function() {
+        function load(action) {
+            var load_div = $(".ajax_load");
+            if (action === "open") {
+                load_div.fadeIn().css("display", "flex");
+
+            } else {
+                load_div.fadeOut();
+            }
+        }
+
+        $("body").on("click", "[data-action]", function(e) {
+            e.preventDefault();
+            var data = $(this).data();
+            var div = $(this).parent().parent();
+
+            var tr = $(this).closest('tr');
+            var id = $(this).data('id');
+
+            swal({
+                    title: "Deseja realmente excluir a empresa?",
+                    text: data.nome,
+                    icon: "warning",
+                    buttons: {
+                        cancel: {
+                            text: "Cancel",
+                            value: null,
+                            visible: true,
+                            className: "",
+                            closeModal: true,
+                        },
+                        confirm: {
+                            text: "OK",
+                            value: true,
+                            visible: true,
+                            className: "",
+                            closeModal: true,
+
+                        },
+                    },
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: data.action,
+                            data: data,
+                            type: 'POST',
+
+                        }).done(function(resp) {
+
+                            tr.fadeOut('slow', function() {});
+
+                        }).fail(function(resp) {
+
+                        })
+
+
+
+                    }
+                })
+        })
+    })
+</script>
+
+<?php $v->end(); ?>

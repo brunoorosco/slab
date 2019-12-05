@@ -39,8 +39,9 @@ $route->group("empresa");
 $route->get("/", "WebEmpresa:empresa");
 $route->get("/add", "WebEmpresa:adicionar");
 $route->post("/add", "WebEmpresa:adicionar");
-$route->put("/edit", "WebEmpresa:editar");
-
+$route->put("/edit/{id}", "WebEmpresa:editar");
+$route->post("/excluir", "WebEmpresa:excluir");
+$route->get("/{id}/editar", "WebEmpresa:editar");
 /**
  * ERROR
  */

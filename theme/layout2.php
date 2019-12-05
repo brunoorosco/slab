@@ -387,6 +387,8 @@
     <!-- Toastr -->
     <script src="js/plugins/toastr/toastr.min.js"></script>
 
+    <?=  $v->section("js");?>
+
 
     <script>
         $(document).ready(function() {

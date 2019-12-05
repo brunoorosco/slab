@@ -14,7 +14,8 @@
       "Source\\": "source/"
     },
     "files": [
-      "source/Config.php"
+      "source/Config/Config.php",
+      "source/Config/Db.php"
     ]
   },
   "require": {

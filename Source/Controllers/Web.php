@@ -16,7 +16,7 @@ class Web
 
     public function home($email):void
     {  
-        echo $email;
+       // echo $email;
        //$user = User::login($email,$senha);
      //$users = (new User())->find()->fetch(true);
        echo $this->view->render("home",[
