@@ -1,243 +1,312 @@
 <?php $v->layout("layout2"); ?>
 <!-- CADASTRO DE EMPRESAS -->
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        Incluir Empresa
+                        <?php //echo ($incluindo ? "Incluir" : "Editar") . " Empresa"; 
+                        ?>
+                    </h5>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>
-                    Incluir Empresa
-                    <?php //echo ($incluindo ? "Incluir" : "Editar") . " Empresa"; 
-                    ?>
-                </h5>
-
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-wrench"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#">Config option 1</a>
-                        </li>
-                        <li><a href="#">Config option 2</a>
-                        </li>
-                    </ul>
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="ibox-content">
-                <form class="form-horizontal" id="form_cadEmpresas" name="frm_cadEmpresas" action="php/cadastro.php" method="post">
-                    <label class="subtitulo2 text-left p-2" id="ini_tit4">
-                        <h4>Incluir Empresas</h4>
-                    </label>
-                    <div class="form-group">
-                        <label class="col-lg-1 control-label text-center">Cód. do Cliente</label>
-                        <div class="col-lg-1">
-                            <input type="text" name="razao_social" value="<?= ($codCliente ? null : $codCliente); ?>" placeholder="" class="form-control">
-                        </div>
-
-                        <label class="col-lg-1 control-label">Razão Social</label>
-                        <div class="col-lg-4">
-                            <input type="text" name="razao_social" value="<?php //($incluindo ? null : $dados->razao_social); 
-                                                                            ?>" placeholder="" class="form-control">
-                        </div>
-
-                        <label class="col-lg-1 control-label">CNPJ</label>
-                        <div class="col-lg-2">
-                            <input type="text" name="razao_social" value="<?php //($incluindo ? null : $dados->razao_social); 
-                                                                            ?>" placeholder="" class="form-control">
-                        </div>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
                     </div>
-                    <!-- FORMULÁRIO DE CADASTRO DE EMPRESA -->
-                    <div class="form-group">
-                        <div class="col-2">
-                            <label class="col-lg-1 control-label" >Insc. Estadual</label>
-                            <div class="col-lg-2">
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" id="form_cadEmpresas" name="frm_cadEmpresas" action="<?=url("empresa/add") ?>" method="post">
+
+                        <div class="row form-group">
+                            <div class="col-2 input-group">
+                                <label class="">CNPJ</label>
+                                <div class="input-group">
+                                    <input type="text" name="cnpj" id="cnpj" value="<?php //($incluindo ? null : $dados->razao_social); 
+                                                                                    ?>" placeholder="00.000.000/0001-00" class="form-control ">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success" id="pesquisar" type="submit"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-1">
+                                <label class="">Cód. Cliente</label>
+
+                                <input type="text" name="codCliente" value="" placeholder="" class="form-control">
+                            </div>
+
+                            <div class="col-5">
+                                <label class="">Razão Social</label>
+
+                                <input type="text" name="razao_social" id="razao" value="<?php //($incluindo ? null : $dados->razao_social); 
+                                                                                            ?>" placeholder="" class="form-control">
+                            </div>
+
+
+                        </div>
+                        <!-- FORMULÁRIO DE CADASTRO DE EMPRESA -->
+                        <div class="row form-group">
+                            <div class="col-2">
+                                <label class="control-label">Insc. Estadual</label>
+
                                 <input type="text" name="txt_ie" onclick="cor(this);" class="form-control" id="cx4_CadEmpresas " value="<?php if (isset($ie)) {
                                                                                                                                             echo $ie;
                                                                                                                                         } ?>" />
+
                             </div>
-                        </div>
-                        <div class="col-2">
-                            <label class="col-lg-1 control-label" >E-mail</label>
-                            <div class="col-lg-2">
-                                <input type="text" name="txt_email" onclick="cor(this);" maxlength="200" class="form-control" id="cx5_CadEmpresas" value="<?php if (isset($email)) {
-                                                                                                                                                                echo $email;
-                                                                                                                                                            } ?>" />
+                            <div class="col-3">
+                                <label class=" control-label">E-mail</label>
+
+                                <input type="text" name="txt_email" onclick="cor(this);" maxlength="200" class="form-control" id="txt_email" value="<?php if (isset($email)) {
+                                                                                                                                                        echo $email;
+                                                                                                                                                    } ?>" />
+
+                                <!-- ----------------------------------------------------------------------- -->
+
                             </div>
-                            <!-- ----------------------------------------------------------------------- -->
+                            <div class="col-2">
+                                <label class="control-label">CEP</label>
 
-                        </div>
-                        <div class="col-2">
-                            <label class="col-lg-1 control-label" >CEP</label>
-                            <div class="col-lg-1">
-                                <input type="text" name="txt_cep" onclick="cor(this);"  class="cx_cep form-control" id="cx5_CadEmpresas" value="<?php if (isset($cep)) {
-                                                                                                                                                                echo $cep;
-                                                                                                                                                            } ?>" />
+                                <input type="text" name="txt_cep" onclick="cor(this);" class="cx_cep form-control" id="txt_cep" value="<?php if (isset($cep)) {
+                                                                                                                                            echo $cep;
+                                                                                                                                        } ?>" />
+
+                                <!-- ----------------------------------------------------------------------- -->
+
                             </div>
-                            <!-- ----------------------------------------------------------------------- -->
+                  
 
-                        </div>
-                    </div>
-                    <div class="row">
 
-                       
-                        <div class="col">
-                            <label id="cadEmpresa_tit6" class="texto">Endereço</label>
+                            <div class="col">
+                                <label id="cadEmpresa_tit6" class="">Endereço</label>
 
-                            <input type="text" name="txt_endereco" onclick="cor(this);" maxlength="100" class="cx_texto2 form-control" id="cx6_CadEmpresas" value="<?php if (isset($endereco)) {
+                                <input type="text" name="txt_endereco" onclick="cor(this);" maxlength="100" class="cx_texto2 form-control" id="txt_endereco" value="<?php if (isset($endereco)) {
                                                                                                                                                                         echo $endereco;
                                                                                                                                                                     } ?>" />
 
 
+                            </div>
+                            <div class="col-1">
+                                <label id="cadEmpresa_tit7" class="texto">Número</label>
+
+                                <input type="text" name="txt_numero" onclick="cor(this);" maxlength="10" class="cx_numeros form-control" id="txt_numero" value="<?php if (isset($numero)) {
+                                                                                                                                                                    echo $numero;
+                                                                                                                                                                } ?>" />
+
+                            </div>
                         </div>
-                        <div class="col-1">
-                            <label id="cadEmpresa_tit7" class="texto">Número</label>
+                        <div class="row form-group">
+                            <div class="col">
+                                <label id="cadEmpresa_tit8" class="texto">Cidade</label>
 
-                            <input type="text" name="txt_numero" onclick="cor(this);" maxlength="10" class="cx_numeros form-control" id="cx7_CadEmpresas" value="<?php if (isset($numero)) {
-                                                                                                                                                                        echo $numero;
-                                                                                                                                                                    } ?>" />
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label id="cadEmpresa_tit8" class="texto">Cidade</label>
-
-                            <input type="text" name="txt_cidade" onclick="cor(this);" maxlength="50" class="cx_texto2 form-control" id="cx8_CadEmpresas" value="<?php if (isset($cidade)) {
+                                <input type="text" name="txt_cidade" onclick="cor(this);" maxlength="50" class="cx_texto2 form-control" id="txt_cidade" value="<?php if (isset($cidade)) {
                                                                                                                                                                     echo $cidade;
                                                                                                                                                                 } ?>" />
 
-                        </div>
-                        <div class="col">
-                            <label id="cadEmpresa_tit9" class="texto">Bairro</label>
+                            </div>
+                            <div class="col">
+                                <label id="cadEmpresa_tit9" class="texto">Bairro</label>
 
-                            <input type="text" name="txt_bairro" onclick="cor(this);" maxlength="50" class="cx_texto2 form-control" id="cx9_CadEmpresas" value="<?php if (isset($bairro)) {
+                                <input type="text" name="txt_bairro" onclick="cor(this);" maxlength="50" class="cx_texto2 form-control" id="txt_bairro" value="<?php if (isset($bairro)) {
                                                                                                                                                                     echo $bairro;
                                                                                                                                                                 } ?>" />
 
-                        </div>
-                        <div class="col-1"><label id="cadEmpresa_tit10" class="texto">Estado</label>
+                            </div>
+                            <div class="col-1"><label id="cadEmpresa_tit10" class="texto">Estado</label>
 
-                            <input type="text" name="txt_estado" onclick="cor(this);" class="cx_texto2 form-control" id="cx10_CadEmpresas" maxlength="2" value="<?php if (isset($estado)) {
+                                <input type="text" name="txt_estado" onclick="cor(this);" class="cx_texto2 form-control" id="txt_estado" maxlength="2" value="<?php if (isset($estado)) {
                                                                                                                                                                     echo $estado;
                                                                                                                                                                 } ?>" />
 
-                            <!-- ------------------------------------------------------------------------- -->
+                                <!-- ------------------------------------------------------------------------- -->
+                            </div>
+                            <div class="col-1">
+                                <label id="cadEmpresa_tit15" class="texto">Contato</label>
+
+                                <input type="text" name="txt_contato" onclick="cor(this);" maxlength="200" class="cx_texto2 form-control" id="cx15_CadEmpresas" value="<?php if (isset($contato)) {
+                                                                                                                                                                            echo $contato;
+                                                                                                                                                                        } ?>" />
+
+
+                            </div>
+
                         </div>
+                        <div class="row form-group">
+                            <div class="col-2">
+                                <label id="cadEmpresa_tit12" class="texto">Telefone 1</label>
 
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <label id="cadEmpresa_tit12" class="texto">Telefone 1</label>
-
-                            <input type="text" name="txt_telefone" onclick="cor(this);" maxlength="14" class="cx_telefone form-control" id="cx12_CadEmpresas" value="<?php if (isset($telefone)) {
+                                <input type="text" name="txt_telefone" onclick="cor(this);" maxlength="14" class="cx_telefone form-control" id="txt_telefone1" value="<?php if (isset($telefone)) {
                                                                                                                                                                             echo $telefone;
                                                                                                                                                                         } ?>" />
 
 
-                        </div>
-                        <div class="col-1">
-                            <label id="cadEmpresa_tit13" class="texto">Ramal</label>
+                            </div>
+                            <div class="col-1">
+                                <label id="cadEmpresa_tit13" class="texto">Ramal</label>
 
-                            <input type="text" name="txt_ramal" onclick="cor(this);" maxlength="10" class="cx_numeros form-control" id="cx13_CadEmpresas" value="<?php if (isset($ramal)) {
-                                                                                                                                                                        echo $ramal;
-                                                                                                                                                                    } ?>" />
-
-                        </div>
-                        <div class="col-2">
-                            <label id="cadEmpresa_tit14" class="texto">FAX</label>
-
-                            <input type="text" name="txt_fax" onclick="cor(this);" class="cx_texto2  form-control" id="cx14_CadEmpresas" value="<?php if (isset($fax)) {
-                                                                                                                                                    echo $fax;
-                                                                                                                                                } ?>" />
-
-                        </div>
-                        <div class="col">
-                            <label id="cadEmpresa_tit15" class="texto">Contato</label>
-
-                            <input type="text" name="txt_contato" onclick="cor(this);" maxlength="200" class="cx_texto2 form-control" id="cx15_CadEmpresas" value="<?php if (isset($contato)) {
-                                                                                                                                                                        echo $contato;
-                                                                                                                                                                    } ?>" />
-
-
-                        </div>
-                        <div class="col">
-                            <label id="cadEmpresa_tit16" class="texto">Cód. SGSET</label>
-
-                            <input type="text" name="txt_sgset" onclick="cor(this);" maxlength="10" class="cx_numeros form-control" id="cx16_CadEmpresas" value="<?php if (isset($sgset)) {
-                                                                                                                                                                        echo $sgset;
-                                                                                                                                                                    } ?>" />
-
-                        </div>
-                        <div class="col-2">
-                            <label id="cadEmpresa_tit25" class="texto">Telefone 2</label>
-
-                            <input type="text" name="txt_telefone2" onclick="cor(this);" maxlength="14" class="cx_telefone form-control" id="cx20_CadEmpresas" value="<?php if (isset($telefone2)) {
-                                                                                                                                                                            echo $telefone2;
+                                <input type="text" name="txt_ramal" onclick="cor(this);" maxlength="10" class="cx_numeros form-control" id="cx13_CadEmpresas" value="<?php if (isset($ramal)) {
+                                                                                                                                                                            echo $ramal;
                                                                                                                                                                         } ?>" />
 
+                            </div>
+                            <div class="col-2">
+                                <label id="cadEmpresa_tit14" class="texto">FAX</label>
 
+                                <input type="text" name="txt_fax" onclick="cor(this);" class="cx_texto2  form-control" id="cx14_CadEmpresas" value="<?php if (isset($fax)) {
+                                                                                                                                                        echo $fax;
+                                                                                                                                                    } ?>" />
+
+                            </div>
+                          
+                          
+                            <div class="col-2">
+                                <label id="cadEmpresa_tit25" class="texto">Telefone 2</label>
+
+                                <input type="text" name="txt_telefone2" onclick="cor(this);" maxlength="14" class="cx_telefone form-control" id="txt_telefone2" value="<?php if (isset($telefone2)) {
+                                                                                                                                                                                echo $telefone2;
+                                                                                                                                                                            } ?>" />
+
+
+                            </div>
+                            <div class="col-2">
+                                <label id="cadEmpresa_tit26" class="texto">Celular</label>
+
+                                <input type="text" name="txt_celular" onclick="cor(this);" maxlength="15" class="cx_celular form-control" id="cx21_CadEmpresas" value="<?php if (isset($celular)) {
+                                                                                                                                                                            echo $celular;
+                                                                                                                                                                        } ?>" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <label id="cadEmpresa_tit26" class="texto">Celular</label>
+                        <div class="row form-group">
+                           
+                            <div class="col-2">
+                                <label id="cadEmpresa_tit24" class="texto">CPF / RG</label>
 
-                            <input type="text" name="txt_celular" onclick="cor(this);" maxlength="15" class="cx_celular form-control" id="cx21_CadEmpresas" value="<?php if (isset($celular)) {
-                                                                                                                                                                        echo $celular;
+                                <input type="text" name="txt_cpf" onclick="cor(this);" maxlength="14" class="cx_texto2 form-control" id="cx19_CadEmpresas" value="<?php if (isset($cpf)) {
+                                                                                                                                                                        echo $cpf;
                                                                                                                                                                     } ?>" />
+
+                            </div>
+                            <div class="col-1">
+                                <label id="cadEmpresa_tit16" class="texto">Cód. SGSET</label>
+
+                                <input type="text" name="txt_sgset" onclick="cor(this);" maxlength="10" class="cx_numeros form-control" id="cx16_CadEmpresas" value="<?php if (isset($sgset)) {
+                                                                                                                                                                            echo $sgset;
+                                                                                                                                                                        } ?>" />
+
+                            </div>
                         </div>
-                        <div class="col-2">
-                            <label id="cadEmpresa_tit24" class="texto">CPF / RG</label>
-
-                            <input type="text" name="txt_cpf" onclick="cor(this);" maxlength="14" class="cx_texto2 form-control" id="cx19_CadEmpresas" value="<?php if (isset($cpf)) {
-                                                                                                                                                                    echo $cpf;
-                                                                                                                                                                } ?>" />
-
+                        </br>
+                        <div class="row">
+                            <div class="col ">
+                                <!-- --------------------------------- -->
+                                <input type="Submit" onclick="validar();" class="btn btn-success" id="bt_cadastrou" name="btn_cadastrar" value="Cadastrar" />
+                                <!--<input type="button" onclick="validar();" class="subtitulo2" id="bt_cadastrar" name="btn_cadastrar" value="Cadastrar" />-->
+                       
+                                <input type="button" onclick="validar();" class="btn btn-warning" id="bt_cadastrou" name="btn_atualizar" value="Atualizar" />
+                              
+                            </div>
                         </div>
-                    </div>
-                    </br>
-                    <div class="row">
-                        <div class="col ">
-                            <!-- --------------------------------- -->
-                            <input type="button" onclick="validar();" class="subtitulo2 btn btn-success" id="bt_cadastrou" name="btn_cadastrar" value="Cadastrar" />
-                            <!--<input type="button" onclick="validar();" class="subtitulo2" id="bt_cadastrar" name="btn_cadastrar" value="Cadastrar" />-->
-                            <input type="hidden" name="txt_cad" />
-
-
-                            <input type="button" onclick="validar();" class="subtitulo2 btn btn-warning" id="bt_cadastrou" name="btn_atualizar" value="Atualizar" />
-
-                            <input type="button" onclick="validar();" class="btn btn-primary" id="bt_ncadastro_compl" name="btn_atualizar" value="Novo" />
-
-
-                            <a href="index.php">
-                                <div id="bt_ncadastro" class="subtitulo2 btn"><label id="bt_ncadastro_compl">Novo</label></div>
-                            </a>
-                        </div>
-                    </div>
 
 
 
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<?php $v->start("js"); ?>
 <script src="./App/Views/empresas/js/validacao.js"></script>
 <script src="./App/Views/empresas/js/cep.js"></script>
+<script src="js/sweetalert.min.js"></script>
 <script>
-    $(function() {
-        $("#txt_cep").on("focus", function() {
-                alert("focus")
-            })
-            .on("blur", function() {
-                alert('1');
-            });
+    $(document).ready(function() {
+
+        // $("#txt_cep").on("focus", function() {
+        //         alert("focus")
+        //     })
+        //     .on("blur", function() {
+        //         alert('1');
+        //     });
+
+        // Adicionamos o evento onclick ao botão com o ID "pesquisar"
+        $('#pesquisar').on('click', function(e) {
+
+            // Apesar do botão estar com o type="button", é prudente chamar essa função para evitar algum comportamento indesejado
+            e.preventDefault();
+
+            // Aqui recuperamos o cnpj preenchido do campo e usamos uma expressão regular para limpar da string tudo aquilo que for diferente de números
+            var cnpj = $('#cnpj').val();
+            cnpj = cnpj.replace(/\D/g, '');
+
+            // Fazemos uma verificação simples do cnpj confirmando se ele tem 14 caracteres
+            if (cnpj.length == 14) {
+
+                // Aqui rodamos o ajax para a url da API concatenando o número do CNPJ na url
+                $.ajax({
+                    url: 'https://www.receitaws.com.br/v1/cnpj/' + cnpj,
+                    method: 'GET',
+                    dataType: 'jsonp', // Em requisições AJAX para outro domínio é necessário usar o formato "jsonp" que é o único aceito pelos navegadores por questão de segurança
+                    complete: function(xhr) {
+
+                        // Aqui recuperamos o json retornado
+                        response = xhr.responseJSON;
+
+                        // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
+                        if (response.status == 'OK') {
+
+                            // Agora preenchemos os campos com os valores retornados
+                            $('#razao').val(response.nome);
+                            $('#txt_email').val(response.email);
+                            $('#txt_endereco').val(response.logradouro);
+
+                            $('#txt_numero').val(response.numero);
+                            $('#txt_bairro').val(response.bairro);
+
+                            $('#txt_estado').val(response.uf);
+                            $('#logradouro').val(response.logradouro);
+                            $('#txt_cep').val(response.cep);
+                            
+
+                            $('#txt_estado').val(response.uf);
+                            $('#txt_cidade').val(response.municipio);
+
+                            tel = response.telefone;
+                            tels = tel.split("/");
+                            tels.sort();
+                            $('#txt_telefone1').val(tels[0]);
+                            $('#txt_telefone2').val(tels[1]);
+
+
+                            // Aqui exibimos uma mensagem caso tenha ocorrido algum erro
+                        } else {
+                            swal(response.message, "", "error"); // Neste caso estamos imprimindo a mensagem que a própria API retorna
+                        }
+                    }
+                });
+
+                // Tratativa para caso o CNPJ não tenha 14 caracteres
+            } else {
+                swal("CNPJ Inválido!", "", "error");
+            }
+        });
     });
 </script>
+<?php $v->end(); ?>

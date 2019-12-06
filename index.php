@@ -37,7 +37,7 @@ $route->post("/plano", "Atendimento:imprimirPlano");
  */
 $route->group("empresa");
 $route->get("/", "WebEmpresa:empresa");
-$route->get("/add", "WebEmpresa:adicionar");
+$route->get("/add", "WebEmpresa:incluir");
 $route->post("/add", "WebEmpresa:adicionar");
 $route->put("/edit/{id}", "WebEmpresa:editar");
 $route->post("/excluir", "WebEmpresa:excluir");

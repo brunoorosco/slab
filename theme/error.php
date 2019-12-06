@@ -1,4 +1,4 @@
-<?php $v->layout("_theme");?>
+<?php $v->layout("layout2");?>
 
 <div class="error">
     <h2>Oooops erro <?= $error;?> !</h2>

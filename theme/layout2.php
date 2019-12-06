@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="<?php echo 'https://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']); ?>/Source/assests/">
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- Toastr style -->
@@ -17,23 +17,24 @@
 
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/_style.css" rel="stylesheet">
     <title><?= $v->e($title) ?></title>
 </head>
 
 <body>
     <div id="wrapper">
-        <nav class="navbar-default navbar-static-side" role="navigation">
+        <nav class="navbar-default  navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element"> <span>
-                                <img alt="image" class="img-circle" src="https://pbs.twimg.com/profile_images/414540829030887424/zHO4KVWI_400x400.jpeg" width="45" />
+                                <img alt="image" class="img-circle" src="./img/avatar-2.png" width="45" />
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Fulano X</strong>
                                     </span>
-                                    <span class="text-muted text-xs block">Assistente de Ensaios <b class="caret"></b></span> </span> </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                    <span class="text-light">Assistente de Ensaios <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu profile animated fadeInRight m-t-xs">
                                 <li><a href="profile.html">Profile</a></li>
                                 <li><a href="contacts.html">Contacts</a></li>
                                 <li><a href="mailbox.html">Mailbox</a></li>
@@ -45,41 +46,108 @@
                             IN+
                         </div>
                     </li>
-                    <li class="">
-                        <a href="./empresa/"><i class="fa fa-th-large"></i> <span class="nav-label">Empresas</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li class="active"><a href="<?= url("empresa"); ?>">Listar</a></li>
-                            <li><a href="<?= url("empresa/add"); ?>">Incluir</a></li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a href="./empresa/"><i class="fa fa-th-large"></i> <span class="nav-label">Composições</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li class="active"><a href="./empresa/">Listar</a></li>
-                            <li><a href="./empresa/incluir/">Incluir</a></li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a href="./empresa/"><i class="fa fa-th-large"></i> <span class="nav-label">Produtos</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li class="active"><a href="<?= url("empresa"); ?>">Listar</a></li>
-                            <li><a href="<?= url("empresa/add"); ?>">Incluir</a></li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a href="./empresa/"><i class="fa fa-th-large"></i> <span class="nav-label">Serviços</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li class="active"><a href="./empresa/">Listar</a></li>
-                            <li><a href="./empresa/incluir/">Incluir</a></li>
-                        </ul>
-                    </li>
                 </ul>
+
+
+                <nav id="sidebar">
+                    <ul class="list-unstyled components">
+                        <li>
+                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-th-large"></i> Cadastro</a>
+                            <ul class="collapse list-unstyled" id="pageSubmenu">
+                                <li><a href="../composicoes/" class="lk_lista">Composições</a></li>
+                                <li><a href="<?= url("empresa/add"); ?>">Empresas</a></li>
+                                <li><a href="../funcionarios" class="lk_lista">Funcionários</a></li>
+                                <li><a href="#">Normas</a> </li>
+                                <li><a href="../produtos/" class="lk_lista">Produtos</a></li>
+                                <li><a href="../ensaios/" class="lk_lista">Tipos de Ensaios</a></li>
+                                <li><a href="../tiposTecido/" class="lk_lista">Tipos de Tecidos</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-th-large"></i> Consulta</a>
+                            <ul class="collapse list-unstyled" id="homeSubmenu">
+                                <li>
+                                    <a href="<?= url("empresa"); ?>">Empresas</a>
+                                </li>
+                                <li>
+                                    <a href="./ensaio">Ensaios</a>
+                                </li>
+                                <li>
+                                    <a href="./atendimento/plano">Plano de Atendimento</a>
+                                </li>
+                                <li>
+                                    <a href="<?= url("orcamento"); ?>">Orçamentos</a>
+                                </li>
+                                <li>
+                                    <a href="#">Outros</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="<?= url("atendimento"); ?>">Plano de Atendimento</a>
+                        </li>
+
+                        <li>
+                            <a href="<?= url("etiqueta/busca"); ?>">Impressão de Etiquetas</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Liberação de Pedidos</a>
+                        </li>
+                        <li>
+                            <a href="#relatorioSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-th-large"></i> Relatórios</a>
+                            <ul class="collapse list-unstyled" id="relatorioSubmenu">
+                                <li><a href="../relatorios/planoAtendimento/" class="lk_lista">Plano de atendimento</a></li>
+                                <li><a href="../relatorios/etiquetas/" class="lk_lista">Etiquetas para amostras</a></li>
+                                <li><a href="../relatorios/recebimentoItens/" class="lk_lista">Recebimento de itens para ensaio</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="list-unstyled CTAs">
+                        <li>
+                            <a href="#" class="download">Settings</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- <li class="">
+                        <a href="./empresa/"><i class="fa fa-th-large"></i> <label class="nav-label">Empresas</label> <label class="fa arrow"></label></a>
+                        <ul class="nav nav-second-level">
+                            <li class="active"><a href="<?= url("empresa"); ?>">Listar</a></li>
+                            <li><a href="<?= url("empresa/add"); ?>">Incluir</a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="./empresa/"><i class="fa fa-th-large"></i> <label class="nav-label">Composições</label> <label class="fa arrow"></label></a>
+                        <ul class="nav nav-second-level">
+                            <li class="active"><a href="./empresa/">Listar</a></li>
+                            <li><a href="./empresa/incluir/">Incluir</a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="./empresa/"><i class="fa fa-th-large"></i> <label class="nav-label">Produtos</label> <label class="fa arrow"></label></a>
+                        <ul class="nav nav-second-level">
+                            <li class="active"><a href="<?= url("empresa"); ?>">Listar</a></li>
+                            <li><a href="<?= url("empresa/add"); ?>">Incluir</a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="./empresa/"><i class="fa fa-th-large"></i> <label class="nav-label">Serviços</label> <label class="fa arrow"></label></a>
+                        <ul class="nav nav-second-level">
+                            <li class="active"><a href="./empresa/">Listar</a></li>
+                            <li><a href="./empresa/incluir/">Incluir</a></li>
+                        </ul>
+                    </li>
+                </ul> -->
             </div>
         </nav>
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="row border-bottom">
-                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <nav class="navbar col" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header">
                         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                         <form role="search" class="navbar-form-custom" action="search_results.html">
@@ -358,7 +426,7 @@
     <script src="js/jquery-3.4.1.js"></script>
 
     <script src="js/popper.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 
 
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
@@ -387,7 +455,7 @@
     <!-- Toastr -->
     <script src="js/plugins/toastr/toastr.min.js"></script>
 
-    <?=  $v->section("js");?>
+    <?= $v->section("js"); ?>
 
 
     <script>

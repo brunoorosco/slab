@@ -1,0 +1,193 @@
+var that;var PopUpload={menuSelectedId:null,returnFunction:null,documentScrollTop:0,cfg:{importMaxWidth:1024,importMaxHeight:1024},show:function(title,retFunction,overrideCfg)
+{that=this;that.returnFunction=retFunction;if(overrideCfg)
+{for(var key in overrideCfg)
+{that.cfg[key]=overrideCfg[key];}}
+documentScrollTop=$(document).scrollTop();$('body').css({position:'fixed',width:'100%',top:'-'+documentScrollTop+'px','overflow-y':'scroll'});if(title!==null)
+{$('#pop-upload-title').html(title);}
+$('#pop-content-webcam').css({position:'static',top:'auto'});$('#pop-content-loading').hide();$('#pop-upload-layer').fadeIn(200);$('#pop-upload').append('');that.registerEvents();that.selectMenu('pop-import');that.setPosition();},hide:function()
+{$('body').css({position:'static',width:'auto',top:'auto','overflow-y':'auto'});$(document).scrollTop(documentScrollTop);$('#pop-upload-layer').hide();that.unregisterEvents();that.selectMenu(null);},selectMenu:function(selectId)
+{if(selectId&&that.menuSelectedId==selectId)
+{return;}
+if(that.menuSelectedId=='pop-webcam')
+{that.finishWebcam();}
+if(that.menuSelectedId=='pop-recent')
+{that.finishRecentList();}
+if(that.menuSelectedId=='pop-import')
+{that.finishImport();}
+if(that.menuSelectedId=='pop-facebook')
+{that.finishFacebook();}
+that.menuSelectedId=selectId;$('#pop-upload-menu').children('li').each(function()
+{var li=$(this);var id=li.attr('data-id');li.removeClass('pop-selected');if(id==selectId)
+{li.addClass('pop-selected');$('#pop-upload-content').children().hide().filter('div[data-id="'+id+'"]').show();}});if(selectId=='pop-import')
+{that.initImport();}
+if(selectId=='pop-recent')
+{that.initRecentList();}
+if(selectId=='pop-webcam')
+{that.initWebcam();}
+if(that.menuSelectedId=='pop-share')
+{that.initFacebook();}
+that.setPosition();},setPosition:function()
+{var top=Math.round(($(window).height()-$('#pop-upload').outerHeight(false))/2);var left=Math.round(($(window).width()-$('#pop-upload').outerWidth(false))/2);$('#pop-upload').css({top:top+'px',left:left+'px'});},registerEvents:function()
+{$('#pop-upload-close').off().click(function(e)
+{that.hide();});$('#pop-upload-layer').off().click(function(e)
+{if($(e.target)[0]==$('#pop-upload-layer')[0])
+{that.hide();e.stopPropagation();}});$('#pop-upload-menu').children('li').off().click(function(e)
+{that.selectMenu($(this).attr('data-id'));});$(window).on('resize.position',function()
+{that.setPosition();});},unregisterEvents:function()
+{$('#pop-upload-close').off();$('#pop-upload-layer').off();$('#pop-upload-menu').children('li').off();$(window).off('resize.position');},initRecentList:function()
+{$('#pop-clean-recent-link').off().click(function(e)
+{$.getJSON(url('ajax/pop-upload'),{action:'cleanUploadRecentList'}).done(function(data)
+{if(data.hasOwnProperty('error'))
+{alert(data.error);return;}
+$('#pop-recent-list').html('');$('#pop-clean-recent').hide();$('#pop-no-image-recent').show();}).fail(function(data)
+{}).always(function(data)
+{});});that.updateRecentList();},importFromRecentFileAjax:null,getUploadRecentListAjax:null,updateRecentList:function()
+{if(that.getUploadRecentListAjax||that.importFromRecentFileAjax)
+{return;}
+$('#pop-content-loading').show();$('#pop-content-recent').hide();that.getUploadRecentListAjax=$.getJSON(url('ajax/pop-upload'),{action:'getUploadRecentList'}).done(function(data)
+{if(data.hasOwnProperty('error'))
+{$('#pop-content-loading').hide();$('#pop-content-recent').show();alert(data.error);return;}
+var li;$('#pop-recent-list').html('');$.each(data['photos'],function(i,photo)
+{li=$('<li style="background-image:url('+url(photo.preview)+');" data-backup-id="'+photo.id+'"></li>');li.click(function(e)
+{$('#pop-content-loading').show();$('#pop-content-recent').hide();that.importFromRecentFileAjax=$.getJSON(url('ajax/pop-upload'),{action:'importFromRecentFile',backupId:$(this).attr('data-backup-id')}).done(function(data)
+{that.returnFunction(data.imageFile,data.previewFile);}).fail(function(data)
+{$('#pop-content-loading').hide();$('#pop-content-recent').show();}).always(function(data)
+{that.importFromRecentFileAjax=false;});});$('#pop-recent-list').append(li);});if(li)
+{$('#pop-no-image-recent').hide();$('#pop-clean-recent').show();}
+else
+{$('#pop-no-image-recent').show();$('#pop-clean-recent').hide();}}).fail(function(data)
+{}).always(function(data)
+{$('#pop-content-loading').hide();$('#pop-content-recent').show();that.getUploadRecentListAjax=false;that.setPosition();});},finishRecentList:function()
+{if(that.getUploadRecentListAjax)
+{that.getUploadRecentListAjax.abort();that.getUploadRecentListAjax=null;}
+if(that.importFromRecentFileAjax)
+{that.importFromRecentFileAjax.abort();that.importFromRecentFileAjax=null;}
+$('#pop-content-loading').hide();$('#pop-content-recent').show();},initWebcam:function()
+{$('#pop-content-webcam-app-container').append('<div id="webcam-app"></div>');var flashvars={};var params={allowscriptaccess:'always'};var attributes={};swfobject.embedSWF($('#pop-content-webcam-app-container').attr('data-app-file'),'webcam-app','100%','100%','9.0.0',url('swf/expressInstall.swf'),flashvars,params,attributes);$('#webcam-do-capture-button').show();$('#webcam-restart-capture-button').hide();$('#webcam-send-capture-button').hide();$(window).off('resize.webcam').on('resize.webcam',function()
+{that.setWebcamPosition();});$('#webcam-do-capture-button').off().click(function(e)
+{that.webcamDoCapture();});$('#webcam-restart-capture-button').off().click(function(e)
+{that.webcamRestartCapture();});$('#webcam-send-capture-button').off().click(function(e)
+{that.webcamSendCapture();});that.setWebcamPosition();},finishWebcam:function()
+{swfobject.removeSWF('webcam-app');$(window).off('resize.webcam');},webcamDoCapture:function()
+{that.webcamGetMyApp('webcam-app').webcamDoCapture();$('#webcam-do-capture-button').hide();$('#webcam-restart-capture-button').show();$('#webcam-send-capture-button').show();},webcamRestartCapture:function()
+{that.webcamGetMyApp('webcam-app').webcamRestartCapture();$('#webcam-do-capture-button').show();$('#webcam-restart-capture-button').hide();$('#webcam-send-capture-button').hide();},webcamSendCapture:function()
+{$('#webcam-restart-capture-button').hide();$('#webcam-send-capture-button').hide();$('#pop-content-loading').show();var o={url:url('ajax/pop-upload?action=postImage'),finishFunction:'function() { PopUpload.webcamFinishCapture(\'[[DATA]]\'); }'};that.webcamGetMyApp('webcam-app').webcamSendCapture(o);$('#pop-content-webcam').css({position:'absolute',left:'-10000px'});that.setPosition();},webcamFinishCapture:function(result)
+{result=jQuery.parseJSON(result);if(result.hasOwnProperty('error'))
+{$('#pop-content-webcam').css({position:'static',top:'auto'});$('#pop-content-loading').hide();that.setPosition();alert(result.error);}
+else
+{that.returnFunction(result.imageFile,result.previewFile);}},webcamGetMyApp:function(appName)
+{if(navigator.appName.indexOf("Microsoft")!=-1)
+{return window[appName];}
+else
+{return document[appName];}},setWebcamPosition:function()
+{var height=$('#pop-content-webcam-app-container').outerWidth()*0.75;$('#pop-content-webcam-app-container, #webcam-app').css('height',height+'px');},importIframe:null,loadingImportUploading:false,initImport:function()
+{var fail=!window.File||!window.FileList||!window.FileReader||!window.Blob||!document.createElement('canvas')||!document.createElement('canvas').getContext||(document.createElement('canvas').toDataURL('image/jpeg').replace(/^data:([^;]*).*/,'$1')!='image/jpeg');browserCanvasSupport=!fail;browserDragDropSupport=('draggable'in document.createElement('span'));if(browserCanvasSupport&&browserDragDropSupport&&!jQuery.browser.mobile)
+{var timer,dragleave;$(document).off('dragenter').on('dragenter',function(e)
+{e.preventDefault();e.stopPropagation();setTimeout(function(){dragleave=false;},1);if($('#dragdrop').length==0)
+{$('<div id="dragdrop" style="position:fixed; z-index:2000; '+'top:0px left:0px; width:100%; height:100%;">'+'</div>').appendTo('body');var offset=$('#pop-upload').offset();var w=$('#pop-upload').outerWidth();var h=$('#pop-upload').outerHeight();$('<div id="dragdrop-bingo" style="position:fixed; width:'+w+'px;'+'height:'+h+'px; top:'+offset.top+'px; '+'left:'+offset.left+'px;"></div>').appendTo('#dragdrop');$('#dragdrop-bingo').off('dragenter').on('dragenter',function(e)
+{e.preventDefault();$('#pop-import-dragdrop').children('.dashed').addClass('dragover');});$(document).off('dragover').on('dragover',function(e)
+{e.preventDefault();});$('#dragdrop-bingo').off('dragleave.a').on('dragleave.a',function(e)
+{e.preventDefault();$('#pop-import-dragdrop').children('.dashed').removeClass('dragover');});$('#dragdrop, #dragdrop-bingo').off('dragleave.b').on('dragleave.b',function(e)
+{e.preventDefault();if(timer)
+{clearTimeout(timer);}
+dragleave=true;timer=setTimeout(function()
+{if(dragleave)
+{$('#dragdrop').remove();$('#pop-import-dragdrop').hide();dragleave=false;}},500);});$('#dragdrop-bingo').on('drop',function(e)
+{e.preventDefault();e.stopPropagation();$('#dragdrop').remove();$('#pop-import-dragdrop').hide();if(!e.originalEvent.dataTransfer||e.originalEvent.dataTransfer.files.length==0)
+{return false;}
+var file=e.originalEvent.dataTransfer.files[0];that.importFromFileReader(file);return false;});}
+if(timer)
+{clearTimeout(timer);}
+$('#pop-import-dragdrop').show();return false;});}
+else
+{$('#pop-content-import-dragdrop').hide();}
+$('#pop-import-file').off().change(function(e)
+{if(!browserCanvasSupport)
+{if(that.loadingImportUploading)
+{return;}
+that.loadingImportUploading=true;that.importIframe=$('<iframe name="importIframe" id="importIframe" style="display:none" />');$('body').append(that.importIframe);$('#pop-content-import').hide();$('#pop-import-form').attr({action:url('ajax/pop-upload?action=uploadImage'),target:'importIframe',method:'post'}).submit();$('#pop-content-loading').show();that.importIframe.on('load',function()
+{var response=that.importIframe[0].contentWindow.document.body.innerHTML;var matches=/\|\|START_JSON\|\|([^|]+)\|\|END_JSON\|\|/gm.exec(response);var obj=jQuery.parseJSON(matches[1]);if(obj.hasOwnProperty('error'))
+{that.importIframe.off();that.importIframe.remove();that.importIframe=null;$('#pop-content-import').show();$('#pop-content-loading').hide();var control=$('#pop-import-file');control.replaceWith(control=control.clone(true));that.loadingImportUploading=false;alert(obj.error);}
+else
+{that.returnFunction(obj.imageFile,obj.previewFile);}});}
+else
+{var file=e.target.files[0];that.importFromFileReader(file);}
+return false;});},importFromFileReader:function(file)
+{if(that.loadingImportUploading)
+{return;}
+that.loadingImportUploading=true;if(!file.type.match(/image/))
+{alert($('#pop-upload').attr('data-error-file-type'));that.loadingImportUploading=false;$('#pop-content-import').show();$('#pop-content-loading').hide();return;}
+that.loadingImportUploading=true;$('#pop-content-import').hide();$('#pop-content-loading').show();setTimeout(function()
+{var reader=new FileReader();reader.onload=function(e)
+{var metaOrientation;if(file.type.toLowerCase().match(/image\/(jpg|jpeg)/)&&this.result&&window.atob)
+{var data=window.atob(this.result.replace(/^.*?,/,''));var jpeg=new JpegMeta.JpegFile(data,file);if(jpeg&&jpeg.tiff&&jpeg.tiff.Orientation&&jpeg.tiff.Orientation.value&&'345678'.indexOf(jpeg.tiff.Orientation.value)!=-1)
+{metaOrientation=jpeg.tiff.Orientation.value;}}
+var img=new Image();img.onload=function()
+{var img=this;var canvas=that.resizeImage(img,that.cfg.importMaxWidth,that.cfg.importMaxHeight);$(img).remove();if(metaOrientation!=null)
+{switch(metaOrientation)
+{case 6:case 5:degrees=90;break;case 8:case 7:degrees=-90;break;case 3:case 4:degrees=180;break;}
+var tmp=that.rotateCanvas(canvas,degrees);delete canvas;canvas=tmp;}
+var dataURL=canvas.toDataURL('image/jpeg',.8).split(',')[1];$.ajax({type:'POST',url:url('ajax/pop-upload?action=postImageBase64'),data:{image_base_64:dataURL},dataType:'json',xhr:function()
+{var xhr=new window.XMLHttpRequest();xhr.upload.addEventListener('progress',function(evt)
+{if(evt.lengthComputable)
+{var percentComplete=evt.loaded/evt.total;var text=Math.round(percentComplete*100)+'%';$('#pop-content-loading').html(text);}},false);xhr.addEventListener('progress',function(evt)
+{if(evt.lengthComputable)
+{var percentComplete=evt.loaded/evt.total;$('#pop-content-loading').html('...');}},false);return xhr;}}).done(function(data)
+{if(data.hasOwnProperty('error'))
+{alert(data.error);return;}
+that.returnFunction(data.imageFile,data.previewFile);}).fail(function(data)
+{$('#pop-content-import').show();$('#pop-content-loading').hide();}).always(function(data)
+{$('#pop-content-loading').html('');that.loadingImportUploading=false;});};img.src=e.target.result;};reader.readAsDataURL(file);},200);},finishImport:function()
+{if(that.importIframe)
+{that.importIframe.off();that.importIframe.remove();that.importIframe=null;}
+$('#pop-content-import').show();$('#pop-content-loading').hide();var control=$('#pop-import-file');control.replaceWith(control=control.clone(true));that.loadingImportUploading=false;},facebookAccessToken:null,initFacebook:function()
+{$('#pop-content-facebook').hide();$('#pop-facebook-photos').hide();$('#pop-facebook-permissions').hide();$('#pop-content-loading').show();$('#facebook-permissions-button').off().click(function(e)
+{that.facebookConnect();});FB.getLoginStatus(function(response)
+{if(response.status==='connected')
+{facebookAccessToken=response.authResponse.accessToken;FB.api('/me/permissions',function(response)
+{var permsOk=false;$.each(response.data,function(index,value)
+{if(value.permission=='user_photos')
+{permsOk=true;}});if(permsOk)
+{that.facebookLoadAlbums();}
+else
+{$('#pop-content-facebook').show();$('#pop-content-loading').hide();$('#pop-facebook-permissions').show();}});}
+else
+{$('#pop-content-facebook').show();$('#pop-content-loading').hide();$('#pop-facebook-permissions').show();}});},facebookConnect:function()
+{FB.login(function(response)
+{if(response.authResponse)
+{$('#pop-facebook-permissions').hide();facebookAccessToken=FB.getAuthResponse()['accessToken'];that.facebookLoadAlbums();}
+else
+{alert($('#pop-content-facebook').attr('data-error-permissions'));}},{scope:'user_photos'});},facebookLoadAlbums:function()
+{$('#pop-content-facebook').hide();$('#pop-content-loading').show();FB.api('/me/albums',function(resp)
+{var albumMe={};albumMe.id='me';albumMe.name=$('#pop-content-facebook').attr('data-text-photos-of-you');albumMe.cover_photo='me';resp.data.splice(0,0,albumMe);var html='';var albumCount,albumCover;for(var i=0,l=resp.data.length;i<l;i++)
+{var album=resp.data[i];if(!album.count&&album.id!='me'&&album.id!='friends')continue;if(album.id=='me'||album.id=='friends')
+{albumCount='';albumCover=url('css/pop-upload-facebook-me.jpg');}
+else
+{albumCount=album.count;albumCover='https://graph.facebook.com/v2.0/'+album.cover_photo+'/picture?access_token='+facebookAccessToken+'&type=album';}
+html+='<div class="box" style="background-image:url('+albumCover+');" '+'onclick="that.facebookLoadPhotos(\''+album.id+'\', \''+album.name.replace(/'/g,"\\'")+'\', \''+album.count+'\', \''+albumCover+'\');">'+
+(albumCount!=''?'<div class="nb">'+albumCount+'</div>':'')+'<div class="name">'+album.name+'</div>'+'</div>';}
+$('#pop-content-loading').hide();$('#pop-content-facebook').show();$('#pop-facebook-photos').html(html).show().scrollTop(0);});},facebookLoadPhotos:function(albumId,albumName,albumCount,albumCover)
+{$('#pop-content-facebook').hide();$('#pop-content-loading').show();var request;request='/'+albumId+'/photos?fields=id,picture.width(860),source&limit=800';FB.api(request,function(resp)
+{var textBack=$('#pop-content-facebook').attr('data-text-back-albums');var html='<div class="back-button-container">'+'<button type="button" onclick="that.facebookLoadAlbums();">'+textBack+'</button>'+'</div>';if(!resp.hasOwnProperty('data')||!resp.data.hasOwnProperty('length')||resp.data.length==0)
+{html+='<div>'+$('#pop-content-facebook').attr('data-text-empty-album')+'</div>';}
+else
+{for(var i=0,l=resp.data.length;i<l;i++)
+{var thumb,large;thumb=resp.data[i].picture;large=resp.data[i].source;html+='<div class="box" style="background-image:url('+thumb+');" '+'onclick="that.facebookSelectPhoto(\''+large+'\');"></div>';}}
+$('#pop-content-loading').hide();$('#pop-content-facebook').show();$('#pop-facebook-photos').html(html).show().scrollTop(0);});},facebookSelectPhoto:function(photoURL)
+{$('#pop-content-facebook').hide();$('#pop-content-loading').show();$.getJSON(url('ajax/pop-upload'),{action:'importFromFacebook',photoURL:photoURL}).done(function(data)
+{if(data.hasOwnProperty('error'))
+{alert(data.error);return;}
+that.returnFunction(data.imageFile,data.previewFile);}).fail(function(data)
+{$('#pop-content-facebook').show();$('#pop-content-loading').hide();}).always(function(data)
+{});},finishFacebook:function()
+{$('#facebook-permissions-button').off();},resizeImage:function(img,maxWidth,maxHeight)
+{var toWidth=img.width;var toHeight=img.height;if(toWidth>maxWidth)
+{toHeight=toHeight/(toWidth/maxWidth);toWidth=maxWidth;}
+if(toHeight>maxHeight)
+{toWidth=toWidth/(toHeight/maxHeight);toHeight=maxHeight;}
+var resized=document.createElement('canvas');resized.width=toWidth;resized.height=toHeight;resized.getContext('2d').drawImage(img,0,0,img.width,img.height,0,0,toWidth,toHeight);return resized;},rotateCanvas:function(canvas,degrees)
+{var cw=canvas.width,ch=canvas.height,cx=0,cy=0;switch(degrees)
+{case 90:cw=canvas.height;ch=canvas.width;cy=canvas.height*(-1);break;case 180:cx=canvas.width*(-1);cy=canvas.height*(-1);break;case-90:cw=canvas.height;ch=canvas.width;cx=canvas.width*(-1);break;}
+var rotated=document.createElement('canvas');rotated.setAttribute('width',cw);rotated.setAttribute('height',ch);rotated.getContext('2d').rotate(degrees*Math.PI/180);rotated.getContext('2d').drawImage(canvas,cx,cy);return rotated;}}
+
+/*END_FILE*/

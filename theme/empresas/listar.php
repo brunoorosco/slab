@@ -1,5 +1,5 @@
 <?php $v->layout("layout2"); ?>
-
+<div class="container-fluid">
 <div class="ajax_load"></div>
 
 <div class="row">
@@ -75,6 +75,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <?php $v->start("js"); ?>
