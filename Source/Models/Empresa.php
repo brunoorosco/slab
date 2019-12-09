@@ -11,7 +11,7 @@ class Empresa extends DataLayer
     {
         //parent::__construct("tbl_empresas", ["CodigoCliente", "Nome","Endereco","Numero","CNPJ","Contato", 
         // "Email", "Telefone", "Ie","CEP","Fax","Ramal","Bairro","Cidade","Estado","Sgset","Status","CPF","Telefone2","Celular"], "Codigo");
-        parent::__construct("tbl_empresas", ["Nome", "Endereco", "Numero", "CNPJ", "Telefone"], "Codigo");
+        parent::__construct("tbl_empresas", ["Nome", "Endereco", "Numero", "CNPJ", "Telefone"], "Codigo", false);
     }
     /**Executa pesquisa das ordens de serviço da empresa escolhida */
     public function OsEmpresa()

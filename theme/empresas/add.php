@@ -31,7 +31,8 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <form class="form-horizontal" id="form_cadEmpresas" name="frm_cadEmpresas" action="<?=url("empresa/add") ?>" method="post">
+                    <div class="ajax_load" style="display: none"></div>
+                    <form class="form-horizontal" id="form_cadEmpresas" action="<?= url('empresa/add') ?>" method="post">
 
                         <div class="row form-group">
                             <div class="col-2 input-group">
@@ -40,7 +41,7 @@
                                     <input type="text" name="cnpj" id="cnpj" value="<?php //($incluindo ? null : $dados->razao_social); 
                                                                                     ?>" placeholder="00.000.000/0001-00" class="form-control ">
                                     <div class="input-group-append">
-                                        <button class="btn btn-success" id="pesquisar" type="submit"><i class="fa fa-search"></i></button>
+                                        <button class="btn btn-success" id="pesquisar" type="button"><i class="fa fa-search"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +66,7 @@
                             <div class="col-2">
                                 <label class="control-label">Insc. Estadual</label>
 
-                                <input type="text" name="txt_ie" onclick="cor(this);" class="form-control" id="cx4_CadEmpresas " value="<?php if (isset($ie)) {
+                                <input type="text" name="txt_ie" class="form-control" id="cx4_CadEmpresas " value="<?php if (isset($ie)) {
                                                                                                                                             echo $ie;
                                                                                                                                         } ?>" />
 
@@ -73,7 +74,7 @@
                             <div class="col-3">
                                 <label class=" control-label">E-mail</label>
 
-                                <input type="text" name="txt_email" onclick="cor(this);" maxlength="200" class="form-control" id="txt_email" value="<?php if (isset($email)) {
+                                <input type="text" name="txt_email" maxlength="200" class="form-control" id="txt_email" value="<?php if (isset($email)) {
                                                                                                                                                         echo $email;
                                                                                                                                                     } ?>" />
 
@@ -83,31 +84,31 @@
                             <div class="col-2">
                                 <label class="control-label">CEP</label>
 
-                                <input type="text" name="txt_cep" onclick="cor(this);" class="cx_cep form-control" id="txt_cep" value="<?php if (isset($cep)) {
-                                                                                                                                            echo $cep;
-                                                                                                                                        } ?>" />
+                                <input type="text" name="txt_cep" class="form-control cep" id="txt_cep" value="<?php if (isset($cep)) {
+                                                                                                                                    echo $cep;
+                                                                                                                                } ?>" />
 
                                 <!-- ----------------------------------------------------------------------- -->
 
                             </div>
-                  
+
 
 
                             <div class="col">
                                 <label id="cadEmpresa_tit6" class="">Endereço</label>
 
-                                <input type="text" name="txt_endereco" onclick="cor(this);" maxlength="100" class="cx_texto2 form-control" id="txt_endereco" value="<?php if (isset($endereco)) {
-                                                                                                                                                                        echo $endereco;
-                                                                                                                                                                    } ?>" />
+                                <input type="text" name="txt_endereco" maxlength="100" class="form-control" id="txt_endereco" value="<?php if (isset($endereco)) {
+                                                                                                                                                                echo $endereco;
+                                                                                                                                                            } ?>" />
 
 
                             </div>
                             <div class="col-1">
                                 <label id="cadEmpresa_tit7" class="texto">Número</label>
 
-                                <input type="text" name="txt_numero" onclick="cor(this);" maxlength="10" class="cx_numeros form-control" id="txt_numero" value="<?php if (isset($numero)) {
-                                                                                                                                                                    echo $numero;
-                                                                                                                                                                } ?>" />
+                                <input type="text" name="txt_numero"  maxlength="10" class="form-control" id="txt_numero" value="<?php if (isset($numero)) {
+                                                                                                                                                            echo $numero;
+                                                                                                                                                        } ?>" />
 
                             </div>
                         </div>
@@ -115,33 +116,33 @@
                             <div class="col">
                                 <label id="cadEmpresa_tit8" class="texto">Cidade</label>
 
-                                <input type="text" name="txt_cidade" onclick="cor(this);" maxlength="50" class="cx_texto2 form-control" id="txt_cidade" value="<?php if (isset($cidade)) {
-                                                                                                                                                                    echo $cidade;
-                                                                                                                                                                } ?>" />
+                                <input type="text" name="txt_cidade"  maxlength="50" class="form-control" id="txt_cidade" value="<?php if (isset($cidade)) {
+                                                                                                                                                            echo $cidade;
+                                                                                                                                                        } ?>" />
 
                             </div>
                             <div class="col">
                                 <label id="cadEmpresa_tit9" class="texto">Bairro</label>
 
-                                <input type="text" name="txt_bairro" onclick="cor(this);" maxlength="50" class="cx_texto2 form-control" id="txt_bairro" value="<?php if (isset($bairro)) {
-                                                                                                                                                                    echo $bairro;
-                                                                                                                                                                } ?>" />
+                                <input type="text" name="txt_bairro"  maxlength="50" class="form-control" id="txt_bairro" value="<?php if (isset($bairro)) {
+                                                                                                                                                            echo $bairro;
+                                                                                                                                                        } ?>" />
 
                             </div>
                             <div class="col-1"><label id="cadEmpresa_tit10" class="texto">Estado</label>
 
-                                <input type="text" name="txt_estado" onclick="cor(this);" class="cx_texto2 form-control" id="txt_estado" maxlength="2" value="<?php if (isset($estado)) {
-                                                                                                                                                                    echo $estado;
-                                                                                                                                                                } ?>" />
+                                <input type="text" name="txt_estado" class="form-control" id="txt_estado" maxlength="2" value="<?php if (isset($estado)) {
+                                                                                                                                                        echo $estado;
+                                                                                                                                                    } ?>" />
 
                                 <!-- ------------------------------------------------------------------------- -->
                             </div>
                             <div class="col-1">
                                 <label id="cadEmpresa_tit15" class="texto">Contato</label>
 
-                                <input type="text" name="txt_contato" onclick="cor(this);" maxlength="200" class="cx_texto2 form-control" id="cx15_CadEmpresas" value="<?php if (isset($contato)) {
-                                                                                                                                                                            echo $contato;
-                                                                                                                                                                        } ?>" />
+                                <input type="text" name="txt_contato"  maxlength="200" class="form-control" id="cx15_CadEmpresas" value="<?php if (isset($contato)) {
+                                                                                                                                                                    echo $contato;
+                                                                                                                                                                } ?>" />
 
 
                             </div>
@@ -151,63 +152,63 @@
                             <div class="col-2">
                                 <label id="cadEmpresa_tit12" class="texto">Telefone 1</label>
 
-                                <input type="text" name="txt_telefone" onclick="cor(this);" maxlength="14" class="cx_telefone form-control" id="txt_telefone1" value="<?php if (isset($telefone)) {
-                                                                                                                                                                            echo $telefone;
-                                                                                                                                                                        } ?>" />
+                                <input type="text" name="txt_telefone"  maxlength="14" class="form-control" id="txt_telefone1" value="<?php if (isset($telefone)) {
+                                                                                                                                                                echo $telefone;
+                                                                                                                                                            } ?>" />
 
 
                             </div>
                             <div class="col-1">
                                 <label id="cadEmpresa_tit13" class="texto">Ramal</label>
 
-                                <input type="text" name="txt_ramal" onclick="cor(this);" maxlength="10" class="cx_numeros form-control" id="cx13_CadEmpresas" value="<?php if (isset($ramal)) {
-                                                                                                                                                                            echo $ramal;
-                                                                                                                                                                        } ?>" />
+                                <input type="text" name="txt_ramal" maxlength="10" class="form-control" id="cx13_CadEmpresas" value="<?php if (isset($ramal)) {
+                                                                                                                                                                echo $ramal;
+                                                                                                                                                            } ?>" />
 
                             </div>
                             <div class="col-2">
                                 <label id="cadEmpresa_tit14" class="texto">FAX</label>
 
-                                <input type="text" name="txt_fax" onclick="cor(this);" class="cx_texto2  form-control" id="cx14_CadEmpresas" value="<?php if (isset($fax)) {
-                                                                                                                                                        echo $fax;
-                                                                                                                                                    } ?>" />
+                                <input type="text" name="txt_fax" class="form-control" id="cx14_CadEmpresas" value="<?php if (isset($fax)) {
+                                                                                                                                                echo $fax;
+                                                                                                                                            } ?>" />
 
                             </div>
-                          
-                          
+
+
                             <div class="col-2">
                                 <label id="cadEmpresa_tit25" class="texto">Telefone 2</label>
 
-                                <input type="text" name="txt_telefone2" onclick="cor(this);" maxlength="14" class="cx_telefone form-control" id="txt_telefone2" value="<?php if (isset($telefone2)) {
-                                                                                                                                                                                echo $telefone2;
-                                                                                                                                                                            } ?>" />
+                                <input type="text" name="txt_telefone2" maxlength="15" class="form-control" id="txt_telefone2" value="<?php if (isset($telefone2)) {
+                                                                                                                                                                echo $telefone2;
+                                                                                                                                                            } ?>" />
 
 
                             </div>
                             <div class="col-2">
                                 <label id="cadEmpresa_tit26" class="texto">Celular</label>
 
-                                <input type="text" name="txt_celular" onclick="cor(this);" maxlength="15" class="cx_celular form-control" id="cx21_CadEmpresas" value="<?php if (isset($celular)) {
-                                                                                                                                                                            echo $celular;
-                                                                                                                                                                        } ?>" />
+                                <input type="text" name="txt_celular" maxlength="15" class="form-control cel" id="cx21_CadEmpresas" value="<?php if (isset($celular)) {
+                                                                                                                                                                echo $celular;
+                                                                                                                                                            } ?>" />
                             </div>
                         </div>
                         <div class="row form-group">
-                           
+
                             <div class="col-2">
                                 <label id="cadEmpresa_tit24" class="texto">CPF / RG</label>
 
-                                <input type="text" name="txt_cpf" onclick="cor(this);" maxlength="14" class="cx_texto2 form-control" id="cx19_CadEmpresas" value="<?php if (isset($cpf)) {
-                                                                                                                                                                        echo $cpf;
-                                                                                                                                                                    } ?>" />
+                                <input type="text" name="txt_cpf" maxlength="14" class="form-control" id="cpf" value="<?php if (isset($cpf)) {
+                                                                                                                                                            echo $cpf;
+                                                                                                                                                        } ?>" />
 
                             </div>
                             <div class="col-1">
                                 <label id="cadEmpresa_tit16" class="texto">Cód. SGSET</label>
 
-                                <input type="text" name="txt_sgset" onclick="cor(this);" maxlength="10" class="cx_numeros form-control" id="cx16_CadEmpresas" value="<?php if (isset($sgset)) {
-                                                                                                                                                                            echo $sgset;
-                                                                                                                                                                        } ?>" />
+                                <input type="text" name="txt_sgset" maxlength="10" class="form-control" id="cx16_CadEmpresas" value="<?php if (isset($sgset)) {
+                                                                                                                                                                echo $sgset;
+                                                                                                                                                            } ?>" />
 
                             </div>
                         </div>
@@ -215,11 +216,11 @@
                         <div class="row">
                             <div class="col ">
                                 <!-- --------------------------------- -->
-                                <input type="Submit" onclick="validar();" class="btn btn-success" id="bt_cadastrou" name="btn_cadastrar" value="Cadastrar" />
+                                <button class="btn btn-success" id="bt_cadastrou" name="btn_cadastrar">Cadastrar</button>
                                 <!--<input type="button" onclick="validar();" class="subtitulo2" id="bt_cadastrar" name="btn_cadastrar" value="Cadastrar" />-->
-                       
-                                <input type="button" onclick="validar();" class="btn btn-warning" id="bt_cadastrou" name="btn_atualizar" value="Atualizar" />
-                              
+
+                                <input type="button" class="btn btn-warning" id="bt_cadastrou" name="btn_atualizar" value="Atualizar" />
+
                             </div>
                         </div>
 
@@ -236,9 +237,21 @@
 <script src="./App/Views/empresas/js/validacao.js"></script>
 <script src="./App/Views/empresas/js/cep.js"></script>
 <script src="js/sweetalert.min.js"></script>
+<script src="js/jquery.mask.min.js"></script>
+<script src="js/maskara.js"></script>
+
 <script>
     $(document).ready(function() {
 
+        function load(action) {
+            var load_div = $(".ajax_load");
+            if (action === "open") {
+                load_div.fadeIn().css("display", "flex");
+            } else {
+                load_div.fadeOut();
+            }
+
+        }
         // $("#txt_cep").on("focus", function() {
         //         alert("focus")
         //     })
@@ -247,6 +260,49 @@
         //     });
 
         // Adicionamos o evento onclick ao botão com o ID "pesquisar"
+        $("#form_cadEmpresas").submit(function(e) {
+            e.preventDefault();
+            var form = $(this);
+            $.ajax({
+                    url: form.attr("action"),
+                    data: form.serialize(),
+                    type: "POST",
+                    dataType: "json",
+                })
+                .done(function(callback) {
+
+                    swal({
+                        title: callback.message,
+                        text: " ",
+                        icon: 'success',
+                        timer: 3000
+                    });
+                    $('#form_cadEmpresas')[0].reset();
+                  
+                }).fail(function(callback) {
+                    console.log("chegou em fail")
+                })
+            //     beforeSend:function(callback){
+            //          load("open");
+            //     },
+            //     success:function(callback){
+            //         swal(callback.message, "", callback.action); // Neste caso estamos imprimindo a mensagem que a própria API retorna
+            //       console.log(callback);
+            //        if(callback.message){
+            //            $('.ajax_load').html(callback.message).fadeIn();
+            //        }else{
+            //         ajax_load.fadeOut(function(){
+            //             $(this).html("");
+            //        });
+            //        }
+            //     },
+            //     complete:function(){
+            //          load("close");
+            //     }
+            // })
+
+        })
+
         $('#pesquisar').on('click', function(e) {
 
             // Apesar do botão estar com o type="button", é prudente chamar essa função para evitar algum comportamento indesejado
@@ -282,8 +338,9 @@
 
                             $('#txt_estado').val(response.uf);
                             $('#logradouro').val(response.logradouro);
-                            $('#txt_cep').val(response.cep);
-                            
+                            cep = response.cep;
+                            $('#txt_cep').val(cep.replace('.', ''));
+
 
                             $('#txt_estado').val(response.uf);
                             $('#txt_cidade').val(response.municipio);

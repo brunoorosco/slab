@@ -32,37 +32,42 @@ class WebEmpresa
     }
     public function adicionar($data): void
     {
-        echo $data["razao_social"];
+        $jobData = filter_var_array($data, FILTER_SANITIZE_STRING);
+        if (empty($jobData["razao_social"])) {
+            $callback["message"] = message("informe o Nome da Empresa");
+            echo json_encode($callback);
+            return;
+        }
+
+        //echo $data["razao_social"];
         $empresa = new Empresa();
-        $empresa->Nome = $data["razao_social"];
-        $empresa->CNPJ = $data["cnpj"];
-        // $empresa->Ie = $data["txt_ie"];
-        // $empresa->CEP = $data["txt_cep"];
-        $empresa->Endereco = $data["txt_endereco"];
-        //$empresa->Numero = $data["txt_numero"];
-        // $empresa->Cidade = $data["txt_cidade"];
-        // $empresa->Bairro = $data["txt_bairro"];
-        // $empresa->Estado = $data["txt_estado"];
-        // $empresa->Contato = $data["txt_contato"];
-        $empresa->Telefone = $data["txt_telefone"];
-        // $empresa->Ramal = $data["txt_ramal"];
-        // $empresa->Fax = $data["txt_fax"];
-        // $empresa->Telefone2 = $data["txt_telefone2"];
-        // $empresa->Celular = $data["txt_celular"];
-        // $empresa->CPF = $data["txt_cpf"];
-        // $empresa->Sgset = $data["txt_sgset"];
-        // $empresa->CodigoCliente = $data["codCliente"];
-        // $empresa->Celular = $data["txt_celular"];
-        // $empresa->Email = $data["txt_email"];
-        
+        $empresa->Nome = $jobData["razao_social"];
+        $empresa->CNPJ = $jobData["cnpj"];
+        $empresa->Ie = $jobData["txt_ie"];
+        $empresa->CEP = $jobData["txt_cep"];
+        $empresa->Endereco = $jobData["txt_endereco"];
+        $empresa->Numero = $jobData["txt_numero"];
+        $empresa->Cidade = $jobData["txt_cidade"];
+        $empresa->Bairro = $jobData["txt_bairro"];
+        $empresa->Estado = $jobData["txt_estado"];
+        $empresa->Contato = $jobData["txt_contato"];
+        $empresa->Telefone = $jobData["txt_telefone"];
+        $empresa->Ramal = $jobData["txt_ramal"];
+        $empresa->Fax = $jobData["txt_fax"];
+        $empresa->Telefone2 = $jobData["txt_telefone2"];
+        $empresa->Celular = $jobData["txt_celular"];
+        $empresa->CPF = $jobData["txt_cpf"];
+        $empresa->Sgset = $jobData["txt_sgset"];
+        $empresa->CodigoCliente = $jobData["codCliente"];
+        $empresa->Celular = $jobData["txt_celular"];
+        $empresa->Email = $jobData["txt_email"];
+
         $empresa->save();
 
+        $callback["message"] = "Empresa cadastrada com sucesso!";
+        $callback["action"] = "success";
+        echo json_encode($callback);
        
-        //$users = (new Empresa())->find()->fetch(true);
-        echo $this->view->render("empresas/add", [
-            "title" => "Cad. Empresa | " . SITE
-
-        ]);
     }
 
     public function editar($data): void

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+<html>
 
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="<?php echo 'https://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']); ?>/Source/assests/">
+    <base href='<?= ROOT . ("/Source/assests/") ?>'>
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
