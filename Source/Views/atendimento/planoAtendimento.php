@@ -2,33 +2,33 @@
 
 <?php $v->start("css"); ?>
 <style>
-  .ui-autocomplete {
-		position: absolute;
-		z-index: 2150000000 !important;
-		cursor: default;
-		border: 2px solid #ccc;
-		padding: 5px 0;
-		border-radius: 2px;
-		font-size:15px;
-		font-family: 'Oswald', sans-serif;
+    .ui-autocomplete {
+        position: absolute;
+        z-index: 2150000000 !important;
+        cursor: default;
+        border: 2px solid #ccc;
+        padding: 5px 0;
+        border-radius: 2px;
+        font-size: 15px;
+        font-family: 'Oswald', sans-serif;
         list-style-type: none;
         background-color: whitesmoke;
-	}
+    }
 
-.custom-control-input:checked ~ .custom-control-label::before {
-		color: #fff;
-		border-color: #7B1FA2;
-		background-color: #7B1FA2;
-	}
+    .custom-control-input:checked~.custom-control-label::before {
+        color: #fff;
+        border-color: #7B1FA2;
+        background-color: #7B1FA2;
+    }
 
-	.min-height-100 { 
-        min-height: 50px; 
+    .min-height-100 {
+        min-height: 50px;
         margin: 5px 5px 5px 5px;
         border-radius: 8px;
         background-color: #0099ff;
-		color:#ffffff;  
-         }
-  </style>
+        color: #ffffff;
+    }
+</style>
 
 <?php $v->end(); ?>
 
@@ -155,43 +155,20 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
-   $( function() {
-    var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $( "#empresa" ).autocomplete({
-      source: availableTags
-    });
-  } );
+    $(document).ready(function() {
 
-    $(this).find('#formPlano')[0].reset();
-    $('#cem_bat').autocomplete({
-        source: 'retornaCEM.php'
-    });
-    $('#name_bat').autocomplete({
-        source: 'retornaMembro.php',
-        minLength: 3
+        $('#empresa').autocomplete({ source: 'retornaCEM.php'});       
+
+        $(this).find('#formPlano')[0].reset();
+
+        $('#cem_bat').autocomplete({
+            source: 'retornaCEM.php'
+        });
+
+        $('#name_bat').autocomplete({
+            source: 'retornaMembro.php',
+            minLength: 3
+        });
     });
 </script>
 <?php $v->end(); ?>
