@@ -19,7 +19,7 @@ class Atendimento
     public function atendimento($data):void
     {
     //    $users = (new User())->find()->fetch(true);
-        echo $this->view->render("atendimento/planoAtendimento",[
+        echo $this->view->render("../Source/Views/atendimento/planoAtendimento",[
             "title" => "Ordem de Serv | ". SITE,
           //  "users" => $users
         ]);

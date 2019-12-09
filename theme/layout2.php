@@ -19,6 +19,7 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/_style.css" rel="stylesheet">
+    <?= $v->section("css"); ?> 
     <title><?= $v->e($title) ?></title>
 </head>
 
