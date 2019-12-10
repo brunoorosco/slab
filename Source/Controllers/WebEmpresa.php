@@ -30,6 +30,19 @@ class WebEmpresa
 
         ]);
     }
+
+    public function buscar($data): void
+    {
+        echo "teste";
+        var_dump($data);
+        die();
+        $empresa = Empresa::buscarEmpresa($data);
+        var_dump($empresa);
+        die();
+        return $empresa;
+    }
+
+
     public function adicionar($data): void
     {
         $jobData = filter_var_array($data, FILTER_SANITIZE_STRING);
@@ -38,11 +51,12 @@ class WebEmpresa
             echo json_encode($callback);
             return;
         }
+        $cnpj = str_replace(array('.', ',', '-', '/'), '', $jobData["cnpj"]);
 
         //echo $data["razao_social"];
         $empresa = new Empresa();
         $empresa->Nome = $jobData["razao_social"];
-        $empresa->CNPJ = $jobData["cnpj"];
+        $empresa->CNPJ = $cnpj;
         $empresa->Ie = $jobData["txt_ie"];
         $empresa->CEP = $jobData["txt_cep"];
         $empresa->Endereco = $jobData["txt_endereco"];
@@ -67,7 +81,6 @@ class WebEmpresa
         $callback["message"] = "Empresa cadastrada com sucesso!";
         $callback["action"] = "success";
         echo json_encode($callback);
-       
     }
 
     public function editar($data): void

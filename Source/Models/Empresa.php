@@ -4,6 +4,7 @@
 namespace Source\Models;
 
 use CoffeeCode\DataLayer\DataLayer;
+use Source\Config\Db;  
 
 class Empresa extends DataLayer
 {
@@ -11,14 +12,28 @@ class Empresa extends DataLayer
     {
         //parent::__construct("tbl_empresas", ["CodigoCliente", "Nome","Endereco","Numero","CNPJ","Contato", 
         // "Email", "Telefone", "Ie","CEP","Fax","Ramal","Bairro","Cidade","Estado","Sgset","Status","CPF","Telefone2","Celular"], "Codigo");
-        parent::__construct("tbl_empresas", ["Nome", "Endereco", "Numero", "CNPJ", "Telefone"], "Codigo", false);
+        parent::__construct("tbl_empresas", ["Nome", "Endereco", "Numero", "CNPJ", "Telefone"], "Codigo",false);
     }
     /**Executa pesquisa das ordens de serviço da empresa escolhida */
     public function OsEmpresa()
     {
         return (new Address())->find("CodigoCliente = :uid", "uid={$this->id}")->fetch(true);
     }
-
+    
+    public function buscarEmpresa($nome)
+    {
+        $sql = "select * from tbl_empresas where CNPJ=$nome";
+        $result = Db::query($sql);
+        $empresa = $result[0];
+//        echo "<pre>";
+//        var_dump($empresa);
+//        var_dump($result);
+//        die();
+        // Retornar empresas
+        var_dump($empresa);
+        return $empresa;
+        //return (new Empresa())->find("CNPJ = :nome","nome={$nome}")->fetch(true);
+    }
    
 }
 

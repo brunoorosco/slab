@@ -1,1 +1,1 @@
-<?php $v->layout("layout"); ?>
+<?php $v->layout("layout2"); ?>

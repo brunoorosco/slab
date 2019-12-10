@@ -2,7 +2,18 @@
 
 require __DIR__ . "/vendor/autoload.php";
 
+
+
 $route = new \CoffeeCode\Router\Router(ROOT);
+
+// Conectar com o banco de dados
+if ($_SERVER['SERVER_NAME'] == 'localhost')
+    require './Source/Config/config_dev.php';
+else
+    require './Source/Config/config_prod.php';
+session_start();
+
+Db::conectar($dbname, $user, $password, $host);
 
 /**
  * APP
@@ -20,8 +31,8 @@ $route->get("/teste", "Web:layout");
 $route->post("/login/{email}", "Web:home");
 
 $route->group("etiqueta");
-$route->get("/","Web:etiqueta");
-$route->get("/busca","Web:buscaEtiqueta");
+$route->get("/","Atendimento:etiqueta");
+$route->get("/busca","Atendimento:buscaEtiqueta");
 /**
  * web
  * Atendimento de empresas
@@ -30,6 +41,7 @@ $route->group("atendimento");
 $route->get("/", "Atendimento:atendimento");
 $route->get("/plano", "Atendimento:plano");
 $route->post("/plano", "Atendimento:imprimirPlano");
+$route->post("/", "WebEmpresa:buscar");
 
 /**
  * web
@@ -42,6 +54,10 @@ $route->post("/add", "WebEmpresa:adicionar");
 $route->put("/edit/{id}", "WebEmpresa:editar");
 $route->post("/excluir", "WebEmpresa:excluir");
 $route->get("/{id}/editar", "WebEmpresa:editar");
+//$route->post("/busca/?{id}","WebEmpresa:buscar");
+
+$route->group("autocomplete");
+$route->get("/?", "WebEmpresa:buscar");
 /**
  * ERROR
  */
