@@ -1,34 +1,7 @@
 <?php $v->layout("layout2"); ?>
 
 <?php $v->start("css"); ?>
-<style>
-    .ui-autocomplete {
-        position: absolute;
-        z-index: 2150000000 !important;
-        cursor: default;
-        border: 2px solid #ccc;
-        padding: 5px 0;
-        border-radius: 2px;
-        font-size: 15px;
-        font-family: 'Oswald', sans-serif;
-        list-style-type: none;
-        background-color: whitesmoke;
-    }
-
-    .custom-control-input:checked~.custom-control-label::before {
-        color: #fff;
-        border-color: #7B1FA2;
-        background-color: #7B1FA2;
-    }
-
-    .min-height-100 {
-        min-height: 50px;
-        margin: 5px 5px 5px 5px;
-        border-radius: 8px;
-        background-color: #0099ff;
-        color: #ffffff;
-    }
-</style>
+<link rel="stylesheet" href="<?= url('Source/assests/css/planoStyle.css'); ?>">
 
 <?php $v->end(); ?>
 
@@ -57,22 +30,22 @@
             </div>
             <div class="form-group col-2">
                 <label for="message-text" class="control-span">Data da Solicitação:</label>
-                <input name="solicitacao" type="text" class="form-control date" id="" placeholder="Quando Solicitado">
+                <input name="dataSolicitacao" type="text" class="form-control date" id="dataSolicitacao" placeholder="Quando Solicitado">
             </div>
         </div>
         <div class="input-group">
 
             <div class="form-group col-4">
                 <label for="message-text" class="control-span">Endereço:</label>
-                <input name="endereco" type="text" class="form-control" disabled id="" placeholder="Endereço">
+                <input name="endereco" type="text" class="form-control" disabled id="endereco" placeholder="Endereço">
             </div>
             <div class="form-group col-2">
                 <label for="message-text" class="control-span">Contato:</label>
-                <input name="contato" type="text" class="form-control" disabled id="" placeholder="Resp. Empresa">
+                <input name="contato" type="text" class="form-control" disabled id="contato" placeholder="Resp. Empresa">
             </div>
             <div class="form-group col">
                 <label for="message-text" class="control-span">Email:</label>
-                <input name="email" type="text" class="form-control" disabled id="" placeholder="Email">
+                <input name="email" type="text" class="form-control" disabled id="email" placeholder="Email">
             </div>
 
         </div>
@@ -103,11 +76,11 @@
             </div>
             <div class="col-3">
                 <label for="cem" class="control-span">Resp. p/ Atendimento:</label>
-                <input name="cem_bat" class="form-control" id="cem_bat" Type="text" placeholder="Login em nome de:">
+                <input name="dataResposta" class="form-control" id="dataResposta" Type="text" placeholder="Login em nome de:">
             </div>
             <div class="form-group col-2">
                 <label for="recipient-name" class="control-span">Previsão da Realização:</label>
-                <input name="nome" type="text" class="form-control date" id="name_bat" placeholder="00/00/0000" maxlength="10">
+                <input name="dataRealiza" type="text" class="form-control date" id="dataRealiza" placeholder="00/00/0000" maxlength="10">
             </div>
             <div class="form-group col-2">
                 <label for="message-text" class="control-span">Resposta ao Cliente:</label>
@@ -159,10 +132,27 @@
 <script src="js/sweetalert.min.js"></script>
 <script src="js/jquery.mask.min.js"></script>
 <script src="js/maskara.js"></script>
+<script src="js/moment.js"></script>
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
     $(document).ready(function() {
+
+            var option = {  
+            uiLibrary: 'bootstrap4',
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            nextText: 'Próximo',
+            prevText: 'Anterior'};
+
+        $("#dataRealiza").datepicker(option).val();
+        $("#dataSolicitacao").datepicker(option).val();
+        $("#dataResposta").val(moment().format('MMM D, YYYY'));
 
         $('#pesquisar').on('click', function(e) {
 
@@ -180,30 +170,33 @@
                 $.ajax({
                     url: window.location.pathname,
                     method: 'POST',
-                    data : { cnpj: cnpj},
+                    data: {
+                        cnpj: cnpj
+                    },
                     dataType: 'json', // Em requisições AJAX para outro domínio é necessário usar o formato "jsonp" que é o único aceito pelos navegadores por questão de segurança
                     complete: function(xhr) {
 
                         // Aqui recuperamos o json retornado
                         response = xhr.responseJSON;
-                         console.log(response);
-                        if(response != null){
-                      
+                        console.log(response);
+                        if (response != null) {
 
-                        // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
-                         if (xhr.statusText == 'OK') {
+                            // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
+                            if (xhr.statusText == 'OK') {
 
-                            // Agora preenchemos os campos com os valores retornados
-                            $('#empresa').val(response.Nome);
-                         
-                            // Aqui exibimos uma mensagem caso tenha ocorrido algum erro
+                                // Agora preenchemos os campos com os valores retornados
+                                $('#empresa').val(response.Nome);
+                                $('#endereco').val(response.Endereco + ', ' + response.Numero);
+                                $('#email').val(response.Email);
+                                $('#contato').val(response.Contato);
+
+                                // Aqui exibimos uma mensagem caso tenha ocorrido algum erro
+                            } else {
+                                swal(response.message, "", "error"); // Neste caso estamos imprimindo a mensagem que a própria API retorna
+                            }
                         } else {
-                            swal(response.message, "", "error"); // Neste caso estamos imprimindo a mensagem que a própria API retorna
-                         }
+                            swal("CNPJ Não Encontrado!", "", "error");
                         }
-                        else {
-                swal("CNPJ Não Encontrado!", "", "error");
-            }
                     }
                 });
 
@@ -262,8 +255,5 @@
             minLength: 3
         });
     });
-
-
-
 </script>
 <?php $v->end(); ?>

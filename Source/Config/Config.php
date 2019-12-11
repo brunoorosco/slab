@@ -1,9 +1,10 @@
 <?php
 
-define("ROOT", "https://www.localhost/www/SLAB");
+define("ROOT", "https://".$_SERVER['SERVER_NAME']."/www/SLAB");
+
 
 define("SITE", "#S-LAB");
-// echo $_SERVER['SERVER_NAME'];
+//echo $_SERVER['SERVER_NAME'];
 
 if ($_SERVER['SERVER_NAME'] == 'www.localhost') {
     define("DATA_LAYER_CONFIG", [
@@ -26,8 +27,8 @@ if ($_SERVER['SERVER_NAME'] == 'www.localhost') {
         "host" => "localhost",
         "port" => "3306",
         "dbname" => "slab",
-        "username" => "usuario",
-        "passwd" => "senha",
+        "username" => "brunoorosco",
+        "passwd" => "123456",
         "options" => [
             PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

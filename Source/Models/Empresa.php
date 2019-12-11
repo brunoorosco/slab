@@ -26,7 +26,7 @@ class Empresa extends DataLayer
          $result = Db::query($sql);
          $empresa = $result[0];
          return json_encode($empresa);
-        //return (new Empresa())->find("CNPJ = :nome","nome={$nome}")->fetch(true);
+        //return (new Empresa())->find("CNPJ = :nome","nome={$nome}")->fetch(false);
     }
    
 }
