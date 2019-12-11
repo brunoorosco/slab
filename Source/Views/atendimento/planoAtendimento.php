@@ -37,7 +37,7 @@
     <form id="formPlano" method="POST" action="<?= url('atendimento/plano') ?>" enctype="multipart/form-data">
         <div class=" input-group">
             <div class="form-group col-2">
-                <label for="message-text" class="control-span">Nº Proposta/Sequencial:</label>
+                <label for="message-text" class="control-span">Nº Sequencial:</label>
                 <input name="nProposta" type="text" class="form-control col" disabled id="" onkeypress="DataHora(event, this)" placeholder="Nº Proposta">
             </div>
             <div class="form-group col-3">
@@ -186,18 +186,24 @@
 
                         // Aqui recuperamos o json retornado
                         response = xhr.responseJSON;
-                     //   console.log(xhr);
+                         console.log(response);
+                        if(response != null){
+                      
 
                         // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
-                         if (response.status == 'OK') {
+                         if (xhr.statusText == 'OK') {
 
                             // Agora preenchemos os campos com os valores retornados
-                            $('#empresa').val(response.nome);
+                            $('#empresa').val(response.Nome);
                          
                             // Aqui exibimos uma mensagem caso tenha ocorrido algum erro
                         } else {
                             swal(response.message, "", "error"); // Neste caso estamos imprimindo a mensagem que a própria API retorna
+                         }
                         }
+                        else {
+                swal("CNPJ Não Encontrado!", "", "error");
+            }
                     }
                 });
 

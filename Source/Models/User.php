@@ -18,8 +18,8 @@ class User extends DataLayer
         $senha = filter_var($senha, FILTER_SANITIZE_STRING);
         //$usuario = CandidatoModel::obterPorEmail($email);
 
-        $user = $model->find("usuario = :email", "senha= :senha")->fetch();
-        echo $user->first_name;
+        // $user = $model->find("usuario = :email", "senha= :senha")->fetch();
+        // echo $user->first_name;
 
 
         $usuario = User::obterPorEmail($email);

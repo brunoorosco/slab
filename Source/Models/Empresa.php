@@ -3,8 +3,8 @@
 
 namespace Source\Models;
 
+use Db;
 use CoffeeCode\DataLayer\DataLayer;
-use Source\Config\Db;  
 
 class Empresa extends DataLayer
 {
@@ -22,16 +22,10 @@ class Empresa extends DataLayer
     
     public function buscarEmpresa($nome)
     {
-        $sql = "select * from tbl_empresas where CNPJ=$nome";
-        $result = Db::query($sql);
-        $empresa = $result[0];
-//        echo "<pre>";
-//        var_dump($empresa);
-//        var_dump($result);
-//        die();
-        // Retornar empresas
-        var_dump($empresa);
-        return $empresa;
+         $sql = "select * from tbl_empresas where CNPJ={$nome['cnpj']}";
+         $result = Db::query($sql);
+         $empresa = $result[0];
+         return json_encode($empresa);
         //return (new Empresa())->find("CNPJ = :nome","nome={$nome}")->fetch(true);
     }
    

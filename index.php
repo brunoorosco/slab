@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . "/vendor/autoload.php";
+require __DIR__ . "/Source/Config/Db.php";
 
 
 

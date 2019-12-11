@@ -1,5 +1,7 @@
 <?php
 
+
+
 class Db{
     
     /* @var $conexao_pdo PDO */

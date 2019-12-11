@@ -31,15 +31,16 @@ class WebEmpresa
         ]);
     }
 
-    public function buscar($data): void
+    public function buscar($data)
     {
-        echo "teste";
-        var_dump($data);
-        die();
         $empresa = Empresa::buscarEmpresa($data);
-        var_dump($empresa);
-        die();
-        return $empresa;
+        
+        // Decodifica o formato JSON e retorna um Objeto
+     //  $json = json_decode($empresa);
+       echo ($empresa);
+        // Loop para percorrer o Objeto
+              // die();
+         //echo $empresa;
     }
 
 
