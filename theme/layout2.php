@@ -56,9 +56,9 @@
                         <li>
                             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-th-large"></i> Cadastro</a>
                             <ul class="collapse list-unstyled" id="pageSubmenu">
-                                <li><a href="../composicoes/" class="lk_lista">Composições</a></li>
+                                <li><a href="<?= url("comp/add"); ?>" >Composições</a></li>
                                 <li><a href="<?= url("empresa/add"); ?>">Empresas</a></li>
-                                <li><a href="../funcionarios" class="lk_lista">Funcionários</a></li>
+                                <li><a href="<?= url("func/add"); ?>">Funcionários</a></li>
                                 <li><a href="#">Normas</a> </li>
                                 <li><a href="../produtos/" class="lk_lista">Produtos</a></li>
                                 <li><a href="../ensaios/" class="lk_lista">Tipos de Ensaios</a></li>
@@ -69,18 +69,12 @@
                         <li>
                             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-th-large"></i> Consulta</a>
                             <ul class="collapse list-unstyled" id="homeSubmenu">
-                                <li>
-                                    <a href="<?= url("empresa"); ?>">Empresas</a>
-                                </li>
-                                <li>
-                                    <a href="./ensaio">Ensaios</a>
-                                </li>
-                                <li>
-                                    <a href="./atendimento/plano">Plano de Atendimento</a>
-                                </li>
-                                <li>
-                                    <a href="<?= url("orcamento"); ?>">Orçamentos</a>
-                                </li>
+                                <li><a href="<?= url("empresa"); ?>">Empresas</a></li>
+                                <li><a href="<?= url("ensaio"); ?>">Ensaios</a></li>
+                                <li><a href="<?= url("equipamentos"); ?>">Equipamentos</a></li>
+                                <li><a href="<?= url("func"); ?>">Funcionários</a></li>
+                                <li><a href="<?= url("atendimento"); ?>">Plano de Atendimento</a></li>
+                                <li><a href="<?= url("orcamento"); ?>">Orçamentos</a></li>
                                 <li>
                                     <a href="#">Outros</a>
                                 </li>

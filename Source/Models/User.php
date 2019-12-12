@@ -3,12 +3,55 @@
 namespace Source\Models;
 
 use CoffeeCode\DataLayer\DataLayer;
+use Source\Models\FuncionarioModel;
+
 
 class User extends DataLayer
 {
-    public function __construct()
+    // public function __construct()
+    // {
+    //     parent::__construct("funcionarios", ["email", "usuario"]);
+    // }
+
+    function autenticar($data)
     {
-        parent::__construct("funcionarios", ["email", "usuario"]);
+
+        $senhaCriptografada = md5($data['senha']);
+        $usuario = ($data['user']);
+
+        $model = new FuncionarioModel();
+        $user = $model->find(
+            "Usuario = :usuario" and "Senha = :senha",
+            "[usuario={$usuario},senha={$senhaCriptografada}]"
+        )->fetch(false);
+        var_dump($user);
+
+        //   if ($total > 0){
+        //       $codigoUsuario = $rows[0]['id'];
+        //       $_SESSION['usuario'] = $rows[0]['username'];
+        //       $_SESSION['nivel'] = $rows[0]['nivel_acesso'];
+        //       $_SESSION['COD_USUARIO'] = $codigoUsuario;
+
+        //       return $codigoUsuario;
+        //   }
+        //   else{
+        //     $codigoUsuario = 0;
+        //     return $codigoUsuario;
+        //   }
+        return $senhaCriptografada;
+    }
+
+    public static function validarUsuario()
+    {
+        if (($_SESSION['COD_USUARIO'] != '')) {
+            return $_SESSION['COD_USUARIO'];
+        } else {
+            return "chegou";
+            //   autenticar(); 
+            //header("location:app/login/login.php");
+            $_SESSION['msg_login'] = "<div id='message' class='alert alert-warning' role='alert'><strong>É necessário estar logado ao sistema!!!</strong><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+            // header("Location:" .$URLBASE);
+        }
     }
 
     public static function login($email, $senha)

@@ -7,6 +7,8 @@ require __DIR__ . "/Source/Config/Db.php";
 
 $route = new \CoffeeCode\Router\Router(ROOT);
 
+if(!isset($_SESSION))session_start(); //verifica se a sessão aberta
+
 // Conectar com o banco de dados
 if ($_SERVER['SERVER_NAME'] == 'localhost')
     require './Source/Config/config_dev.php';
@@ -29,7 +31,8 @@ $route->group(null);
 $route->get("/", "Web:home");
 $route->get("/contato", "Web:contact");
 $route->get("/teste", "Web:layout");
-$route->post("/login/{email}", "Web:home");
+$route->post("/login", "Web:login");
+$route->get("/home","Web:inicio");
 
 $route->group("etiqueta");
 $route->get("/","Atendimento:etiqueta");
@@ -45,7 +48,7 @@ $route->post("/plano", "Atendimento:imprimirPlano");
 $route->post("/", "WebEmpresa:buscar");
 
 /**
- * web
+ * webEmpresa
  * Empresa
  */
 $route->group("empresa");
@@ -56,6 +59,45 @@ $route->put("/edit/{id}", "WebEmpresa:editar");
 $route->post("/excluir", "WebEmpresa:excluir");
 $route->get("/{id}/editar", "WebEmpresa:editar");
 //$route->post("/busca/?{id}","WebEmpresa:buscar");
+
+/**
+ * controller: Composicao
+ * Composições
+ */
+$route->group("comp");
+$route->get("/", "CompController:home");
+$route->get("/add", "CompController:incluir");
+$route->post("/add", "CompController:adicionar");
+$route->put("/edit/{id}", "CompController:editar");
+$route->post("/excluir", "CompController:excluir");
+$route->get("/{id}/editar", "CompController:editar");
+/**
+ * controller: Equipamentos
+ * Composições
+ */
+$route->group("equipamentos");
+$route->get("/", "EquipController:todos");
+$route->get("/add", "EquipController:incluir");
+$route->post("/add", "EquipController:adicionar");
+$route->put("/edit/{id}", "EquipController:editar");
+$route->post("/excluir", "EquipController:excluir");
+$route->get("/{id}/editar", "EquipController:editar");
+/**
+ * controller: FuncionarioController
+ * Funcionarios
+ */
+$route->group("func");
+$route->get("/", "FuncionarioController:todos");
+$route->get("/add", "FuncionarioController:adicionar");
+$route->post("/add", "FuncionarioController:adicionar");
+$route->put("/edit/{id}", "FuncionarioController:editar");
+$route->post("/excluir", "FuncionarioController:excluir");
+$route->get("/{id}/editar", "FuncionarioController:editar");
+
+
+
+
+
 
 $route->group("autocomplete");
 $route->get("/?", "WebEmpresa:buscar");

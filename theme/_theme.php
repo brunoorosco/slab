@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= $title; ?></title>
+    <base href='<?= ROOT . ("/Source/assests/") ?>'>
 
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= url("theme/style.css"); ?>" />
 </head>
 
@@ -16,25 +19,23 @@
             echo $v->section("sidebar");
         else :
             ?>
-            <a title="" href="<?= url(); ?>">Home</a>
+            <!-- <a title="" href="<?= url(); ?>">Home</a>
             <a title="" href="<?= url("contato"); ?>">Contato</a>
-            <a title="" href="<?= url("teste"); ?>">Teste</a>
+            <a title="" href="<?= url("teste"); ?>">Teste</a> -->
         <?php
         endif; ?>
 
     </nav>
     <main class="main_content">
-        <?= $v->section("content");?>
+        <?= $v->section("content"); ?>
     </main>
     <footer class="main_footer">
         <?= SITE; ?> - Todos os Direitos Reservados
 
     </footer>
 
-    <script  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-<?= $v->section("scripts"); ?>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <?= $v->section("scripts"); ?>
 </body>
 
 </html>

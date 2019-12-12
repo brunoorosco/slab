@@ -24,7 +24,7 @@ if ($_SERVER['SERVER_NAME'] == 'www.localhost') {
 } else {
     define("DATA_LAYER_CONFIG", [
         "driver" => "mysql",
-        "host" => "localhost",
+        "host" => $_SERVER['SERVER_NAME'],
         "port" => "3306",
         "dbname" => "slab",
         "username" => "brunoorosco",

@@ -7,8 +7,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>
-                        Incluir Empresa
-                        <?php //echo ($incluindo ? "Incluir" : "Editar") . " Empresa"; 
+                        Incluir Composição                        <?php //echo ($incluindo ? "Incluir" : "Editar") . " Empresa"; 
                         ?>
                     </h5>
 

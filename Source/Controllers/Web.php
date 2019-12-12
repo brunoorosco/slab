@@ -16,41 +16,25 @@ class Web
 
     public function home($email):void
     {  
-       // echo $email;
-       //$user = User::login($email,$senha);
-     //$users = (new User())->find()->fetch(true);
+       $autenticado = User::validarUsuario();
+
        echo $this->view->render("home",[
-           "title" => "Home | ". SITE
+           "title" => "Home | ". SITE,
+           "autentic" => $autenticado
            
        ]);
     }
 
     public function login($data):void
     {
+        $autenticado = User::autenticar($data); 
       // $users = (new User())->find()->fetch(true);
-       echo $this->view->render("login/login",[
+       echo $this->view->render("home",[
            "title" => "Login | ",
-           
+           "autentic" => $autenticado
        ]);
     }
 
-    public function autenticar($data):void
-    {
-       $users = (new User())->find()->fetch(true);
-       echo $this->view->render("login/login",[
-           "title" => "Autenticacao | ". SITE,
-           
-       ]);
-    }
-
-    public function layout($data):void
-    {
-       $users = (new User())->find()->fetch(true);
-       echo $this->view->render("teste",[
-           "title" => "teste | ". SITE,
-           "users" => $users
-       ]);
-    }
     public function contato($data):void
     {
         echo "<h1>Contato</h1>";
@@ -59,16 +43,7 @@ class Web
         require __DIR__."../../Views/contato.php";
     }
 
-    public function orcamento($data):void
-    {
-        $users = (new User())->find()->fetch(true);
-        echo $this->view->render("atendimento/orcamento",[
-            "title" => "Orçamento | ". SITE
-            
-        ]);
-    }
-
-   
+      
     public function error($data):void 
     {
         echo $this->view->render("error",[
