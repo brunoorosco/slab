@@ -84,7 +84,7 @@
             </div>
             <div class="form-group col-2">
                 <label for="message-text" class="control-span">Resposta ao Cliente:</label>
-                <input name="niver" type="text" class="form-control col date" disabled id="" onkeypress="DataHora(event, this)" placeholder="00/00/0000">
+                <input name="dataResposta" type="text" class="form-control col date" disabled id="dataResposta" onkeypress="DataHora(event, this)" placeholder="00/00/0000">
             </div>
             <div class="form-group col-2">
                 <label for="message-text" class="control-span">Resp. Análise Crítica:</label>
@@ -139,7 +139,7 @@
 <script>
     $(document).ready(function() {
 
-            var option = {  
+        var option = {
             uiLibrary: 'bootstrap4',
             dateFormat: 'dd/mm/yy',
             dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
@@ -148,12 +148,14 @@
             monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
             monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
             nextText: 'Próximo',
-            prevText: 'Anterior'};
+            prevText: 'Anterior'
+        };
 
         $("#dataRealiza").datepicker(option).val();
         $("#dataSolicitacao").datepicker(option).val();
-        $("#dataResposta").val(moment().format('MMM D, YYYY'));
-
+        var utc = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+        $("#dataResposta").val(utc);
+        console.log(utc)
         $('#pesquisar').on('click', function(e) {
 
             // Apesar do botão estar com o type="button", é prudente chamar essa função para evitar algum comportamento indesejado
@@ -178,7 +180,7 @@
 
                         // Aqui recuperamos o json retornado
                         response = xhr.responseJSON;
-                        console.log(response);
+                        // console.log(response);
                         if (response != null) {
 
                             // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
