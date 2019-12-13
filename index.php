@@ -29,14 +29,20 @@ $route->namespace("Source\Controllers");
 $route->group(null);
 //$route->get("/", "Web:home");
 $route->get("/", "Web:home");
+$route->get("/login", "Web:home");
 $route->get("/contato", "Web:contact");
 $route->get("/teste", "Web:layout");
 $route->post("/login", "Web:login");
 $route->get("/home","Web:inicio");
-
+$route->get("/logout","Web:logout");
+/**
+ * web
+ * etiquetas
+ */
 $route->group("etiqueta");
 $route->get("/","Atendimento:etiqueta");
 $route->get("/busca","Atendimento:buscaEtiqueta");
+
 /**
  * web
  * Atendimento de empresas
@@ -59,6 +65,15 @@ $route->put("/edit/{id}", "WebEmpresa:editar");
 $route->post("/excluir", "WebEmpresa:excluir");
 $route->get("/{id}/editar", "WebEmpresa:editar");
 //$route->post("/busca/?{id}","WebEmpresa:buscar");
+/**
+ * NormaController
+ * acesso responsavel pelas normas 
+ */
+$route->group("ensaios");
+$route->get("/","EnsaioController:ensaios");
+$route->post("/add","EnsaioController:adicionar");
+$route->post("/editar","EnsaioController:editar");
+$route->post("/excluir","EnsaioController:excluir");
 
 /**
  * controller: Composicao
@@ -93,7 +108,15 @@ $route->post("/add", "FuncionarioController:adicionar");
 $route->put("/edit/{id}", "FuncionarioController:editar");
 $route->post("/excluir", "FuncionarioController:excluir");
 $route->get("/{id}/editar", "FuncionarioController:editar");
-
+/**
+ * NormaController
+ * acesso responsavel pelas normas 
+ */
+$route->group("normas");
+$route->get("/","NormaController:normas");
+$route->post("/add","NormaController:adicionar");
+$route->post("/editar","NormaController:editar");
+$route->post("/excluir","NormaController:excluir");
 
 
 

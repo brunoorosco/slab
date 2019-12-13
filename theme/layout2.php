@@ -33,7 +33,7 @@
                                 <img alt="image" class="img-circle" src="./img/avatar-2.png" width="45" />
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Fulano X</strong>
+                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?= $_SESSION['userName'] ?></strong>
                                     </span>
                                     <span class="text-light">Assistente de Ensaios <b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu profile animated fadeInRight m-t-xs">
@@ -41,7 +41,7 @@
                                 <li><a href="contacts.html">Contacts</a></li>
                                 <li><a href="mailbox.html">Mailbox</a></li>
                                 <li class="divider"></li>
-                                <li><a href="login.html">Logout</a></li>
+                                <li><a href="<?= url("logout"); ?>">Logout</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -190,7 +190,7 @@
 
 
                         <li>
-                            <a href="login.html">
+                            <a href="<?= url("logout"); ?>">
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>

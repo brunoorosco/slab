@@ -9,7 +9,7 @@ use Phpoffice\PhpWord;
 
 define("ROTA","../Source/Views/atendimento/"); 
 
-class Atendimento
+class Atendimento 
 {
     private $view;
 

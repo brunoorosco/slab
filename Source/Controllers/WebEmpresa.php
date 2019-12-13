@@ -34,13 +34,13 @@ class WebEmpresa
     public function buscar($data)
     {
         $empresa = Empresa::buscarEmpresa($data);
-        
+
         // Decodifica o formato JSON e retorna um Objeto
-     //  $json = json_decode($empresa);
-       echo ($empresa);
+        //  $json = json_decode($empresa);
+        echo ($empresa);
         // Loop para percorrer o Objeto
-              // die();
-         //echo $empresa;
+        // die();
+        //echo $empresa;
     }
 
 
@@ -77,11 +77,15 @@ class WebEmpresa
         $empresa->Celular = $jobData["txt_celular"];
         $empresa->Email = $jobData["txt_email"];
 
-        $empresa->save();
-
-        $callback["message"] = "Empresa cadastrada com sucesso!";
-        $callback["action"] = "success";
-        echo json_encode($callback);
+        if ($empresa->save()) {
+            $callback["message"] = "Empresa cadastrada com sucesso!";
+            $callback["action"] = "success";
+            echo json_encode($callback);
+        } else {
+            $callback["message"] = "Não foi possivel cadastrar!";
+            $callback["action"] = "error";
+            echo json_encode($callback);
+        }
     }
 
     public function editar($data): void

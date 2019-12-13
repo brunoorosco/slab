@@ -6,7 +6,7 @@ define("ROOT", "https://".$_SERVER['SERVER_NAME']."/www/SLAB");
 define("SITE", "#S-LAB");
 //echo $_SERVER['SERVER_NAME'];
 
-if ($_SERVER['SERVER_NAME'] == 'www.localhost') {
+if ($_SERVER['SERVER_NAME'] != 'www.localhost') {
     define("DATA_LAYER_CONFIG", [
         "driver" => "mysql",
         "host" => "localhost",

@@ -103,15 +103,15 @@
                 </div>
                 <div class="col-2">
                     <label for="cem" class="control-span">Resp. p/ Atendimento</label>
-                    <input name="responsavel" class="form-control" id="responsavel" Type="text" placeholder="Login em nome de:">
+                    <input name="responsavel" class="form-control" id="responsavel" Type="text" placeholder="Login em nome de:" disabled value="<?= $_SESSION['userName'] ?>">
                 </div>
                 <div class="form-group col">
                     <label for="recipient-name" class="control-span">Previsão da Inicial</label>
-                    <input name="dataRealiza" type="text" class="form-control date text-right" id="dataInicial" placeholder="00/00/0000" maxlength="10">
+                    <input name="dataInicial" type="text" class="form-control date text-right" id="dataInicial" placeholder="00/00/0000" maxlength="10">
                 </div>
                 <div class="form-group col">
                     <label for="recipient-name" class="control-span">Previsão da Final</label>
-                    <input name="dataRealiza" type="text" class="form-control date text-right" id="dataFinal" placeholder="00/00/0000" maxlength="10">
+                    <input name="dataFinal" type="text" class="form-control date text-right" id="dataFinal" placeholder="00/00/0000" maxlength="10">
                 </div>
                 <div class="form-group col">
                     <label for="message-text" class="control-span">Resposta ao Cliente</label>
@@ -187,9 +187,10 @@
         $("#dataRealiza").datepicker(option).val();
         $("#dataSolicitacao").datepicker(option).val();
         $("#dataInicial").datepicker(option).val();
-        $("#datafinal").datepicker(option).val();
+        $("#dataFinal").datepicker(option).val();
+        $("#dataResposta").datepicker(option).val();
 
-        var hoje = moment().format('L');
+        var hoje = moment().format('DD/MM/YYYY');
 
         $('#pesquisar').on('click', function(e) {
 
@@ -220,7 +221,8 @@
 
                             // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
                             if (xhr.statusText == 'OK') {
-
+                                
+                             dataFinal = moment().add(7, 'days').format('DD/MM/YYYY');
                                 // Agora preenchemos os campos com os valores retornados
                                 $('#empresa').val(response.Nome);
                                 $('#endereco').val(response.Endereco + ', ' + response.Numero);
@@ -228,8 +230,9 @@
                                 $('#contato').val(response.Contato);
 
                                 $("#dataInicial").val(hoje);
-                                $("#dataFinal").val(hoje);
+                                $("#dataFinal").val(dataFinal);
                                 $("#dataSolicitacao").val(hoje);
+                                $("#dataResposta").val(hoje);
 
                                 // Aqui exibimos uma mensagem caso tenha ocorrido algum erro
                             } else {
