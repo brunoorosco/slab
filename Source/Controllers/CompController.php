@@ -3,7 +3,7 @@
 namespace Source\Controllers;
 
 use League\Plates\Engine;
-use Source\Models\Composicao;
+use Source\Models\CompModel;
 
 define("ROTA","../Source/Views/composicao/"); 
 
@@ -20,7 +20,7 @@ class CompController
     {  
        // echo $email;
        //$user = User::login($email,$senha);
-       $comps = (new Composicao())->find()->fetch(true);
+       $comps = (new CompModel())->find()->fetch(true);
       // var_dump($comps);
        echo $this->view->render(ROTA."listar",[
            "title" => "Composições | ". SITE,
@@ -50,11 +50,16 @@ class CompController
 
     public function excluir($data):void
     {
-       $users = (new Composicao())->find()->fetch(true);
-       echo $this->view->render("login/login",[
-           "title" => "Autenticacao | ". SITE,
-           
-       ]);
+        if (empty($data["id"])) return;
+
+        $id = filter_var($data["id"], FILTER_VALIDATE_INT);
+        $equip = (new CompModel())->findById($id);
+        var_dump($equip);
+        if ($equip) {
+            $equip->destroy();
+        }
+        $callback = true;
+        echo json_encode($callback);
     }
 
 }

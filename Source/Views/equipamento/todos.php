@@ -60,16 +60,16 @@
                                     <td class="text-left" scope="row"><?= $equi->Fabricante ?></td>
                                     <td class="text-left" scope="row"><?= $equi->PeriodCalibracao ?></td>
                                     <td>
-                                        <!--<a href="<?= url("empresa/") . $equi->Codigo ?>/editar">
+                                        <!--<a href="<?= url("equipamento/") . $equi->Codigo ?>/editar">
                                         <i class="fa fa-pencil text-navy"></i>
                                     </a>-->
-                                        <a data-action="<?= url("empresa/") ?>/editar" data-id=<?= $equi->Codigo ?>>
+                                        <a data-action="<?= url("equipamento/") ?>/editar" data-id=<?= $equi->Codigo ?>>
                                             <i class="fa fa-pencil text-navy"></i>
                                         </a>
-                                        <a data-action="<?= url("empresa/excluir") ?>" data-id=<?= $equi->Codigo ?> data-nome=<?= $func->Nome ?>>
+                                        <a data-action="<?= url("equipamento/excluir") ?>" data-id=<?= $equi->Codigo ?> data-nome=<?= $func->Nome ?>>
                                             <i class="fa fa-trash text-navy"></i>
                                         </a>
-                                        <!-- <a href="<?= url("empresa/") . $func->Codigo ?>/excluir">
+                                        <!-- <a href="<?= url("equipamento/") . $func->Codigo ?>/excluir">
                                         <i class="fa fa-trash text-navy"></i>
                                     </a> -->
                                     </td>
@@ -128,8 +128,8 @@
             var id = $(this).data('id');
 
             swal({
-                    title: "Deseja realmente excluir a empresa?",
-                    text: data.nome,
+                    title: "Deseja realmente excluir este equipamento?",
+                    text: data.Nome,
                     icon: "warning",
                     buttons: {
                         cancel: {

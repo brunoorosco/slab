@@ -4,7 +4,6 @@ require __DIR__ . "/vendor/autoload.php";
 require __DIR__ . "/Source/Config/Db.php";
 
 
-
 $route = new \CoffeeCode\Router\Router(ROOT);
 
 if(!isset($_SESSION))session_start(); //verifica se a sessão aberta
@@ -18,6 +17,8 @@ session_start();
 
 Db::conectar($dbname, $user, $password, $host);
 
+         
+         
 /**
  * APP
  */
@@ -29,12 +30,13 @@ $route->namespace("Source\Controllers");
 $route->group(null);
 //$route->get("/", "Web:home");
 $route->get("/", "Web:home");
-$route->get("/login", "Web:home");
+$route->get("/login", "Web:logout");
 $route->get("/contato", "Web:contact");
 $route->get("/teste", "Web:layout");
 $route->post("/login", "Web:login");
 $route->get("/home","Web:inicio");
 $route->get("/logout","Web:logout");
+
 /**
  * web
  * etiquetas
@@ -61,7 +63,7 @@ $route->group("empresa");
 $route->get("/", "WebEmpresa:empresa");
 $route->get("/add", "WebEmpresa:incluir");
 $route->post("/add", "WebEmpresa:adicionar");
-$route->put("/edit/{id}", "WebEmpresa:editar");
+$route->post("/edit/{id}", "WebEmpresa:editar");
 $route->post("/excluir", "WebEmpresa:excluir");
 $route->get("/{id}/editar", "WebEmpresa:editar");
 //$route->post("/busca/?{id}","WebEmpresa:buscar");
@@ -69,7 +71,7 @@ $route->get("/{id}/editar", "WebEmpresa:editar");
  * NormaController
  * acesso responsavel pelas normas 
  */
-$route->group("ensaios");
+$route->group("ensaio");
 $route->get("/","EnsaioController:ensaios");
 $route->post("/add","EnsaioController:adicionar");
 $route->post("/editar","EnsaioController:editar");
@@ -90,7 +92,7 @@ $route->get("/{id}/editar", "CompController:editar");
  * controller: Equipamentos
  * Composições
  */
-$route->group("equipamentos");
+$route->group("equipamento");
 $route->get("/", "EquipController:todos");
 $route->get("/add", "EquipController:incluir");
 $route->post("/add", "EquipController:adicionar");
@@ -112,7 +114,7 @@ $route->get("/{id}/editar", "FuncionarioController:editar");
  * NormaController
  * acesso responsavel pelas normas 
  */
-$route->group("normas");
+$route->group("norma");
 $route->get("/","NormaController:normas");
 $route->post("/add","NormaController:adicionar");
 $route->post("/editar","NormaController:editar");

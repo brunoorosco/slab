@@ -50,11 +50,16 @@ class FuncionarioController
 
     public function excluir($data):void
     {
-       $users = (new FuncionarioModel())->find()->fetch(true);
-       echo $this->view->render("login/login",[
-           "title" => "Autenticacao | ". SITE,
-           
-       ]);
+        if (empty($data["id"])) return;
+
+        $id = filter_var($data["id"], FILTER_VALIDATE_INT);
+        $func = (new FuncionarioModel())->findById($id);
+        var_dump($func);
+        if ($func) {
+            $func->destroy();
+        }
+        $callback = true;
+        echo json_encode($callback);
     }
 
 }

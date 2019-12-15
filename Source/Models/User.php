@@ -49,7 +49,7 @@ class User extends DataLayer
         if (($_SESSION['codUsuario'] != '')) {
             return $_SESSION['codUsuario'];
         } else {
-            return $_SESSION['codUsuario'];
+            return false;
             //   autenticar(); 
             //header("location:app/login/login.php");
             $_SESSION['msg_login'] = "<div id='message' class='alert alert-warning' role='alert'><strong>É necessário estar logado ao sistema!!!</strong><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";

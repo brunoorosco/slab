@@ -6,7 +6,7 @@ namespace Source\Models;
 use Db;
 use CoffeeCode\DataLayer\DataLayer;
 
-class Composicao extends DataLayer
+class CompModel extends DataLayer
 {
     public function __construct()
     {

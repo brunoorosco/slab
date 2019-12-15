@@ -50,11 +50,16 @@ class EquipController
 
     public function excluir($data):void
     {
-       $users = (new EquipModel())->find()->fetch(true);
-       echo $this->view->render("login/login",[
-           "title" => "Autenticacao | ". SITE,
-           
-       ]);
+        if (empty($data["id"])) return;
+
+        $id = filter_var($data["id"], FILTER_VALIDATE_INT);
+        $equip = (new EquipModel())->findById($id);
+        var_dump($equip);
+        if ($equip) {
+            $equip->destroy();
+        }
+        $callback = true;
+        echo json_encode($callback);
     }
 
 }

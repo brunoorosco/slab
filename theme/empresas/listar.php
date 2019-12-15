@@ -48,9 +48,9 @@
                             <?php
                             foreach ($empresas as $empresa) :
                                 $array = explode('/', $empresa->Email); // função para pegar só o primeiro email
-                                    if(strlen($empresa->CNPJ)==14){
-                                 $cnpj = vsprintf("%s%s.%s%s%s.%s%s%s/%s%s%s%s-%s%s", str_split($empresa->CNPJ)); 
-                                }else $cnpj = $empresa->CNPJ;
+                                if (strlen($empresa->CNPJ) == 14) {
+                                    $cnpj = vsprintf("%s%s.%s%s%s.%s%s%s/%s%s%s%s-%s%s", str_split($empresa->CNPJ));
+                                } else $cnpj = $empresa->CNPJ;
                                 ?>
 
                                 <tr>
@@ -58,15 +58,15 @@
                                     <td class="text-left" scope="row"><?= $empresa->Nome ?></td>
                                     <!--<td class="text-left" scope="row"><?= $array[0] ?></td>-->
                                     <td class="text-left" scope="row"><?= $empresa->Telefone ?></td>
-                                    <td class="text-left cnpj" id="cnpj" scope="row"><?=  $cnpj ?></td>
+                                    <td class="text-left cnpj" id="cnpj" scope="row"><?= $cnpj ?></td>
                                     <td>
                                         <!--<a href="<?= url("empresa/") . $empresa->Codigo ?>/editar">
                                         <i class="fa fa-pencil text-navy"></i>
                                     </a>-->
-                                        <a data-action="<?= url("empresa/") ?>/editar" data-id=<?= $empresa->Codigo ?>>
+                                        <a data-action="<?= url("empresa/editar") ?>" data-id=<?= $empresa->Codigo ?> data-func="edit">
                                             <i class="fa fa-pencil text-navy"></i>
                                         </a>
-                                        <a data-action="<?= url("empresa/excluir") ?>" data-id=<?= $empresa->Codigo ?> data-nome=<?= $empresa->Nome ?>>
+                                        <a data-action="<?= url("empresa/excluir") ?>" data-id=<?= $empresa->Codigo ?> data-nome=<?= $empresa->Nome ?> data-func="exc">
                                             <i class="fa fa-trash text-navy"></i>
                                         </a>
                                         <!-- <a href="<?= url("empresa/") . $empresa->Codigo ?>/excluir">
@@ -92,7 +92,7 @@
 <script src="js/datatables.min.js"></script>
 
 <script>
-   $(document).ready(function(){
+    $(document).ready(function() {
         $('#tabelaEmpresa').DataTable({
             "language": {
                 "lengthMenu": "Mostrar _MENU_ itens p/ Pág.",
@@ -127,55 +127,67 @@
             var tr = $(this).closest('tr');
             var id = $(this).data('id');
 
-            swal({
-                    title: "Deseja realmente excluir a empresa?",
-                    text: data.nome,
-                    icon: "warning",
-                    buttons: {
-                        cancel: {
-                            text: "Cancel",
-                            value: null,
-                            visible: true,
-                            className: "",
-                            closeModal: true,
+            var func = $(this).data('func');
+            // console.log(func);
+            // console.log(data.action); //returna -> https://localhost/www/SLAB/empresa/editar
+            if (func === "exc") {
+                swal({
+                        title: "Deseja realmente excluir a empresa?",
+                        text: data.nome,
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "Cancel",
+                                value: null,
+                                visible: true,
+                                className: "",
+                                closeModal: true,
+                            },
+                            confirm: {
+                                text: "OK",
+                                value: true,
+                                visible: true,
+                                className: "",
+                                closeModal: true,
+
+                            },
                         },
-                        confirm: {
-                            text: "OK",
-                            value: true,
-                            visible: true,
-                            className: "",
-                            closeModal: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                url: data.action,
+                                data: data,
+                                type: 'POST',
 
-                        },
-                    },
-                    dangerMode: true,
+                            }).done(function(resp) {
+
+                                tr.fadeOut('slow', function() {});
+
+                            }).fail(function(resp) {
+
+                            })
+                        }
+                    })
+            } else {
+                console.log("edit")
+                $.ajax({
+                    url: data.action,
+                    data: data,
+                    type: 'POST',
+                }).done(function(resp) {
+                    
+                   
+
+                }).fail(function(resp) {
+
                 })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            url: data.action,
-                            data: data,
-                            type: 'POST',
-
-                        }).done(function(resp) {
-
-                            tr.fadeOut('slow', function() {});
-
-                        }).fail(function(resp) {
-
-                        })
-
-
-
-                    }
-                })
+            }
         })
 
-      
+
     })
-
-
-   
 </script>
 
 <?php $v->end(); ?>

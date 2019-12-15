@@ -54,16 +54,16 @@
                                     <td class="text-left" scope="row"><?= $norma->Codigo ?></td>
                                     <td class="text-left" scope="row"><?= $norma->Nome ?></td>
                                     <td>
-                                        <!--<a href="<?= url("empresa/") . $norma->Codigo ?>/editar">
+                                        <!--<a href="<?= url("norma/") . $norma->Codigo ?>/editar">
                                         <i class="fa fa-pencil text-navy"></i>
                                     </a>-->
-                                        <a data-action="<?= url("normas/") ?>/editar" data-id=<?= $norma->Codigo ?>>
+                                        <a data-action="<?= url("norma/") ?>/editar" data-id=<?= $norma->Codigo ?>>
                                             <i class="fa fa-pencil text-navy"></i>
                                         </a>
-                                        <a data-action="<?= url("normas/excluir") ?>" data-id=<?= $norma->Codigo ?> data-nome=<?= $norma->Nome ?>>
+                                        <a data-action="<?= url("norma/excluir") ?>" data-id=<?= $norma->Codigo ?> data-nome=<?= $norma->Nome ?>>
                                             <i class="fa fa-trash text-navy"></i>
                                         </a>
-                                        <!-- <a href="<?= url("empresa/") . $norma->Codigo ?>/excluir">
+                                        <!-- <a href="<?= url("norma/") . $norma->Codigo ?>/excluir">
                                         <i class="fa fa-trash text-navy"></i>
                                     </a> -->
                                     </td>
@@ -122,7 +122,7 @@
             var id = $(this).data('id');
 
             swal({
-                    title: "Deseja realmente excluir a empresa?",
+                    title: "Deseja realmente excluir esta norma?",
                     text: data.nome,
                     icon: "warning",
                     buttons: {

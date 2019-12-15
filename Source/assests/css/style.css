@@ -3497,8 +3497,8 @@ body.body-small .footer.fixed {
 .table > tfoot > tr > td {
   border-top: 1px solid #e7eaec;
   line-height: 1.42857;
-  padding: 8px;
-  vertical-align: top;
+  padding: 3px;
+  vertical-align: middle;
 }
 /* PANELS */
 .panel.blank-panel {

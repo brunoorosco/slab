@@ -36,6 +36,7 @@ class Web
         }
     }
 
+    
     public function login($data): void
     {
         $model = new FuncionarioModel();
@@ -84,6 +85,7 @@ class Web
 
     public function error($data): void
     {
+        
         echo $this->view->render("error", [
             "title" => "Erro | {$data["errcode"]}" . SITE,
             "error" => $data["errcode"]

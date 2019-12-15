@@ -1,3 +1,12 @@
+<?php
+
+use Source\Models\User;
+
+if (!$autenticado = User::validarUsuario()) {
+    header("location:" . url() . "");
+};
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +28,7 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/_style.css" rel="stylesheet">
-    <?= $v->section("css"); ?> 
+    <?= $v->section("css"); ?>
     <title><?= $v->e($title) ?></title>
 </head>
 
@@ -56,7 +65,7 @@
                         <li>
                             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-th-large"></i> Cadastro</a>
                             <ul class="collapse list-unstyled" id="pageSubmenu">
-                                <li><a href="<?= url("comp/add"); ?>" >Composições</a></li>
+                                <li><a href="<?= url("comp/add"); ?>">Composições</a></li>
                                 <li><a href="<?= url("empresa/add"); ?>">Empresas</a></li>
                                 <li><a href="<?= url("func/add"); ?>">Funcionários</a></li>
                                 <li><a href="#">Normas</a> </li>
@@ -69,11 +78,13 @@
                         <li>
                             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-th-large"></i> Consulta</a>
                             <ul class="collapse list-unstyled" id="homeSubmenu">
+                                <li><a href="<?= url("comp"); ?>">Composições</a></li>
                                 <li><a href="<?= url("empresa"); ?>">Empresas</a></li>
                                 <li><a href="<?= url("ensaio"); ?>">Ensaios</a></li>
-                                <li><a href="<?= url("equipamentos"); ?>">Equipamentos</a></li>
+                                <li><a href="<?= url("equipamento"); ?>">Equipamentos</a></li>
                                 <li><a href="<?= url("func"); ?>">Funcionários</a></li>
                                 <li><a href="<?= url("atendimento"); ?>">Plano de Atendimento</a></li>
+                                <li><a href="<?= url("norma"); ?>">Normas</a></li>
                                 <li><a href="<?= url("orcamento"); ?>">Orçamentos</a></li>
                                 <li>
                                     <a href="#">Outros</a>

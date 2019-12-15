@@ -39,9 +39,9 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Tipo de Ensaio</th>
-                                <th>Cod. do Ensaio</th>
+                                <th>Cod. Ensaio</th>
                                 <th>Carga Hor.</th>
-                                <th>Preço</th>
+                                <th style="min-width: 50px">Preço</th>
                                 <th>Ação</th>
                             </tr>
                         </thead>
@@ -56,16 +56,17 @@
                                 <tr>
                                     <td class="text-left" scope="row"><?= $ensaio->Codigo ?></td>
                                     <td class="text-left" scope="row"><?= $ensaio->Nome ?></td>
-                                    <td class="text-left" scope="row"><?= $ensaio->Codigo ?></td>
-                                    <td class="text-left" scope="row"><?= $ensaio->Nome ?></td>
+                                    <td class="text-left" scope="row"><?= $ensaio->CodEnsaio ?></td>
+                                    <td class="text-left" scope="row"><?= $ensaio->Carga ?></td>
+                                    <td class="text-left" scope="row">R$ <?= $ensaio->Preco ?></td>
                                     <td>
                                         <!--<a href="<?= url("empresa/") . $ensaio->Codigo ?>/editar">
                                         <i class="fa fa-pencil text-navy"></i>
                                     </a>-->
-                                        <a data-action="<?= url("normas/") ?>/editar" data-id=<?= $ensaio->Codigo ?>>
+                                        <a data-action="<?= url("ensaio/") ?>/editar" data-id=<?= $ensaio->Codigo ?>>
                                             <i class="fa fa-pencil text-navy"></i>
                                         </a>
-                                        <a data-action="<?= url("normas/excluir") ?>" data-id=<?= $ensaio->Codigo ?> data-nome=<?= $ensaio->Nome ?>>
+                                        <a data-action="<?= url("ensaio/excluir") ?>" data-id=<?= $ensaio->Codigo ?> data-nome=<?= $ensaio->Nome ?>>
                                             <i class="fa fa-trash text-navy"></i>
                                         </a>
                                         <!-- <a href="<?= url("empresa/") . $ensaio->Codigo ?>/excluir">
@@ -92,7 +93,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#tabelaEnsiao').DataTable({
+        $('#tabelaEnsaio').DataTable({
             "language": {
                 "lengthMenu": "Mostrar _MENU_ itens p/ Pág.",
                 "zeroRecords": "Não foi possivel encontrar nenhum registro",
@@ -127,7 +128,7 @@
             var id = $(this).data('id');
 
             swal({
-                    title: "Deseja realmente excluir a empresa?",
+                    title: "Deseja realmente excluir?",
                     text: data.nome,
                     icon: "warning",
                     buttons: {

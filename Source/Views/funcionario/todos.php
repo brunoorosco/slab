@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Composições</h5>
+                    <h5>Funcionários</h5>
 
                     <div class="ibox-tools">
                         <a class="collapse-link">
@@ -34,7 +34,7 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table" id="tabelaComp">
+                    <table class="table" id="tabelaFunc">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -60,16 +60,16 @@
                                     <td class="text-left" scope="row"><?= $func->CodFuncao ?></td>
                                     <td class="text-left" scope="row"><?= $func->Status ?></td>
                                     <td>
-                                        <!--<a href="<?= url("empresa/") . $func->Codigo ?>/editar">
+                                        <!--<a href="<?= url("func/") . $func->Codigo ?>/editar">
                                         <i class="fa fa-pencil text-navy"></i>
                                     </a>-->
-                                        <a data-action="<?= url("empresa/") ?>/editar" data-id=<?= $func->Codigo ?>>
+                                        <a data-action="<?= url("func/") ?>/editar" data-id=<?= $func->Codigo ?>>
                                             <i class="fa fa-pencil text-navy"></i>
                                         </a>
-                                        <a data-action="<?= url("empresa/excluir") ?>" data-id=<?= $func->Codigo ?> data-nome=<?= $func->Nome ?>>
+                                        <a data-action="<?= url("func/excluir") ?>" data-id=<?= $func->Codigo ?> data-nome=<?= $func->Nome ?>>
                                             <i class="fa fa-trash text-navy"></i>
                                         </a>
-                                        <!-- <a href="<?= url("empresa/") . $func->Codigo ?>/excluir">
+                                        <!-- <a href="<?= url("func/") . $func->Codigo ?>/excluir">
                                         <i class="fa fa-trash text-navy"></i>
                                     </a> -->
                                     </td>
@@ -93,7 +93,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#tabelaComp').DataTable({
+        $('#tabelaFunc').DataTable({
             "language": {
                 "lengthMenu": "Mostrar _MENU_ itens p/ Pág.",
                 "zeroRecords": "Não foi possivel encontrar nenhum registro",

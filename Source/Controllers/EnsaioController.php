@@ -16,7 +16,7 @@ class EnsaioController
         $this->view = Engine::create(__DIR__."/../../theme","php");
     }
 
-    public function ensaios($norma):void
+    public function ensaios($ensaio):void
     {  
        // echo $email;
        //$user = User::login($email,$senha);
@@ -53,10 +53,10 @@ class EnsaioController
         if (empty($data["id"])) return;
 
         $id = filter_var($data["id"], FILTER_VALIDATE_INT);
-        $norma = (new EnsaioModel())->findById($id);
-        var_dump($norma);
-        if ($norma) {
-            $norma->destroy();
+        $ensaio = (new EnsaioModel())->findById($id);
+        var_dump($ensaio);
+        if ($ensaio) {
+            $ensaio->destroy();
         }
         $callback = true;
         echo json_encode($callback);
