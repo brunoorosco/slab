@@ -1,6 +1,5 @@
 <?php
 
-require dirname(__FILE__) . '/../Models/EmpresaModel.php';
 //require dirname(__FILE__) . '/../View/EmpresaView.php';
 namespace Source\Controllers;
 

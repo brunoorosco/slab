@@ -63,7 +63,8 @@ $route->group("empresa");
 $route->get("/", "WebEmpresa:empresa");
 $route->get("/add", "WebEmpresa:incluir");
 $route->post("/add", "WebEmpresa:adicionar");
-$route->post("/edit/{id}", "WebEmpresa:editar");
+$route->get("/edit/{id}", "WebEmpresa:editar");
+$route->post("/edit", "WebEmpresa:buscarEmpresa");
 $route->post("/excluir", "WebEmpresa:excluir");
 $route->get("/{id}/editar", "WebEmpresa:editar");
 //$route->post("/busca/?{id}","WebEmpresa:buscar");
@@ -96,7 +97,7 @@ $route->group("equipamento");
 $route->get("/", "EquipController:todos");
 $route->get("/add", "EquipController:incluir");
 $route->post("/add", "EquipController:adicionar");
-$route->put("/edit/{id}", "EquipController:editar");
+$route->post("/edit/{id}", "EquipController:editar");
 $route->post("/excluir", "EquipController:excluir");
 $route->get("/{id}/editar", "EquipController:editar");
 /**

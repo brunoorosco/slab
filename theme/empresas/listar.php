@@ -59,11 +59,11 @@
                                     <!--<td class="text-left" scope="row"><?= $array[0] ?></td>-->
                                     <td class="text-left" scope="row"><?= $empresa->Telefone ?></td>
                                     <td class="text-left cnpj" id="cnpj" scope="row"><?= $cnpj ?></td>
-                                    <td>
+                                    <td class="text-center">
                                         <!--<a href="<?= url("empresa/") . $empresa->Codigo ?>/editar">
                                         <i class="fa fa-pencil text-navy"></i>
                                     </a>-->
-                                        <a data-action="<?= url("empresa/editar") ?>" data-id=<?= $empresa->Codigo ?> data-func="edit">
+                                        <a data-action="<?= url("empresa/edit") ?>" data-id=<?= $empresa->Codigo ?> data-func="edit">
                                             <i class="fa fa-pencil text-navy"></i>
                                         </a>
                                         <a data-action="<?= url("empresa/excluir") ?>" data-id=<?= $empresa->Codigo ?> data-nome=<?= $empresa->Nome ?> data-func="exc">
@@ -94,6 +94,7 @@
 <script>
     $(document).ready(function() {
         $('#tabelaEmpresa').DataTable({
+            "order": [[ 0, "desc" ]],//o primeiro argumento serve pra selecionar a coluna e o segundo para informa se decrecente ou crescente
             "language": {
                 "lengthMenu": "Mostrar _MENU_ itens p/ Pág.",
                 "zeroRecords": "Não foi possivel encontrar nenhum registro",
@@ -129,7 +130,7 @@
 
             var func = $(this).data('func');
             // console.log(func);
-            // console.log(data.action); //returna -> https://localhost/www/SLAB/empresa/editar
+            // alert(data.action); //returna -> https://localhost/www/SLAB/empresa/editar
             if (func === "exc") {
                 swal({
                         title: "Deseja realmente excluir a empresa?",
@@ -171,18 +172,7 @@
                         }
                     })
             } else {
-                console.log("edit")
-                $.ajax({
-                    url: data.action,
-                    data: data,
-                    type: 'POST',
-                }).done(function(resp) {
-                    
-                   
-
-                }).fail(function(resp) {
-
-                })
+                window.location.href = data.action+'/'+data.id; 
             }
         })
 

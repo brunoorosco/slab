@@ -16,7 +16,7 @@ class WebEmpresa
     }
     public function empresa($data): void
     {
-        $empresas = (new Empresa())->find()->fetch(true);
+        $empresas = (new Empresa())->find()->order("Codigo DESC")->fetch(true);
         echo $this->view->render("empresas/listar", [
             "title" => "Empresas | " . SITE,
             "empresas" => $empresas
@@ -90,9 +90,10 @@ class WebEmpresa
 
     public function editar($data): void
     {
-        // $users = (new User())->find()->fetch(true);
-        echo $this->view->render("teste", [
+        $empresa = (new Empresa())->findById("{$data["id"]}");
+        echo $this->view->render("empresas/edit", [
             "title" => "{$data["id"]} | " . SITE,
+            "empresa" => $empresa
 
         ]);
     }
@@ -110,13 +111,6 @@ class WebEmpresa
         echo json_encode($callback);
     }
 
-    public function error($data): void
-    {
-        echo $this->view->render("error", [
-            "title" => "Erro | {$data["errcode"]}" . SITE,
-            "error" => $data["errcode"]
-        ]);
-    }
     public function CNPJ()
     {
         $cnpj = $this->input->post('cnpj');
