@@ -42,20 +42,83 @@ class WebEmpresa
         // die();
         //echo $empresa;
     }
+    public function atualizar($data){
+        $atualizar = $this->update_create($data,"update");
+        //if ($empresa->save()) {
+            if($atualizar){
+            $callback["message"] = "Empresa Atualizada com sucesso!";
+            $callback["action"] = "success";
+            echo json_encode($callback);
+        } else {
+            $callback["message"] = "Não foi possivel Atualizar!";
+            $callback["action"] = "error";
+            echo json_encode($callback);
+        }
+    }
 
 
     public function adicionar($data): void
     {
+        // $jobData = filter_var_array($data, FILTER_SANITIZE_STRING);
+        // if (empty($jobData["razao_social"])) {
+        //     $callback["message"] = message("informe o Nome da Empresa");
+        //     echo json_encode($callback);
+        //     return;
+        // }
+        //$cnpj = str_replace(array('.', ',', '-', '/'), '', $jobData["cnpj"]);
+
+        //echo $data["razao_social"];
+        // $empresa = new Empresa();
+        // $empresa->Nome = $jobData["razao_social"];
+        // $empresa->CNPJ = $cnpj;
+        // $empresa->Ie = $jobData["txt_ie"];
+        // $empresa->CEP = $jobData["txt_cep"];
+        // $empresa->Endereco = $jobData["txt_endereco"];
+        // $empresa->Numero = $jobData["txt_numero"];
+        // $empresa->Cidade = $jobData["txt_cidade"];
+        // $empresa->Bairro = $jobData["txt_bairro"];
+        // $empresa->Estado = $jobData["txt_estado"];
+        // $empresa->Contato = $jobData["txt_contato"];
+        // $empresa->Telefone = $jobData["txt_telefone"];
+        // $empresa->Ramal = $jobData["txt_ramal"];
+        // $empresa->Fax = $jobData["txt_fax"];
+        // $empresa->Telefone2 = $jobData["txt_telefone2"];
+        // $empresa->Celular = $jobData["txt_celular"];
+        // $empresa->CPF = $jobData["txt_cpf"];
+        // $empresa->Sgset = $jobData["txt_sgset"];
+        // $empresa->CodigoCliente = $jobData["codCliente"];
+        // $empresa->Celular = $jobData["txt_celular"];
+        // $empresa->Email = $jobData["txt_email"];
+        $criar = $this->update_create($data,"create");
+        //if ($empresa->save()) {
+            if($criar){
+            $callback["message"] = "Empresa cadastrada com sucesso!";
+            $callback["action"] = "success";
+            echo json_encode($callback);
+        } else {
+            $callback["message"] = "Não foi possivel cadastrar!";
+            $callback["action"] = "error";
+            echo json_encode($callback);
+        }
+    }
+
+    public function update_create($data, $func):bool
+    {
+        if($func === "update")
+        {
+            $empresa = (new Empresa())->findById($data['codCliente']);
+        }else{
+            $empresa = new Empresa();
+        }
+
         $jobData = filter_var_array($data, FILTER_SANITIZE_STRING);
         if (empty($jobData["razao_social"])) {
             $callback["message"] = message("informe o Nome da Empresa");
             echo json_encode($callback);
-            return;
+            return false;
         }
         $cnpj = str_replace(array('.', ',', '-', '/'), '', $jobData["cnpj"]);
-
-        //echo $data["razao_social"];
-        $empresa = new Empresa();
+        
         $empresa->Nome = $jobData["razao_social"];
         $empresa->CNPJ = $cnpj;
         $empresa->Ie = $jobData["txt_ie"];
@@ -76,16 +139,10 @@ class WebEmpresa
         $empresa->CodigoCliente = $jobData["codCliente"];
         $empresa->Celular = $jobData["txt_celular"];
         $empresa->Email = $jobData["txt_email"];
+        if($empresa->save())return true;
+        else return false;
 
-        if ($empresa->save()) {
-            $callback["message"] = "Empresa cadastrada com sucesso!";
-            $callback["action"] = "success";
-            echo json_encode($callback);
-        } else {
-            $callback["message"] = "Não foi possivel cadastrar!";
-            $callback["action"] = "error";
-            echo json_encode($callback);
-        }
+
     }
 
     public function editar($data): void

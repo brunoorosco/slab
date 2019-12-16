@@ -64,7 +64,7 @@ $route->get("/", "WebEmpresa:empresa");
 $route->get("/add", "WebEmpresa:incluir");
 $route->post("/add", "WebEmpresa:adicionar");
 $route->get("/edit/{id}", "WebEmpresa:editar");
-$route->post("/edit", "WebEmpresa:buscarEmpresa");
+$route->post("/edit", "WebEmpresa:atualizar");
 $route->post("/excluir", "WebEmpresa:excluir");
 $route->get("/{id}/editar", "WebEmpresa:editar");
 //$route->post("/busca/?{id}","WebEmpresa:buscar");
@@ -75,7 +75,8 @@ $route->get("/{id}/editar", "WebEmpresa:editar");
 $route->group("ensaio");
 $route->get("/","EnsaioController:ensaios");
 $route->post("/add","EnsaioController:adicionar");
-$route->post("/editar","EnsaioController:editar");
+$route->get("/editar/{id}","EnsaioController:editar");
+$route->post("/edit","EnsaioController:atualizar");
 $route->post("/excluir","EnsaioController:excluir");
 
 /**

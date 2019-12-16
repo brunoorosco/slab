@@ -7,7 +7,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>
-                        Editar Empresa -  <?=   $empresa->Nome        ?>
+                        Editar Empresa - <?= $empresa->Nome  ?>
                     </h5>
 
                     <div class="ibox-tools">
@@ -30,31 +30,22 @@
                 </div>
                 <div class="ibox-content">
                     <div class="ajax_load" style="display: none"></div>
-                    <form class="form-horizontal" id="form_cadEmpresas" action="<?= url('empresa/add') ?>" method="post">
+                    <form class="form-horizontal" id="form_cadEmpresas" action="<?= url('empresa/edit') ?>" method="post">
 
                         <div class="row form-group">
-                            <div class="col-2 input-group">
+                            <div class="col-2">
                                 <label class="">CNPJ</label>
-                                <div class="input-group">
-                                    <input type="text" name="cnpj" id="cnpj" value="<?php //($incluindo ? null : $dados->razao_social); 
-                                                                                    ?>" placeholder="00.000.000/0001-00" class="form-control ">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-success" id="pesquisar" type="button"><i class="fa fa-search"></i></button>
-                                    </div>
-                                </div>
+                                <input type="text" name="cnpj" id="cnpj" value="<?= $empresa->CNPJ  ?>" placeholder="00.000.000/0001-00" class="form-control ">
                             </div>
 
                             <div class="col-1">
                                 <label class="">Cód. Cliente</label>
-
-                                <input type="text" name="codCliente" value="" placeholder="" class="form-control">
+                                <input type="text" name="codCliente" value="<?= $empresa->Codigo  ?>" placeholder="" class="form-control">
                             </div>
 
                             <div class="col">
                                 <label class="">Razão Social</label>
-
-                                <input type="text" name="razao_social" id="razao" value="<?php //($incluindo ? null : $dados->razao_social); 
-                                                                                            ?>" placeholder="" class="form-control">
+                                <input type="text" name="razao_social" id="razao" value="<?= $empresa->Nome  ?>" placeholder="" class="form-control">
                             </div>
 
 
@@ -63,167 +54,101 @@
                         <div class="row form-group">
                             <div class="col-2">
                                 <label class="control-label">Insc. Estadual</label>
-
-                                <input type="text" name="txt_ie" class="form-control" id="cx4_CadEmpresas " value="<?php if (isset($ie)) {
-                                                                                                                        echo $ie;
-                                                                                                                    } ?>" />
+                                <input type="text" name="txt_ie" class="form-control" id="cx4_CadEmpresas " value="<?= $empresa->Ie ?>" />
 
                             </div>
                             <div class="col-3">
                                 <label class=" control-label">E-mail</label>
-
-                                <input type="text" name="txt_email" maxlength="200" class="form-control" id="txt_email" value="<?php if (isset($email)) {
-                                                                                                                                    echo $email;
-                                                                                                                                } ?>" />
-
-                                <!-- ----------------------------------------------------------------------- -->
-
+                                <input type="text" name="txt_email" maxlength="200" class="form-control" id="txt_email" value="<?= $empresa->Email ?>" />
                             </div>
+
                             <div class="col-2">
                                 <label class="control-label">CEP</label>
 
-                                <input type="text" name="txt_cep" class="form-control cep" id="txt_cep" value="<?php if (isset($cep)) {
-                                                                                                                    echo $cep;
-                                                                                                                } ?>" />
-
-                                <!-- ----------------------------------------------------------------------- -->
-
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <input type="text" name="txt_cep" class="form-control cep" id="txt_cep" value="<?= $empresa->CEP  ?>" />
+                                        <button class="btn btn-success" id="pesquisar" type="button"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
                             </div>
-
-
 
                             <div class="col">
                                 <label id="cadEmpresa_tit6" class="">Endereço</label>
-
-                                <input type="text" name="txt_endereco" maxlength="100" class="form-control" id="txt_endereco" value="<?php if (isset($endereco)) {
-                                                                                                                                            echo $endereco;
-                                                                                                                                        } ?>" />
-
-
+                                <input type="text" name="txt_endereco" maxlength="100" class="form-control" id="txt_endereco" value="<?= $empresa->Endereco  ?>" />
                             </div>
+
                             <div class="col-1">
                                 <label id="cadEmpresa_tit7" class="texto">Número</label>
-
-                                <input type="text" name="txt_numero" maxlength="10" class="form-control" id="txt_numero" value="<?php if (isset($numero)) {
-                                                                                                                                    echo $numero;
-                                                                                                                                } ?>" />
-
+                                <input type="text" name="txt_numero" maxlength="10" class="form-control" id="txt_numero" value="<?= $empresa->Numero  ?>" />
                             </div>
                         </div>
+
                         <div class="row form-group">
                             <div class="col-3">
                                 <label id="cadEmpresa_tit8" class="texto">Cidade</label>
-
-                                <input type="text" name="txt_cidade" maxlength="50" class="form-control" id="txt_cidade" value="<?php if (isset($cidade)) {
-                                                                                                                                    echo $cidade;
-                                                                                                                                } ?>" />
-
+                                <input type="text" name="txt_cidade" maxlength="50" class="form-control" id="txt_cidade" value="<?= $empresa->Cidade ?>" />
                             </div>
+
                             <div class="col-3">
                                 <label id="cadEmpresa_tit9" class="texto">Bairro</label>
-
-                                <input type="text" name="txt_bairro" maxlength="50" class="form-control" id="txt_bairro" value="<?php if (isset($bairro)) {
-                                                                                                                                    echo $bairro;
-                                                                                                                                } ?>" />
-
+                                <input type="text" name="txt_bairro" maxlength="50" class="form-control" id="txt_bairro" value="<?= $empresa->Bairro  ?>" />
                             </div>
+
                             <div class="col-1"><label id="cadEmpresa_tit10" class="texto">Estado</label>
-
-                                <input type="text" name="txt_estado" class="form-control" id="txt_estado" maxlength="2" value="<?php if (isset($estado)) {
-                                                                                                                                    echo $estado;
-                                                                                                                                } ?>" />
-
-                                <!-- ------------------------------------------------------------------------- -->
+                                <input type="text" name="txt_estado" class="form-control" id="txt_estado" maxlength="2" value="<?= $empresa->Estado  ?>" />
                             </div>
+
                             <div class="col">
                                 <label id="cadEmpresa_tit15" class="texto">Contato</label>
-
-                                <input type="text" name="txt_contato" maxlength="200" class="form-control" id="cx15_CadEmpresas" value="<?php if (isset($contato)) {
-                                                                                                                                            echo $contato;
-                                                                                                                                        } ?>" />
-
-
+                                <input type="text" name="txt_contato" maxlength="200" class="form-control" id="cx15_CadEmpresas" value="<?= $empresa->Contato  ?>" />
                             </div>
 
                         </div>
                         <div class="row form-group">
                             <div class="col-2">
                                 <label id="cadEmpresa_tit12" class="texto">Telefone 1</label>
-
-                                <input type="text" name="txt_telefone" maxlength="14" class="form-control" id="txt_telefone1" value="<?php if (isset($telefone)) {
-                                                                                                                                            echo $telefone;
-                                                                                                                                        } ?>" />
-
-
+                                <input type="text" name="txt_telefone" maxlength="14" class="form-control" id="txt_telefone1" value="<?= $empresa->Telefone ?>" />
                             </div>
+
                             <div class="col-1">
                                 <label id="cadEmpresa_tit13" class="texto">Ramal</label>
-
-                                <input type="text" name="txt_ramal" maxlength="10" class="form-control" id="cx13_CadEmpresas" value="<?php if (isset($ramal)) {
-                                                                                                                                            echo $ramal;
-                                                                                                                                        } ?>" />
-
+                                <input type="text" name="txt_ramal" maxlength="10" class="form-control" id="cx13_CadEmpresas" value="<?= $empresa->Ramal ?>" />
                             </div>
+
                             <div class="col-2">
                                 <label id="cadEmpresa_tit14" class="texto">FAX</label>
-
-                                <input type="text" name="txt_fax" class="form-control" id="cx14_CadEmpresas" value="<?php if (isset($fax)) {
-                                                                                                                        echo $fax;
-                                                                                                                    } ?>" />
-
+                                <input type="text" name="txt_fax" class="form-control" id="cx14_CadEmpresas" value="<?= $empresa->Fax ?>" />
                             </div>
-
 
                             <div class="col-2">
                                 <label id="cadEmpresa_tit25" class="texto">Telefone 2</label>
-
-                                <input type="text" name="txt_telefone2" maxlength="15" class="form-control" id="txt_telefone2" value="<?php if (isset($telefone2)) {
-                                                                                                                                            echo $telefone2;
-                                                                                                                                        } ?>" />
-
-
+                                <input type="text" name="txt_telefone2" maxlength="15" class="form-control" id="txt_telefone2" value="<?= $empresa->Telefone2 ?>" />
                             </div>
                             <div class="col-2">
                                 <label id="cadEmpresa_tit26" class="texto">Celular</label>
-
-                                <input type="text" name="txt_celular" maxlength="15" class="form-control cel" id="cx21_CadEmpresas" value="<?php if (isset($celular)) {
-                                                                                                                                                echo $celular;
-                                                                                                                                            } ?>" />
+                                <input type="text" name="txt_celular" maxlength="15" class="form-control cel" id="cx21_CadEmpresas" value="<?= $empresa->Celular ?>" />
                             </div>
                         </div>
-                        <div class="row form-group">
 
+                        <div class="row form-group">
                             <div class="col-2">
                                 <label id="cadEmpresa_tit24" class="texto">CPF / RG</label>
-
-                                <input type="text" name="txt_cpf" maxlength="14" class="form-control" id="cpf" value="<?php if (isset($cpf)) {
-                                                                                                                            echo $cpf;
-                                                                                                                        } ?>" />
-
+                                <input type="text" name="txt_cpf" maxlength="14" class="form-control" id="cpf" value="<?= $empresa->CPF  ?>" />
                             </div>
+
                             <div class="col-1">
                                 <label id="cadEmpresa_tit16" class="texto">Cód. SGSET</label>
-
-                                <input type="text" name="txt_sgset" maxlength="10" class="form-control" id="cx16_CadEmpresas" value="<?php if (isset($sgset)) {
-                                                                                                                                            echo $sgset;
-                                                                                                                                        } ?>" />
-
+                                <input type="text" name="txt_sgset" maxlength="10" class="form-control" id="cx16_CadEmpresas" value="<?= $empresa->Sgset  ?>" />
                             </div>
                         </div>
                         </br>
                         <div class="row">
                             <div class="col ">
-                                <!-- --------------------------------- -->
-                                <button class="btn btn-success" id="bt_cadastrou" name="btn_cadastrar">Cadastrar</button>
-                                <!--<input type="button" onclick="validar();" class="subtitulo2" id="bt_cadastrar" name="btn_cadastrar" value="Cadastrar" />-->
-
-                                <input type="button" class="btn btn-warning" id="bt_cadastrou" name="btn_atualizar" value="Atualizar" />
-
+                                <button class="btn btn-success" id="bt_atualizar" name="btn_atualizar">Atualizar</button>
+                                <input type="button" class="btn btn-secondary" id="bt_cancelar" name="btn_cancelar" value="Voltar" />
                             </div>
                         </div>
-
-
-
                     </form>
                 </div>
             </div>
@@ -276,7 +201,6 @@
                     $('#txt_telefone1').val(tels[0]);
                     $('#txt_telefone2').val(tels[1]);
 
-
                     // Aqui exibimos uma mensagem caso tenha ocorrido algum erro
                 } else {
                     swal(response.message, "", "error"); // Neste caso estamos imprimindo a mensagem que a própria API retorna
@@ -302,29 +226,11 @@
                         icon: 'success',
                         timer: 3000
                     });
-                    $('#form_cadEmpresas')[0].reset();
+                   // $('#form_cadEmpresas')[0].reset();
 
                 }).fail(function(callback) {
                     console.log("chegou em fail")
                 })
-            //     beforeSend:function(callback){
-            //          load("open");
-            //     },
-            //     success:function(callback){
-            //         swal(callback.message, "", callback.action); // Neste caso estamos imprimindo a mensagem que a própria API retorna
-            //       console.log(callback);
-            //        if(callback.message){
-            //            $('.ajax_load').html(callback.message).fadeIn();
-            //        }else{
-            //         ajax_load.fadeOut(function(){
-            //             $(this).html("");
-            //        });
-            //        }
-            //     },
-            //     complete:function(){
-            //          load("close");
-            //     }
-            // })
 
         })
 

@@ -9,9 +9,8 @@ class EnsaioModel extends DataLayer
 {
     public function __construct()
     {
-        parent::__construct("tiposdeensaios", ["Nome", "CodEnsaio","Status","Carga","Preco"], "Codigo",false);
+        parent::__construct("tiposdeensaios", ["Nome", "CodEnsaio","Carga","Preco"], "Codigo",false);
     }
-   
    
 }
 

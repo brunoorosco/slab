@@ -5,7 +5,7 @@
 
 <?php $v->end(); ?>
 
-<div class="container">
+<div class="container-fluid">
     <div class="ajax_load"></div>
 
     <div class="row">
@@ -63,10 +63,10 @@
                                         <!--<a href="<?= url("empresa/") . $ensaio->Codigo ?>/editar">
                                         <i class="fa fa-pencil text-navy"></i>
                                     </a>-->
-                                        <a data-action="<?= url("ensaio/") ?>/editar" data-id=<?= $ensaio->Codigo ?>>
+                                        <a data-action="<?= url("ensaio/editar") ?>" data-id=<?= $ensaio->Codigo ?> data-func="edit">
                                             <i class="fa fa-pencil text-navy"></i>
                                         </a>
-                                        <a data-action="<?= url("ensaio/excluir") ?>" data-id=<?= $ensaio->Codigo ?> data-nome=<?= $ensaio->Nome ?>>
+                                        <a data-action="<?= url("ensaio/excluir") ?>" data-id=<?= $ensaio->Codigo ?> data-nome=<?= $ensaio->Nome ?> data-func="exc">
                                             <i class="fa fa-trash text-navy"></i>
                                         </a>
                                         <!-- <a href="<?= url("empresa/") . $ensaio->Codigo ?>/excluir">
@@ -126,7 +126,8 @@
 
             var tr = $(this).closest('tr');
             var id = $(this).data('id');
-
+            var func = $(this).data('func');
+            if (func === "exc") {
             swal({
                     title: "Deseja realmente excluir?",
                     text: data.nome,
@@ -169,6 +170,10 @@
 
                     }
                 })
+            } else {
+               // console.log(data.action+'/'+data.id)
+                window.location.href = data.action+'/'+data.id; //carrega pagina de edição
+            }
         })
 
 
