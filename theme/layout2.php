@@ -85,7 +85,7 @@ if (!$autenticado = User::validarUsuario()) {
                                 <li><a href="<?= url("ensaio"); ?>">Ensaios</a></li>
                                 <li><a href="<?= url("equipamento"); ?>">Equipamentos</a></li>
                                 <li><a href="<?= url("func"); ?>">Funcionários</a></li>
-                                <li><a href="<?= url("atendimento"); ?>">Plano de Atendimento</a></li>
+                                <li><a href="<?= url("atendimento/plano"); ?>">Plano de Atendimento</a></li>
                                 <li><a href="<?= url("norma"); ?>">Normas</a></li>
                                 <li><a href="<?= url("orcamento"); ?>">Orçamentos</a></li>
                                 <li>

@@ -29,6 +29,7 @@ class Atendimento
         "tecnicos" => $tecnico,
     ]);
   }
+
   public function imprimirPlano($data): void
   {
 
@@ -119,10 +120,13 @@ class Atendimento
 
   public function plano($data): void
   {
-    //    $users = (new User())->find()->fetch(true);
-    echo $this->view->render(ROTA . "consultaPlano", [
+    $planos = (new PlanoModel())->find()->fetch(true);
+    $empresas = (new Empresa())->find()->fetch(true);
+
+    echo $this->view->render(ROTA . "planos", [
       "title" => "Ordem de Serv | " . SITE,
-      //  "users" => $users
+        "planos" => $planos,
+        "empresas" => $empresas
     ]);
   }
   public function etiqueta($data)
