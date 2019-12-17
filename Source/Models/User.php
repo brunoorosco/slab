@@ -59,6 +59,8 @@ class User extends DataLayer
 
     public static function sair()
     {
+        unset($_SESSION['CodUsuario']);
+        unset($_SESSION['Usuario']);
         $_SESSION = array();
         return true;
     }

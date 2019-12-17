@@ -1,4 +1,4 @@
-<?php
+<?php  $v->layout("layout2");
 
 $file = './Source/assests/plano.docx';
 

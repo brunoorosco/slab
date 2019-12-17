@@ -34,130 +34,139 @@
         </div>
         <div class="ibox-content">
 
-        <form id="formPlano" method="POST" action="<?= url('atendimento/plano') ?>" enctype="multipart/form-data">
-            <div class=" input-group">
-                <div class="form-group col-2">
-                    <label for="message-text" class="control-span">Nº Sequencial:</label>
-                    <input name="nProposta" type="text" class="form-control col" disabled id="" onkeypress="DataHora(event, this)" placeholder="Nº Proposta">
-                </div>
-                <div class="form-group col-2">
-                    <label for="recipient-name" class="control-span ">CNPJ:</label>
-                    <!-- <input name="cnpj" type="text" class="form-control text-right" id="cnpj" placeholder="00.000.000/0000-00" maxlength="18"> -->
-                    <div class="input-group">
-                        <input type="text" name="cnpj" id="cnpj" value="<?php //($incluindo ? null : $dados->razao_social); 
-                                                                        ?>" placeholder="00.000.000/0000-00" class="form-control text-right ">
-                        <div class="input-group-append">
-                            <button class="btn btn-success" id="pesquisar" type="button"><i class="fa fa-search"></i></button>
+            <form id="formPlano" method="POST" action="<?= url('atendimento/plano') ?>" enctype="multipart/form-data">
+                <div class=" input-group">
+                    <div class="form-group col-2">
+                        <label for="message-text" class="control-span">Nº Sequencial:</label>
+                        <div class="input-group">
+                            <input name="nProposta" type="text" class="form-control col" id="nProposta" placeholder="Nº Proposta">
+                            <input name="nPropostaAno" type="text" disabled class="form-control" placeholder="/ <?= date('Y') ?>">
                         </div>
                     </div>
-                </div>
-                <div class="form-group col">
-                    <label for="empresa" class="control-span">Empresa:</label>
-                    <input name="empresa" type="text" class="form-control" id="empresa" placeholder="Razão Social">
-                </div>
-                <div class="form-group col-2">
-                    <label for="message-text" class="control-span">Data da Solicitação:</label>
-                    <input name="dataSolicitacao" type="text" class="form-control date" id="dataSolicitacao" placeholder="Quando Solicitado">
-                </div>
-            </div>
-            <div class="input-group">
-
-                <div class="form-group col-5">
-                    <label for="message-text" class="control-span">Endereço:</label>
-                    <input name="endereco" type="text" class="form-control" disabled id="endereco" placeholder="Endereço">
-                </div>
-                <div class="form-group col-3">
-                    <label for="message-text" class="control-span">Contato:</label>
-                    <input name="contato" type="text" class="form-control" disabled id="contato" placeholder="Resp. Empresa">
-                </div>
-                <div class="form-group col">
-                    <label for="message-text" class="control-span">Email:</label>
-                    <input name="email" type="text" class="form-control" disabled id="email" placeholder="Email">
-                </div>
-
-            </div>
-
-            <div class="input-group">
-                <div class=" col-2">
-                    <label for="message-text" class="control-form">Forma da Solicitação:</label>
-                    <div class="custom-control custom-radio " style="margin-top:0px">
-                        <input type="radio" id="customRadioInline1" checked name="tipoSolicitacao" value="email" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadioInline1">E-mail</Label>
+                    <div class="form-group col-2">
+                        <label for="recipient-name" class="control-span ">CNPJ:</label>
+                        <!-- <input name="cnpj" type="text" class="form-control text-right" id="cnpj" placeholder="00.000.000/0000-00" maxlength="18"> -->
+                        <div class="input-group">
+                            <input type="text" name="cnpj" id="cnpj" value="<?php //($incluindo ? null : $dados->razao_social); 
+                                                                            ?>" placeholder="00.000.000/0000-00" class="form-control text-right ">
+                            <div class="input-group-append">
+                                <button class="btn btn-success" id="pesquisar" type="button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="custom-control custom-radio ">
-                        <input type="radio" id="customRadioInline2" name="tipoSolicitacao" value="fax" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadioInline2">Fax</label>
-                    </div>
-                    <div class="custom-control custom-radio " style="margin-top:0px">
-                        <input type="radio" id="customRadioInline3" name="tipoSolicitacao" value="fone" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadioInline3">Fone</Label>
-                    </div>
-                    <div class="custom-control custom-radio ">
-                        <input type="radio" id="customRadioInline4" name="tipoSolicitacao" value="outros" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadioInline4">Outros</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" hidden id="customRadioInline4" name="tipoSolicitacao" class="form-control" />
-                    </div>
-
-                </div>
-                <div class="col-2">
-                    <label for="cem" class="control-span">Resp. p/ Atendimento</label>
-                    <input name="responsavel" class="form-control" id="responsavel" Type="text" placeholder="Login em nome de:" disabled value="<?= $_SESSION['userName'] ?>">
-                </div>
-                <div class="form-group col">
-                    <label for="recipient-name" class="control-span">Previsão da Inicial</label>
-                    <input name="dataInicial" type="text" class="form-control date text-right" id="dataInicial" placeholder="00/00/0000" maxlength="10">
-                </div>
-                <div class="form-group col">
-                    <label for="recipient-name" class="control-span">Previsão da Final</label>
-                    <input name="dataFinal" type="text" class="form-control date text-right" id="dataFinal" placeholder="00/00/0000" maxlength="10">
-                </div>
-                <div class="form-group col">
-                    <label for="message-text" class="control-span">Resposta ao Cliente</label>
-                    <input name="dataResposta" type="text" class="form-control col text-right" id="dataResposta" placeholder="00/00/0000">
-                </div>
-                <div class="form-group col">
-                    <label for="message-text" class="control-span">Resp. Análise Crítica</label>
-                    <input name="niver" type="text" class="form-control" disabled id="" onkeypress="DataHora(event, this)" placeholder="Nome">
-                </div>
-            </div>
-
-
-            <div class="input-group">
-                <h5>Serviço a ser Realizado</h5>
-                <div class="form-group input-group">
-                    <div class="col-auto">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect">Normas</label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                            <option selected>NBR's</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                    <div class="form-group col">
+                        <label for="empresa" class="control-span">Empresa:</label>
+                        <input name="empresa" type="text" class="form-control" id="empresa" placeholder="Razão Social">
+                        <input name="codEmpresa" type="text" hidden id="codEmpresa">
                     </div>
                     <div class="form-group col-2">
-                        <label for="cem" class="control-span">Nº de Amostras:</label>
-                        <input name="quantamostra" class="form-control" id="quantAmostras" Type="text" placeholder="número de amostras">
+                        <label for="message-text" class="control-span">Data da Solicitação:</label>
+                        <input name="dataSolicitacao" type="text" class="form-control date" id="dataSolicitacao" placeholder="Quando Solicitado">
                     </div>
                 </div>
                 <div class="input-group">
 
+                    <div class="form-group col-5">
+                        <label for="message-text" class="control-span">Endereço:</label>
+                        <input name="endereco" type="text" class="form-control" disabled id="endereco" placeholder="Endereço">
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="message-text" class="control-span">Contato:</label>
+                        <input name="contato" type="text" class="form-control" disabled id="contato" placeholder="Resp. Empresa">
+                    </div>
+                    <div class="form-group col">
+                        <label for="message-text" class="control-span">Email:</label>
+                        <input name="email" type="text" class="form-control" disabled id="email" placeholder="Email">
+                    </div>
 
                 </div>
 
-            </div>
-            <input name="id_bat" type="hidden" class="form-control" id="id-batizado" value="">
-            <div class="modal-footer btn-group " role="group">
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-ligth btn-block" data-dismiss="modal">Cancelar</button>
+                <div class="input-group">
+                    <div class=" col-2">
+                        <label for="message-text" class="control-form">Forma da Solicitação:</label>
+                        <div class="custom-control custom-radio " style="margin-top:0px">
+                            <input type="radio" id="customRadioInline1" checked name="tipoSolicitacao" value="EMAIL" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline1">E-mail</Label>
+                        </div>
+                        <div class="custom-control custom-radio ">
+                            <input type="radio" id="customRadioInline2" name="tipoSolicitacao" value="FA" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline2">Fax</label>
+                        </div>
+                        <div class="custom-control custom-radio " style="margin-top:0px">
+                            <input type="radio" id="customRadioInline3" name="tipoSolicitacao" value="FONE" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline3">Fone</Label>
+                        </div>
+                        <div class="custom-control custom-radio ">
+                            <input type="radio" id="customRadioInline4" name="tipoSolicitacao" value="OUTROS" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline4">Outros</label>
+                        </div>
+
+                    </div>
+                    <div class="col-2">
+                        <label for="cem" class="control-span">Resp. p/ Atendimento</label>
+                        <input name="responsavel" class="form-control" id="responsavel" Type="text" placeholder="Login em nome de:" disabled value="<?= $_SESSION['userName'] ?>">
+                    </div>
+                    <div class="form-group col">
+                        <label for="recipient-name" class="control-span">Previsão da Inicial</label>
+                        <input name="dataInicial" type="text" class="form-control date text-right" id="dataInicial" placeholder="00/00/0000" maxlength="10">
+                    </div>
+                    <div class="form-group col">
+                        <label for="recipient-name" class="control-span">Previsão da Final</label>
+                        <input name="dataFinal" type="text" class="form-control date text-right" id="dataFinal" placeholder="00/00/0000" maxlength="10">
+                    </div>
+                    <div class="form-group col">
+                        <label for="message-text" class="control-span">Resposta ao Cliente</label>
+                        <input name="dataResposta" type="text" class="form-control col text-right" id="dataResposta" placeholder="00/00/0000">
+                    </div>
+                    <div class="form-group col">
+                        <label for="tecnico" class="control-span">Resp. Análise Crítica</label>
+                        <select class="custom-select mr-sm-2" id="tecnico" name="tecnico">
+                            <option selected disabled>Técnicos</option>
+                            <?php 
+                            foreach ($tecnicos as $tecnico) : ?>
+                            <option value="<?=$tecnico->Codigo?>"><?=$tecnico->Nome?></option>
+                            <?php
+                            endforeach; ?>
+                        </select>
+                    </div>
                 </div>
-                <div class="btn-group" role="group">
-                    <button type="submit" class="btn btn-success btn-block" name="formulario" value="editar">Salvar</button>
+
+
+                <div class="input-group">
+                    <h5>Serviço a ser Realizado</h5>
+                    <div class="form-group input-group">
+                        <div class="col-auto">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Normas</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                <option selected>NBR's</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-2">
+                            <label for="cem" class="control-span">Nº de Amostras:</label>
+                            <input name="quantamostra" class="form-control" id="quantAmostras" Type="text" placeholder="número de amostras">
+                        </div>
+                    </div>
+                    <div class="input-group">
+
+
+                    </div>
+
                 </div>
-            </div>
-        </form>
-    </div></div>
+                <input name="id_bat" type="hidden" class="form-control" id="id-batizado" value="">
+                <div class="modal-footer btn-group " role="group">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-ligth btn-block" data-dismiss="modal">Cancelar</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="submit" class="btn btn-success btn-block">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <?php $v->start("js"); ?>
@@ -170,6 +179,33 @@
 
 <script>
     $(document).ready(function() {
+
+        $("#form_Plano").submit(function(e) {
+            e.preventDefault();
+            var form = $(this);
+            $.ajax({
+                    url: form.attr("action"),
+                    data: form.serialize(),
+                    type: "POST",
+                    dataType: "application/msword",
+                })
+                .done(function(callback) {
+
+                    swal({
+                        title: callback.message,
+                        text: " ",
+                        icon: callback.action,
+                        timer: 3000
+                    });
+                    $('#formPlano')[0].reset();
+
+                }).fail(function(callback) {
+                    console.log("chegou em fail")
+                })
+        })
+
+
+
 
         var option = {
             uiLibrary: 'bootstrap4',
@@ -221,10 +257,11 @@
 
                             // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
                             if (xhr.statusText == 'OK') {
-                                
-                             dataFinal = moment().add(7, 'days').format('DD/MM/YYYY');
+
+                                dataFinal = moment().add(7, 'days').format('DD/MM/YYYY');
                                 // Agora preenchemos os campos com os valores retornados
                                 $('#empresa').val(response.Nome);
+                                $('#codEmpresa').val(response.Codigo);
                                 $('#endereco').val(response.Endereco + ', ' + response.Numero);
                                 $('#email').val(response.Email);
                                 $('#contato').val(response.Contato);

@@ -5,7 +5,7 @@ namespace Source\Controllers;
 use League\Plates\Engine;
 use Source\Models\User;
 use Source\Models\FuncionarioModel;
-use Source\Models\Template;
+use helper\Seguranca;
 
 define("ROTA", "../Source/Views/");
 
@@ -15,7 +15,9 @@ class Web
 
     public function __construct()
     {
+      //  new Seguranca();
         $this->view = Engine::create(__DIR__ . "/../../theme", "php");
+        
         
     }
 

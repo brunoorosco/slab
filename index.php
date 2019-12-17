@@ -52,7 +52,7 @@ $route->get("/busca","Atendimento:buscaEtiqueta");
 $route->group("atendimento");
 $route->get("/", "Atendimento:atendimento");
 $route->get("/plano", "Atendimento:plano");
-$route->post("/plano", "Atendimento:imprimirPlano");
+$route->post("/plano", "Atendimento:adicionar");
 $route->post("/", "WebEmpresa:buscar");
 
 /**

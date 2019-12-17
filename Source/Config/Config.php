@@ -1,6 +1,6 @@
 <?php
 
-define("ROOT", "https://".$_SERVER['SERVER_NAME']."/www/SLAB");
+define("ROOT", "https://".$_SERVER['SERVER_NAME']."/SLAB");
 
 
 define("SITE", "#S-LAB");

@@ -21,6 +21,8 @@ if (!$autenticado = User::validarUsuario()) {
 
     <!-- Toastr style -->
     <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
 
     <!-- Gritter -->
     <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">

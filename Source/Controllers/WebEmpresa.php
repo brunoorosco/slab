@@ -13,6 +13,7 @@ class WebEmpresa
     public function __construct()
     {
         $this->view = Engine::create(__DIR__ . "/../../theme", "php");
+        
     }
     public function empresa($data): void
     {
