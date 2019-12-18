@@ -16,6 +16,7 @@ class NormaController
         $this->view = Engine::create(__DIR__."/../../theme","php");
     }
 
+    /** RESPONSAVEL POR CRIAR TABELA COM OS DADOS DO BANCO */
     public function normas($norma):void
     {  
        // echo $email;
@@ -23,31 +24,34 @@ class NormaController
        $normas = (new NormaModel())->find()->fetch(true);
       // var_dump($comps);
        echo $this->view->render(ROTA."normas",[
-           "title" => "Funcionários | ". SITE,
+           "title" => "Normas | ". SITE,
            "normas" => $normas
            
        ]);
     }
+    /** RESPONSAVEL POR ADICIONAR NORMA */
     public function adicionar($email):void
     {  
        // echo $email;
        //$user = User::login($email,$senha);
      //$users = (new User())->find()->fetch(true);
        echo $this->view->render(ROTA."novo",[
-           "title" => "Home | ". SITE
+           "title" => "Normas | ". SITE
            
        ]);
     }
 
+    /** RESPONSAVEL POR EDITAR NORMAS */
     public function editar($data):void
     {
-      // $users = (new User())->find()->fetch(true);
-       echo $this->view->render("login/login",[
-           "title" => "Login | ",
-           
+        $normas = (new NormaModel())->findById("{$data["id"]}");
+       echo $this->view->render(ROTA."editNorma",[
+           "title" => "Normas  | ".SITE,
+           "norma" => $normas
        ]);
     }
 
+     /** RESPONSAVEL POR Excluir NORMAS */
     public function excluir($data)
     {
         if (empty($data["id"])) return;

@@ -118,6 +118,7 @@ $route->get("/{id}/editar", "FuncionarioController:editar");
  */
 $route->group("norma");
 $route->get("/","NormaController:normas");
+$route->get("/editar/{id}","NormaController:editar");
 $route->post("/add","NormaController:adicionar");
 $route->post("/editar","NormaController:editar");
 $route->post("/excluir","NormaController:excluir");

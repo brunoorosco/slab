@@ -3,7 +3,7 @@
 use Source\Models\User;
 
 if (!$autenticado = User::validarUsuario()) {
-    header("location:" . url() . "");
+    header("location:" . url());
 };
 ?>
 
@@ -14,6 +14,7 @@ if (!$autenticado = User::validarUsuario()) {
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <base href='<?= ROOT . ("/Source/assests/") ?>'>
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -21,7 +22,8 @@ if (!$autenticado = User::validarUsuario()) {
 
     <!-- Toastr style -->
     <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    
+   
 
 
     <!-- Gritter -->
@@ -48,9 +50,8 @@ if (!$autenticado = User::validarUsuario()) {
                                     </span>
                                     <span class="text-light">Assistente de Ensaios <b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu profile animated fadeInRight m-t-xs">
-                                <li><a href="profile.html">Profile</a></li>
-                                <li><a href="contacts.html">Contacts</a></li>
-                                <li><a href="mailbox.html">Mailbox</a></li>
+                                <li><a href="profile.html">Minha Conta</a></li>
+                                <li><a href="mailbox.html">Email</a></li>
                                 <li class="divider"></li>
                                 <li><a href="<?= url("logout"); ?>">Logout</a></li>
                             </ul>
@@ -161,7 +162,7 @@ if (!$autenticado = User::validarUsuario()) {
                         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                         <form role="search" class="navbar-form-custom" action="search_results.html">
                             <div class="form-group">
-                                <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                                <input type="text" placeholder="Procurando algo..." class="form-control" name="top-search" id="top-search">
                             </div>
                         </form>
                     </div>
@@ -178,7 +179,7 @@ if (!$autenticado = User::validarUsuario()) {
                                 <li>
                                     <div class="text-center link-block">
                                         <a href="mailbox.html">
-                                            <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                            <i class="fa fa-envelope"></i> <strong>Ler todas as mensagens</strong>
                                         </a>
                                     </div>
                                 </li>
@@ -192,7 +193,7 @@ if (!$autenticado = User::validarUsuario()) {
                                 <li>
                                     <a href="mailbox.html">
                                         <div>
-                                            <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                            <i class="fa fa-envelope fa-fw"></i> você tem XX mensagens
                                             <span class="pull-right text-muted small">4 minutes ago</span>
                                         </div>
                                     </a>

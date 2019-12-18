@@ -9,6 +9,7 @@ use Source\Models\PlanoModel;
 use Source\Models\FuncionarioModel;
 use PhpOffice\Common;
 use Phpoffice\PhpWord;
+use Source\Models\NormaModel;
 
 define("ROTA", "../Source/Views/atendimento/");
 
@@ -26,7 +27,7 @@ class Atendimento
 
     echo $this->view->render(ROTA . "planoAtendimento", [
       "title" => "Ordem de Serv | " . SITE,
-        "tecnicos" => $tecnico,
+      "tecnicos" => $tecnico,
     ]);
   }
 
@@ -42,7 +43,7 @@ class Atendimento
   public function adicionar($data): void
   {
     $criar = $this->update_create($data, "create");
-   
+
     if ($criar) {
       $callback["message"] = "Plano de Atendimento realizado com sucesso!";
       $callback["action"] = "success";
@@ -74,7 +75,7 @@ class Atendimento
     date_default_timezone_set('UTC');
 
     $tecnico = (new FuncionarioModel())->findById($data['tecnico']);
-   
+
     if ($func === "update") {
       $ensaio = (new PlanoModel())->findById($data['Codigo']);
     } else {
@@ -82,7 +83,7 @@ class Atendimento
     }
 
     $jobData = filter_var_array($data, FILTER_SANITIZE_STRING);
-   
+
     $dataInicio = date("Y-m-d", strtotime(str_replace('/', '-', $jobData["dataInicial"])));
     $datafinal = date("Y-m-d", strtotime(str_replace('/', '-', $jobData["dataFinal"])));
     $dataSol = date("Y-m-d", strtotime(str_replace('/', '-', $jobData["dataSolicitacao"])));
@@ -100,8 +101,8 @@ class Atendimento
     $ensaio->ResponsavelAnalise = $tecnico->Codigo;
     $ensaio->FormaRecebimento = $jobData["tipoSolicitacao"];
     $ensaio->Usuario = $_SESSION['codUsuario'];
-  
-  
+
+
     // var_dump($ensaio);
     if ($ensaio->save()) {
       $ensaio->ResponsavelAnalise = $tecnico->Nome;
@@ -122,11 +123,13 @@ class Atendimento
   {
     $planos = (new PlanoModel())->find()->fetch(true);
     $empresas = (new Empresa())->find()->fetch(true);
+    $norma = (new NormaModel())->find()->fetch(true);
 
     echo $this->view->render(ROTA . "planos", [
       "title" => "Ordem de Serv | " . SITE,
-        "planos" => $planos,
-        "empresas" => $empresas
+      "planos" => $planos,
+      "empresas" => $empresas,
+   
     ]);
   }
   public function etiqueta($data)

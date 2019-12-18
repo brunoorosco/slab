@@ -1,13 +1,13 @@
 <?php $v->layout("layout2"); ?>
 <!-- EDIÇÃO DE ENSAIOS -->
 
-<div class="container-fluid">
-    <div class="row">
+<div class="container">
+     <div class=" justify-content-center col-6">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>
-                        Editar Ensaio - <?= $ensaio->Nome  ?>
+                        Editar Norma - <?= $norma->Nome  ?>
                     </h5>
 
                     <div class="ibox-tools">
@@ -28,53 +28,32 @@
                         </a>
                     </div>
                 </div>
-                <div class="ibox-content">
+                <div class="ibox-content content-center">
                     <div class="ajax_load" style="display: none"></div>
-                    <form class="form-horizontal" id="form_cadEnsaio" action="<?= url('ensaio/edit') ?>" method="post">
-                        <input hidden name="Codigo" value="<?= $ensaio->Codigo  ?>" />
+                    <form class="form-horizontal" id="formNorma" action="<?= url('norma/editNorma') ?>" method="post">
+                        <input hidden name="Codigo" value="<?= $norma->Codigo  ?>" />
                         <div class="row form-group">
-                            <div class="col-2">
-                                <label class="">Cód. Ensaio</label>
-                                <input type="text" name="codEnsaio" id="codEnsaio" value="<?= $ensaio->CodEnsaio  ?>" placeholder="" class="form-control ">
+                            <div class="form-group col">
+                                <label for="message-text" class="control-span">Norma:</label>
+                                <div class="input-group">
+                                    <input name="norma" type="text" class="form-control" id="norma" value="<?= $norma->Nome ?>">
+                                    <input name="anoNorma" type="text" class="form-control col-4" value="<?= $norma->ano ?>" placeholder="Ano">
+                                </div>
                             </div>
-                            <div class="col">
-                                <label class="">Ensaio</label>
-                                <input type="text" name=ensaio id="razao" value="<?= $ensaio->Nome  ?>" placeholder="" class="form-control">
-                            </div>
-                            <div class="col-2">
-                                <label class="">Qt. Horas</label>
-                                <input type="text" name="qtHoras" value="<?= $ensaio->Carga  ?>" placeholder="" class="form-control">
-                            </div>
-
 
                         </div>
                         <!-- FORMULÁRIO DE CADASTRO DE EMPRESA -->
                         <div class="row form-group">
-                            <div class="col-2">
-                                <label class="control-label">Preço - R$</label>
-                                <input type="text" name="preco" class="form-control money2" id="cx4_CadEmpresas " value="<?= $ensaio->Preco ?>" />
-
+                            <div class="form-group col">
+                                <select class="form-control" id="statusNorma" name="statusNorma">
+                                    <option selected disabled>Status</option>
+                                    <option value="1">Ativa</option>
+                                    <option value="0">Desativa</option>
+                                </select>
                             </div>
-                            <div class="col-1">
-                                <label class=" control-label">Status</label>
-                                <input type="text" name="status" maxlength="200" class="form-control" id="txt_email" value="<?= $ensaio->Status ?>" />
-                            </div>
-
-                            <div class="col-2">
-                                <label class="control-label">Norma</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-append">
-                                        <input type="text" name="nomeNorma" class="form-control" id="nomeNorma" value="<?= $norma->Nome  ?>" placeholder="Sem Norma"/>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        </br>
-                        <div class="row">
-                            <div class="col ">
+                        </div> </br>
+                        <div class="row form-group">
+                            <div class="col">
                                 <button class="btn btn-primary" id="bt_atualizar" name="btn_atualizar">Atualizar</button>
                                 <input type="button" class="btn btn-success" id="bt_novo" name="bt_novo" value="Novo" />
                                 <input type="button" class="btn btn-secondary" id="bt_cancelar" name="btn_cancelar" value="Voltar" onclick="document.location ='<?= url('ensaio') ?>'" />
@@ -140,7 +119,7 @@
         // })
 
 
-        $("#form_cadEnsaio").submit(function(e) {
+        $("#formNorma").submit(function(e) {
             e.preventDefault();
             var form = $(this);
             $.ajax({
@@ -172,8 +151,8 @@
 
         $('#bt_novo').on('click', function(e) {
             console.log("teste");
-            document.getElementById("form_cadEnsaio").reset();//funciona
-          
+            document.getElementById("formNorma").reset(); //funciona
+
             //     // Apesar do botão estar com o type="button", é prudente chamar essa função para evitar algum comportamento indesejado
             //     e.preventDefault();
             //  //   window.location.href = __DIR__;

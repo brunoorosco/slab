@@ -4,6 +4,7 @@ namespace Source\Controllers;
 
 use League\Plates\Engine;
 use Source\Models\EnsaioModel;
+use Source\Models\NormaModel;
 
 define("ROTA", "../Source/Views/ensaio/");
 
@@ -18,14 +19,13 @@ class EnsaioController
 
     public function ensaios($ensaio): void
     {
-        // echo $email;
-        //$user = User::login($email,$senha);
-        $ensaios = (new EnsaioModel())->find()->fetch(true);
-        // var_dump($comps);
+        $ensaios = (new EnsaioModel())->find()->fetch(true);           
+      
         echo $this->view->render(ROTA . "ensaio", [
             "title" => "Ensaios | " . SITE,
-            "ensaios" => $ensaios
-
+            "ensaios" => $ensaios,
+           
+        
         ]);
     }
     public function adicionar($data): void
@@ -58,21 +58,30 @@ class EnsaioController
     }
 
     public function update_create($data, $func): bool
-    {
+    {   
+
+        $norma = (new NormaModel())->find("Nome = :name", "name={$data['nomeNorma']}")->fetch(false);
+        if(!$norma)return false;
+      
+
         if ($func === "update") {
             $ensaio = (new EnsaioModel())->findById($data['Codigo']);
+           
         } else {
             $ensaio = new EnsaioModel();
         }
 
         $jobData = filter_var_array($data, FILTER_SANITIZE_STRING);
+
         if (empty($jobData["ensaio"])) {
             $callback["message"] = message("informe o Nome da Ensaio");
             echo json_encode($callback);
             return false;
         }
+
         $ensaio->Nome = $jobData["ensaio"];
-        $ensaio->CodEnsaio = $jobData["codEnsaio"];;
+        $ensaio->CodEnsaio = $jobData["codEnsaio"];
+        $ensaio->codNorma = $norma->Codigo;
         $ensaio->Carga = $jobData["qtHoras"];
         $ensaio->Preco = $jobData["preco"];
         $ensaio->Status = $jobData["status"];
@@ -83,11 +92,21 @@ class EnsaioController
     }
 
     public function editar($data): void
-    {
-        $ensaio = (new EnsaioModel())->findById("{$data["id"]}");
+    { /** não esquecer de inserir uma coluna com a cod de norma no ensaio */
+        $ens = new EnsaioModel();
+        $ensaio = $ens->findById("{$data["id"]}");
+
+        if($ensaio->codNorma)
+        {
+            $norma = (new NormaModel())->findById($ensaio->codNorma);
+        }
+
+     //   $norma = $ens->ensaioNorma($ensaio);
+
         echo $this->view->render(ROTA."edit", [
             "title" => "{$data["id"]} | " . SITE,
-            "ensaio" => $ensaio
+            "ensaio" => $ensaio,
+            "norma" => $norma
 
         ]);
     }

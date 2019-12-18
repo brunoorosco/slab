@@ -39,6 +39,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Tipo de Ensaio</th>
+                                <th>Norma</th>
                                 <th>Cod. Ensaio</th>
                                 <th>Carga Hor.</th>
                                 <th style="min-width: 50px">Preço</th>
@@ -46,16 +47,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                        
-                            <?php
-                          
-                            foreach ($ensaios as $ensaio) :
 
-                                ?>
-                             
+                            <?php
+                            foreach ($ensaios as $ensaio) :
+                            ?>
+
                                 <tr>
                                     <td class="text-left" scope="row"><?= $ensaio->Codigo ?></td>
                                     <td class="text-left" scope="row"><?= $ensaio->Nome ?></td>
+
+                                    <?php
+                                    if ($ensaio->codNorma) {
+                                        foreach ($ensaio->ensaioNorma() as $normas) :
+                                    ?>
+                                            <td class="text-left" scope="row"><?= $normas->Nome?></td>
+                                        <?php
+                                        endforeach;
+                                    } else { ?>
+                                        <td class="text-left" scope="row"></td>
+                                    <?php
+                                    }
+                                    ?>
+
                                     <td class="text-left" scope="row"><?= $ensaio->CodEnsaio ?></td>
                                     <td class="text-left" scope="row"><?= $ensaio->Carga ?></td>
                                     <td class="text-left" scope="row">R$ <?= $ensaio->Preco ?></td>
@@ -76,7 +89,8 @@
                                 </tr>
 
                             <?php
-                            endforeach; ?>
+                            endforeach;
+                            ?>
 
                         </tbody>
                     </table>
@@ -128,51 +142,51 @@
             var id = $(this).data('id');
             var func = $(this).data('func');
             if (func === "exc") {
-            swal({
-                    title: "Deseja realmente excluir?",
-                    text: data.nome,
-                    icon: "warning",
-                    buttons: {
-                        cancel: {
-                            text: "Cancel",
-                            value: null,
-                            visible: true,
-                            className: "",
-                            closeModal: true,
+                swal({
+                        title: "Deseja realmente excluir?",
+                        text: data.nome,
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "Cancel",
+                                value: null,
+                                visible: true,
+                                className: "",
+                                closeModal: true,
+                            },
+                            confirm: {
+                                text: "OK",
+                                value: true,
+                                visible: true,
+                                className: "",
+                                closeModal: true,
+
+                            },
                         },
-                        confirm: {
-                            text: "OK",
-                            value: true,
-                            visible: true,
-                            className: "",
-                            closeModal: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                url: data.action,
+                                data: data,
+                                type: 'POST',
 
-                        },
-                    },
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            url: data.action,
-                            data: data,
-                            type: 'POST',
+                            }).done(function(resp) {
 
-                        }).done(function(resp) {
+                                tr.fadeOut('slow', function() {});
 
-                            tr.fadeOut('slow', function() {});
+                            }).fail(function(resp) {
 
-                        }).fail(function(resp) {
-
-                        })
+                            })
 
 
 
-                    }
-                })
+                        }
+                    })
             } else {
-               // console.log(data.action+'/'+data.id)
-                window.location.href = data.action+'/'+data.id; //carrega pagina de edição
+                // console.log(data.action+'/'+data.id)
+                window.location.href = data.action + '/' + data.id; //carrega pagina de edição
             }
         })
 

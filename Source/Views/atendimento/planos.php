@@ -46,46 +46,37 @@
                         </thead>
                         <tbody>
                             <?php
-                                foreach ($planos as $plano) {
-                                    var_dump($plano->data());
-                                    // foreach ($plano->() as $address) {
-                                    //     var_dump($address->data());
-                                    // }
-                                }
-
-
-                                foreach ($planos as $plano) :
-                                    // $array = explode('/', $empresa->Email); // função para pegar só o primeiro email
-                                    // if (strlen($empresa->CNPJ) == 14) {
-                                    //     $cnpj = vsprintf("%s%s.%s%s%s.%s%s%s/%s%s%s%s-%s%s", str_split($empresa->CNPJ));
-                                    // } else $cnpj = $empresa->CNPJ;
-                                    // 
+                            foreach ($planos as $plano) :
+                                // var_dump($plano->data());
+                                foreach ($atendimento as $norma) :
+                                    // var_dump($address->data());
                             ?>
 
-                                <tr>
-                                    <td class="text-left" scope="row"><?= $plano->Codigo ?></td>
-                                    <td class="text-left" scope="row"><?= $empresa->Nome ?></td>
-                                    <!--<td class="text-left" scope="row"><?= $array[0] ?></td>-->
-                                    <td class="text-left" scope="row"><?= $plano->Telefone ?></td>
-                                    <td class="text-left cnpj" id="cnpj" scope="row"><?= $cnpj ?></td>
-                                    <td class="text-center">
-                                        <!--<a href="<?= url("plano/") . $plano->Codigo ?>/editar">
+                                    <tr>
+                                        <td class="text-left" scope="row"><?= $plano->Codigo ?></td>
+                                        <td class="text-left" scope="row"><?= $empresa->Nome ?></td>
+                                        <!--<td class="text-left" scope="row"><?= $array[0] ?></td>-->
+                                        <td class="text-left" scope="row"><?= $plano->Telefone ?></td>
+                                        <td class="text-left cnpj" id="cnpj" scope="row"><?= $cnpj ?></td>
+                                        <td class="text-center">
+                                            <!--<a href="<?= url("plano/") . $plano->Codigo ?>/editar">
                                         <i class="fa fa-pencil text-navy"></i>
                                     </a>-->
-                                        <a data-action="<?= url("plano/edit") ?>" data-id=<?= $plano->Codigo ?> data-func="edit">
-                                            <i class="fa fa-pencil text-navy"></i>
-                                        </a>
-                                        <a data-action="<?= url("plano/excluir") ?>" data-id=<?= $plano->Codigo ?> data-nome=<?= $plano->Nome ?> data-func="exc">
-                                            <i class="fa fa-trash text-navy"></i>
-                                        </a>
-                                        <!-- <a href="<?= url("plano/") . $plano->Codigo ?>/excluir">
+                                            <a data-action="<?= url("plano/edit") ?>" data-id=<?= $plano->Codigo ?> data-func="edit">
+                                                <i class="fa fa-pencil text-navy"></i>
+                                            </a>
+                                            <a data-action="<?= url("plano/excluir") ?>" data-id=<?= $plano->Codigo ?> data-nome=<?= $plano->Nome ?> data-func="exc">
+                                                <i class="fa fa-trash text-navy"></i>
+                                            </a>
+                                            <!-- <a href="<?= url("plano/") . $plano->Codigo ?>/excluir">
                                         <i class="fa fa-trash text-navy"></i>
                                     </a> -->
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
 
                             <?php
-                                                                                                                            endforeach; ?>
+                                endforeach;
+                            endforeach; ?>
 
                         </tbody>
                     </table>
