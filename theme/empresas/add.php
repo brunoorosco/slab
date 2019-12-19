@@ -219,7 +219,7 @@
                                 <button class="btn btn-success" id="bt_cadastrou" name="btn_cadastrar">Cadastrar</button>
                                 <!--<input type="button" onclick="validar();" class="subtitulo2" id="bt_cadastrar" name="btn_cadastrar" value="Cadastrar" />-->
 
-                                <input type="button" class="btn btn-warning" id="bt_cadastrou" name="btn_atualizar" value="Atualizar" />
+                                <input type="button" class="btn btn-warning" id="bt_cadastro" name="btn_atualizar" value="Atualizar" />
 
                             </div>
                         </div>

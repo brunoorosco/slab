@@ -2,9 +2,9 @@
 <!-- EDIÇÃO DE ENSAIOS -->
 
 <div class="container">
-     <div class=" justify-content-center col-6">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
+     <div class=" row">
+        <div class="col-md-6 offset-md-3">
+            <div class="ibox">
                 <div class="ibox-title">
                     <h5>
                         Editar Norma - <?= $norma->Nome  ?>
