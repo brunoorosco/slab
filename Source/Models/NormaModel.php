@@ -9,7 +9,7 @@ class NormaModel extends DataLayer
 {
     public function __construct()
     {
-        parent::__construct("normas", ["Nome", "Status"], "Codigo",false);
+        parent::__construct("normas", ["Nome", "Status", "ano"], "Codigo",false);
     }
    
    

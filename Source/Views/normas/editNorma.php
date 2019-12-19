@@ -30,7 +30,7 @@
                 </div>
                 <div class="ibox-content content-center">
                     <div class="ajax_load" style="display: none"></div>
-                    <form class="form-horizontal" id="formNorma" action="<?= url('norma/editNorma') ?>" method="post">
+                    <form class="form-horizontal" id="formNorma" action="<?= url('norma/edit') ?>" method="post">
                         <input hidden name="Codigo" value="<?= $norma->Codigo  ?>" />
                         <div class="row form-group">
                             <div class="form-group col">
@@ -56,7 +56,7 @@
                             <div class="col">
                                 <button class="btn btn-primary" id="bt_atualizar" name="btn_atualizar">Atualizar</button>
                                 <input type="button" class="btn btn-success" id="bt_novo" name="bt_novo" value="Novo" />
-                                <input type="button" class="btn btn-secondary" id="bt_cancelar" name="btn_cancelar" value="Voltar" onclick="document.location ='<?= url('ensaio') ?>'" />
+                                <input type="button" class="btn btn-secondary" id="bt_cancelar" name="btn_cancelar" value="Voltar" onclick="document.location ='<?= url('norma') ?>'" />
                             </div>
                         </div>
                     </form>

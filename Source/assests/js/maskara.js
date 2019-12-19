@@ -32,4 +32,19 @@ $(document).ready(function(){
         }
       });
     $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
+
+
+
+    /** RESPONSAVEL PELA ENTRADA SÓ DE NÚMERO*/
+    $('.number').on('keypress', function(e) {
+      var theEvent = e || window.event;
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+      //var regex = /^[0-9.,]+$/;
+      var regex = /^[0-9]+$/;
+      if (!regex.test(key)) {
+          theEvent.returnValue = false;
+          if (theEvent.preventDefault) theEvent.preventDefault();
+      }
+  })
   });

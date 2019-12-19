@@ -122,49 +122,116 @@
                         <label for="tecnico" class="control-span">Resp. Análise Crítica</label>
                         <select class="custom-select mr-sm-2" id="tecnico" name="tecnico">
                             <option selected disabled>Técnicos</option>
-                            <?php 
+                            <?php
                             foreach ($tecnicos as $tecnico) : ?>
-                            <option value="<?=$tecnico->Codigo?>"><?=$tecnico->Nome?></option>
+                                <option value="<?= $tecnico->Codigo ?>"><?= $tecnico->Nome ?></option>
                             <?php
                             endforeach; ?>
                         </select>
                     </div>
                 </div>
 
-
+                <!-- 
                 <div class="input-group">
                     <h5>Serviço a ser Realizado</h5>
                     <div class="form-group input-group">
+                        <div class="form-group col-2">
+                            <label for="tpEnsaio" class="control-span">Tipo de Ensaio</label>
+                            <input name="tpEnsaio" class="form-control" id="tpEnsaio" Type="text" placeholder="Tipo de Ensaio">
+                        </div>
                         <div class="col-auto">
                             <label class="mr-sm-2" for="inlineFormCustomSelect">Normas</label>
                             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>NBR's</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option selected Disabled>Técnicos</option>
+                                <?php
+                                foreach ($tecnicos as $tecnico) : ?>
+                                    <option value="<?= $tecnico->Codigo ?>"><?= $tecnico->Nome ?></option>
+                                <?php
+                                endforeach; ?> 
                             </select>
                         </div>
+                        <div class="form-group col-1">
+                            <label for="quantAmostra" class="control-span">Nº Amostras</label>
+                            <input name="quantAmostra" class="form-control text-center number calculo" id="quantAmostra" Type="text" placeholder="Quant.">
+                        </div>
                         <div class="form-group col-2">
-                            <label for="cem" class="control-span">Nº de Amostras:</label>
-                            <input name="quantamostra" class="form-control" id="quantAmostras" Type="text" placeholder="número de amostras">
+                            <label for="precoUnit" class="control-span">Unitário R$</label>
+                            <input name="precoUnit" class="form-control text-right calculo money2" id="precoUnit" Type="text">
+                        </div>
+                        <div class="form-group col-2">
+                            <label for="precoTotal" class="control-span">Preço Total</label>
+                            <input name="precoTotal" class="form-control money text-right" id="precoTotal" Type="text" placeholder="R$ 0.00" disabled>
                         </div>
                     </div>
-                    <div class="input-group">
+               </div>  -->
 
 
+                <div class="panel panel-default" id="pn_qualidade">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Serviço a ser executado</h3>
                     </div>
+                    <div class="panel-body ">
+                        <div class="table-responsive">
+                            <table class="table " tablename="tb_Defeitos" id="tb_Defeitos" deleteicon="/ecm_resources/resources/assets/images/delete_24_Original.png">
+                                <thead>
+                                    <tr class="row justify-content-md-center" style="margin-right: 0px">
+                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-3">Descricao do Ensaio</th>
+                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Norma</th>
+                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Amostras</th>
+                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Valor Unitário</th>
+                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Valor Total</th>
+                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Desc. (%)</th>
+                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Justificativa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="row justify-content-md-center" style="margin-right: 0px">
+                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
+                                            <select class="custom-select mr-sm-2" id="tpEnsaio" name="tpEnsaio">
+                                                <!-- <option selected Disabled>Técnicos</option> -->
+                                                <?php
+                                                foreach ($ensaios as $ensaio) : ?>
+                                                    <option value="<?= $ensaio->Codigo ?>"><?= $ensaio->Nome ?></option>
+                                                <?php
+                                                endforeach; ?>
+                                            </select>
+                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                            <input id="tpNorma"/>
+                                            <!-- <select class="custom-select mr-sm-2" id="tpNorma" name="tpNorma">
+                                               
 
+                                            </select> -->
+                                        </td>
+                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="quantAmostra" class="form-control text-center number calculo" id="quantAmostra" Type="text"></td>
+                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoUnit" class="form-control text-right calculo money2" id="precoUnit" Type="text"></td>
+                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoTotal" class="form-control money text-right" id="precoTotal" Type="text" placeholder="R$ 0.00" disabled></td>
+                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input type="text" name="desc" id="desc" class="form-control" maxlength="100"></td>
+                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input type="text" name="Tipo" id="Tipo" class="form-control"></td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <input name="id_bat" type="hidden" class="form-control" id="id-batizado" value="">
-                <div class="modal-footer btn-group " role="group">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-ligth btn-block" data-dismiss="modal">Cancelar</button>
+                <div class="form-inline d-flex">
+                    <div class="mr-auto p-2">
+                        <div class="form-group mb-2">
+                            <h3><label type="text" readonly class="form-control-plaintext text-right">Valor Total: </label></h3>
+                            <input type="text" class="form-control money text-right" style="background: rgba(0, 151, 19, 0.1);" id="valorTotal" placeholder="R$ 0,00" disabled>
+                        </div>
                     </div>
-                    <div class="btn-group" role="group">
-                        <button type="submit" class="btn btn-success btn-block">Salvar</button>
+                    <div class="form-inline">
+                        <div class="form-group flex-fill mx-sm-1">
+                            <button type="reset" class="btn btn-lith mb-2">Limpar</button>
+                        </div>
+                        <div class="form-group flex-fill mx-sm-1">
+                            <button type="submit" class="btn btn-success mb-2">Salvar</button>
+                        </div>
                     </div>
                 </div>
             </form>
+
         </div>
     </div>
 </div>
@@ -180,33 +247,7 @@
 <script>
     $(document).ready(function() {
 
-        $("#form_Plano").submit(function(e) {
-            e.preventDefault();
-            var form = $(this);
-            $.ajax({
-                    url: form.attr("action"),
-                    data: form.serialize(),
-                    type: "POST",
-                    dataType: "application/msword",
-                })
-                .done(function(callback) {
-
-                    swal({
-                        title: callback.message,
-                        text: " ",
-                        icon: callback.action,
-                        timer: 3000
-                    });
-                    $('#formPlano')[0].reset();
-
-                }).fail(function(callback) {
-                    console.log("chegou em fail")
-                })
-        })
-
-
-
-
+        /**VARIAVEIS DE LEITURA E CONFIGURAÇÃO DO SCRIPT */
         var option = {
             uiLibrary: 'bootstrap4',
             dateFormat: 'dd/mm/yy',
@@ -227,6 +268,101 @@
         $("#dataResposta").datepicker(option).val();
 
         var hoje = moment().format('DD/MM/YYYY');
+
+
+
+        $('form input').on('keypress', function(e) {
+            return e.which !== 13;
+        });
+
+        $('.calculo').on('keyup', function() {
+
+            //   e.preventDefault();
+
+            var unitario = $('#precoUnit').val();
+            //   unitario.toString().replace("." , ",");
+
+            unitario = parseInt(unitario.replace(/\D/g, ''));
+            console.log(unitario);
+
+            var quant = parseInt($('#quantAmostra').val());
+
+            if (isNaN(unitario))
+                unitario = 0
+
+            if (isNaN(quant))
+                quant = 0
+
+
+            var total = (unitario * quant) / 100;
+
+
+            var total = total.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+
+            // console.log('O valor de' + total);
+            $('#precoTotal').val(total);
+            $('#valorTotal').val(total);
+
+        });
+
+        $('#tpEnsaio').on('change', function(e) {
+            e.preventDefault();
+            var form = $(this).val();
+            console.log(form);
+            $.ajax({
+                    url: "<?= url('atendimento/auto') ?>",
+                    data: {
+                        'data': form
+                    },
+                    method: "POST",
+                    dataType: "json",
+                })
+                .done(function(callback) {
+                    console.log(callback);
+                        $('#tpNorma').val(callback.Nome);           
+                        //$("#tpNorma").append($("<option selected></option>").text(callback.Nome).val(callback.Codigo));
+
+                    // };
+                })
+                .fail(function(callback) {
+                    console.log("chegou em fail")
+                })
+        })
+
+
+
+
+        // $("#form_Plano").submit(function(e) {
+        //     e.preventDefault();
+        //     var form = $(this);
+        //     $.ajax({
+        //             url: form.attr("action"),
+        //             data: form.serialize(),
+        //             method: 'POST',
+        //             dataType: "json",
+        //         })
+        //         .done(function(callback) {
+
+        //             swal({
+        //                 title: callback.message,
+        //                 text: " ",
+        //                 icon: callback.action,
+        //                 timer: 3000
+        //             });
+
+        //             $('#formPlano')[0].reset();
+
+        //         }).fail(function(callback) {
+        //             console.log("chegou em fail")
+        //         })
+        // })
+
+
+
+
 
         $('#pesquisar').on('click', function(e) {
 
@@ -327,7 +463,7 @@
 
         $(this).find('#formPlano')[0].reset();
 
-        $('#cem_bat').autocomplete({
+        $('#norma').autocomplete({
             source: 'retornaCEM.php'
         });
 

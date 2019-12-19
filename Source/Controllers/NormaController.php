@@ -29,16 +29,59 @@ class NormaController
            
        ]);
     }
-    /** RESPONSAVEL POR ADICIONAR NORMA */
-    public function adicionar($email):void
-    {  
-       // echo $email;
-       //$user = User::login($email,$senha);
-     //$users = (new User())->find()->fetch(true);
-       echo $this->view->render(ROTA."novo",[
-           "title" => "Normas | ". SITE
+
+  /** RESPONSAVEL POR ADICIONAR NORMA */
+    public function adicionar($data): void
+    {
+        $criar = $this->update_create($data, "create");
+      
+        //if ($empresa->save()) {
+        if ($criar) {
+            $callback["message"] = "Norma cadastrada com sucesso!";
+            $callback["action"] = "success";
+            echo json_encode($callback);
+        } else {
+            $callback["message"] = "Não foi possivel cadastrar!";
+            $callback["action"] = "error";
+            echo json_encode($callback);
+        }
+    }
+
+    public function atualizar($data){
+        $atualizar = $this->update_create($data,"update");
+       // var_dump($data);
+        //if ($empresa->save()) {
+            if($atualizar){
+            $callback["message"] = "Norma atualizado com sucesso!";
+            $callback["action"] = "success";
+            echo json_encode($callback);
+        } else {
+            $callback["message"] = "Não foi possivel Atualizar!";
+            $callback["action"] = "error";
+            echo json_encode($callback);
+        }
+    }
+
+    public function update_create($data, $func): bool
+    {   
+
+        // $norma = (new NormaModel())->find("Nome = :name", "name={$data['nomeNorma']}")->fetch(false);
+        // if(!$norma)return false;
+        if ($func === "update") {
+            $ensaio = (new NormaModel())->findById($data['Codigo']);
            
-       ]);
+        } else {
+            $ensaio = new NormaModel();
+        }
+      
+        $norma = filter_var_array($data, FILTER_SANITIZE_STRING);
+
+        $ensaio->Nome = $norma["norma"];
+        $ensaio->Status = $norma["statusNorma"];
+        $ensaio->ano = $norma["anoNorma"];
+      
+        if ($ensaio->save()) return true;
+        else return false;
     }
 
     /** RESPONSAVEL POR EDITAR NORMAS */

@@ -53,7 +53,21 @@ $route->group("atendimento");
 $route->get("/", "Atendimento:atendimento");
 $route->get("/plano", "Atendimento:plano");
 $route->post("/plano", "Atendimento:adicionar");
-$route->post("/", "WebEmpresa:buscar");
+$route->post("/", "Atendimento:buscar");
+$route->post("/auto", "Atendimento:autoCarrega");
+
+
+/**
+ * controller: Composicao
+ * Composições
+ */
+$route->group("comp");
+$route->get("/", "CompController:home");
+$route->get("/add", "CompController:incluir");
+$route->post("/add", "CompController:adicionar");
+$route->put("/edit/{id}", "CompController:editar");
+$route->post("/excluir", "CompController:excluir");
+$route->get("/{id}/editar", "CompController:editar");
 
 /**
  * webEmpresa
@@ -79,17 +93,7 @@ $route->get("/editar/{id}","EnsaioController:editar");
 $route->post("/edit","EnsaioController:atualizar");
 $route->post("/excluir","EnsaioController:excluir");
 
-/**
- * controller: Composicao
- * Composições
- */
-$route->group("comp");
-$route->get("/", "CompController:home");
-$route->get("/add", "CompController:incluir");
-$route->post("/add", "CompController:adicionar");
-$route->put("/edit/{id}", "CompController:editar");
-$route->post("/excluir", "CompController:excluir");
-$route->get("/{id}/editar", "CompController:editar");
+
 /**
  * controller: Equipamentos
  * Composições
@@ -120,7 +124,7 @@ $route->group("norma");
 $route->get("/","NormaController:normas");
 $route->get("/editar/{id}","NormaController:editar");
 $route->post("/add","NormaController:adicionar");
-$route->post("/editar","NormaController:editar");
+$route->post("/edit","NormaController:atualizar");
 $route->post("/excluir","NormaController:excluir");
 
 

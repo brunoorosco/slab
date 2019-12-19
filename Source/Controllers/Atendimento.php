@@ -10,6 +10,7 @@ use Source\Models\FuncionarioModel;
 use PhpOffice\Common;
 use Phpoffice\PhpWord;
 use Source\Models\NormaModel;
+use Source\Models\EnsaioModel;
 
 define("ROTA", "../Source/Views/atendimento/");
 
@@ -23,11 +24,18 @@ class Atendimento
   }
   public function atendimento($data): void
   {
-    $tecnico = (new FuncionarioModel())->find("CodFuncao = :cod", "cod=3")->order("Nome ASC")->fetch(true);
+    $tecnico = (new FuncionarioModel())->find("CodFuncao = :cod", "cod=3")->order("Nome ASC")->fetch(true);    
+    $ensaios = (new EnsaioModel())->find()->order("Nome ASC")->fetch(true);
+    $normas = (new NormaModel())->find()->order("Nome ASC")->fetch(true);
+
+    
 
     echo $this->view->render(ROTA . "planoAtendimento", [
       "title" => "Ordem de Serv | " . SITE,
       "tecnicos" => $tecnico,
+      "normas" => $normas,
+      "ensaios" => $ensaios,
+
     ]);
   }
 
@@ -150,5 +158,14 @@ class Atendimento
       "title" => "Etiquetas | " . SITE
 
     ]);
+  }
+
+  public function autocarrega($data)
+  {
+    
+    $codigo = (new EnsaioModel())->findById($data['data']);
+    $normas = (new NormaModel())->findById($codigo->codNorma);
+    //var_dump($normas);
+    echo json_encode($normas);
   }
 }

@@ -43,7 +43,7 @@ class CompController
     {
       // $users = (new User())->find()->fetch(true);
        echo $this->view->render("login/login",[
-           "title" => "Login | ",
+           "title" => "Composições | ",
            
        ]);
     }

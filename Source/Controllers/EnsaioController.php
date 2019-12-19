@@ -22,7 +22,7 @@ class EnsaioController
         $ensaios = (new EnsaioModel())->find()->fetch(true);           
       
         echo $this->view->render(ROTA . "ensaio", [
-            "title" => "Ensaios | " . SITE,
+            "title" => "Ensaios  | " . SITE,
             "ensaios" => $ensaios,
            
         
@@ -104,7 +104,7 @@ class EnsaioController
      //   $norma = $ens->ensaioNorma($ensaio);
 
         echo $this->view->render(ROTA."edit", [
-            "title" => "{$data["id"]} | " . SITE,
+            "title" => "Ensaios  | " . SITE,
             "ensaio" => $ensaio,
             "norma" => $norma
 
