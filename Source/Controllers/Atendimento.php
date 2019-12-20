@@ -24,11 +24,11 @@ class Atendimento
   }
   public function atendimento($data): void
   {
-    $tecnico = (new FuncionarioModel())->find("CodFuncao = :cod", "cod=3")->order("Nome ASC")->fetch(true);    
+    $tecnico = (new FuncionarioModel())->find("CodFuncao = :cod", "cod=3")->order("Nome ASC")->fetch(true);
     $ensaios = (new EnsaioModel())->find()->order("Nome ASC")->fetch(true);
     $normas = (new NormaModel())->find()->order("Nome ASC")->fetch(true);
 
-    
+
 
     echo $this->view->render(ROTA . "planoAtendimento", [
       "title" => "Ordem de Serv | " . SITE,
@@ -137,7 +137,7 @@ class Atendimento
       "title" => "Ordem de Serv | " . SITE,
       "planos" => $planos,
       "empresas" => $empresas,
-   
+
     ]);
   }
   public function etiqueta($data)
@@ -162,10 +162,35 @@ class Atendimento
 
   public function autocarrega($data)
   {
-    
+    ob_clean();
     $codigo = (new EnsaioModel())->findById($data['data']);
     $normas = (new NormaModel())->findById($codigo->codNorma);
-    //var_dump($normas);
-    echo json_encode($normas);
+    $callback['nome'] = $normas->Nome;
+    $callback['Codigo'] = $normas->Codigo;
+    $callback['Status'] = $normas->Status;
+    $callback['valor'] = $codigo->Preco;
+
+
+    // var_dump(json_encode($callback));
+
+    echo json_encode($callback);
+  }
+
+  public function carregaEnsaio($data)
+  {
+    ob_clean();
+    $callback = array();
+    $i = 0;
+    $ensaios = (new EnsaioModel())->find()->order("Nome ASC")->fetch(true);
+    foreach ($ensaios as $ensaio) {
+
+      $callback[$i]['nome'] = $ensaio->Nome;
+      $callback[$i]['Codigo'] = $ensaio->Codigo;
+      $callback[$i]['Status'] = $ensaio->Status;
+      $callback[$i]['valor'] = $ensaio->Preco;
+      $i++;
+    }
+
+    echo (json_encode($callback));
   }
 }

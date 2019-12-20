@@ -54,6 +54,7 @@ $route->get("/", "Atendimento:atendimento");
 $route->get("/plano", "Atendimento:plano");
 $route->post("/plano", "Atendimento:adicionar");
 $route->post("/", "Atendimento:buscar");
+$route->post("/autoEnsaio", "Atendimento:carregaEnsaio");
 $route->post("/auto", "Atendimento:autoCarrega");
 
 

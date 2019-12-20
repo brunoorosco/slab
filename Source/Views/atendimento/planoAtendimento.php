@@ -172,7 +172,7 @@
                     </div>
                     <div class="panel-body ">
                         <div class="table-responsive">
-                            <table class="table " tablename="tb_Defeitos" id="tb_Defeitos" deleteicon="/ecm_resources/resources/assets/images/delete_24_Original.png">
+                            <table class="table " tablename="tb_pedidos" id="tb_pedidos" deleteicon="/ecm_resources/resources/assets/images/delete_24_Original.png">
                                 <thead>
                                     <tr class="row justify-content-md-center" style="margin-right: 0px">
                                         <th class="col-xs-2 col-sm-2 col-md-2 col-lg-3">Descricao do Ensaio</th>
@@ -181,7 +181,7 @@
                                         <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Valor Unitário</th>
                                         <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Valor Total</th>
                                         <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Desc. (%)</th>
-                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Justificativa</th>
+                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -196,17 +196,26 @@
                                                 endforeach; ?>
                                             </select>
                                         <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                            <input id="tpNorma"/>
-                                            <!-- <select class="custom-select mr-sm-2" id="tpNorma" name="tpNorma">
-                                               
+                                            <!-- <input id="tpNorma" type="text"/> -->
+                                            <select class="custom-select mr-sm-2" id="tpNorma" name="tpNorma">
 
-                                            </select> -->
+
+                                            </select>
                                         </td>
                                         <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="quantAmostra" class="form-control text-center number calculo" id="quantAmostra" Type="text"></td>
                                         <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoUnit" class="form-control text-right calculo money2" id="precoUnit" Type="text"></td>
                                         <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoTotal" class="form-control money text-right" id="precoTotal" Type="text" placeholder="R$ 0.00" disabled></td>
                                         <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input type="text" name="desc" id="desc" class="form-control" maxlength="100"></td>
-                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input type="text" name="Tipo" id="Tipo" class="form-control"></td>
+                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1 text-center p-3">
+                                            <a data-action="<?= url("plano/edit") ?>" data-id=<?= $plano->Codigo ?> data-func="edit" id="adicionar">
+                                                <i class="fa fa-pencil text-navy mr-2"></i>
+                                            </a>
+                                            <a data-action="<?= url("plano/edit") ?>" data-id=<?= $plano->Codigo ?> data-func="edit">
+                                                <i class="fa fa-plus text-navy mr-2"></i>
+                                            </a>
+                                            <a data-action="<?= url("plano/excluir") ?>" data-id=<?= $plano->Codigo ?> data-nome=<?= $plano->Nome ?> data-func="exc">
+                                                <i class="fa fa-trash text-navy"></i>
+                                            </a></td>
                                     </tr>
                                 </tbody>
 
@@ -275,6 +284,11 @@
             return e.which !== 13;
         });
 
+        $('#adicionar').bind('click', Adicionar);
+        $(".btnEditar").bind("click", Editar);
+        $(".btnExcluir").bind("click", Excluir);
+
+
         $('.calculo').on('keyup', function() {
 
             //   e.preventDefault();
@@ -317,52 +331,44 @@
                     data: {
                         'data': form
                     },
-                    method: "POST",
+                    type: "POST",
                     dataType: "json",
                 })
                 .done(function(callback) {
-                    console.log(callback);
-                        $('#tpNorma').val(callback.Nome);           
-                        //$("#tpNorma").append($("<option selected></option>").text(callback.Nome).val(callback.Codigo));
+                    console.log(callback.nome);
+                    $("#tpNorma").html('');
+                    // $('#tpNorma').val(callback.nome);           
+                    $("#tpNorma").append($("<option selected></option>").text(callback.nome).val(callback.Codigo));
+                    $("#precoUnit").val(callback.valor);
 
                     // };
                 })
                 .fail(function(callback) {
-                    console.log("chegou em fail")
+                    $("#tpNorma").html('');
+                    console.log("falha");
                 })
         })
 
+        function carregaEnsaio() {
+            $.ajax({
+                    url: "<?= url('atendimento/autoEnsaio') ?>",
+                    type: "POST",
+                    dataType: "json",
+                })
+                .done(function(callback) {
+                    console.log(callback.nome);
+                    $("#tpNorma").html('');
+                    // $('#tpNorma').val(callback.nome);           
+                    $("#tpNorma").append($("<option selected></option>").text(callback.nome).val(callback.Codigo));
+                    $("#precoUnit").val(callback.valor);
 
-
-
-        // $("#form_Plano").submit(function(e) {
-        //     e.preventDefault();
-        //     var form = $(this);
-        //     $.ajax({
-        //             url: form.attr("action"),
-        //             data: form.serialize(),
-        //             method: 'POST',
-        //             dataType: "json",
-        //         })
-        //         .done(function(callback) {
-
-        //             swal({
-        //                 title: callback.message,
-        //                 text: " ",
-        //                 icon: callback.action,
-        //                 timer: 3000
-        //             });
-
-        //             $('#formPlano')[0].reset();
-
-        //         }).fail(function(callback) {
-        //             console.log("chegou em fail")
-        //         })
-        // })
-
-
-
-
+                    // };
+                })
+                .fail(function(callback) {
+                    $("#tpNorma").html('');
+                    console.log("falha");
+                })
+        }
 
         $('#pesquisar').on('click', function(e) {
 
@@ -423,9 +429,6 @@
             }
         });
 
-
-
-
         // $('#empresa').autocomplete({ source: "../../busca/"});       
 
         // Dispara o Autocomplete a partir do segundo caracter
@@ -472,5 +475,107 @@
             minLength: 3
         });
     });
+
+    function Adicionar() {
+        $("#tb_pedidos tbody").append(
+            ' <tr class="row justify-content-md-center" style="margin-right: 0px">' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-3">' +
+            '<select class="custom-select mr-sm-2 resultEnsaio">' +
+            '<option selected Disabled>Ensaios</option>' +
+            '</select>' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">' +
+            '<select class="custom-select mr-sm-2" id="tpNorma" name="tpNorma"></select>' +
+            '</td>' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="quantAmostra" class="form-control text-center number calculo" id="quantAmostra" Type="text"></td>' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoUnit" class="form-control text-right calculo money2" id="precoUnit" Type="text"></td>' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoTotal" class="form-control money text-right" id="precoTotal" Type="text" placeholder="R$ 0.00" disabled></td>' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input type="text" name="desc" id="desc" class="form-control"></td>' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1 text-center p-3">' +
+            '<i class="fa fa-pencil text-navy mr-2 btnSalvar"></i>' +
+            '<i class="fa fa-trash text-navy btnExcluir"></i>' +
+            '</td>' +
+            '</tr>');
+
+        $(".btnSalvar").bind("click", Salvar);
+        $(".btnExcluir").bind("click", Excluir);
+
+        $.post("<?= url('atendimento/autoEnsaio') ?>", {
+            Type: "json"
+        }, function(data) {
+            $.ajax({
+                    url: "<?= url('atendimento/autoEnsaio') ?>",
+                    type: "POST",
+                    dataType: "json",
+                })
+                .done(function(callback) {
+                    for (i = 0; i < callback.length; i++) {
+
+                        $('.resultEnsaio').append('<option>' + callback[i].nome + '</option>');
+                        console.log(callback[i].nome);
+                        //    $(".resultEnsaio").append($("<option></option>").text(data.nome).val(data.Codigo));
+                    }
+                    // };
+                })
+
+
+
+
+
+        });
+
+    };
+
+    function Editar() {
+        console.log("chegou")
+        var par = $(this).parent().parent(); //tr
+        var tdEnsaio = par.children("td:nth-child(1)");
+        var tdNorma = par.children("td:nth-child(2)");
+        var tdAmostra = par.children("td:nth-child(3)");
+        var tdPreco = par.children("td:nth-child(4)");
+        var tdTotal = par.children("td:nth-child(5)");
+        var tdDesconto = par.children("td:nth-child(6)");
+        var tdBotoes = par.children("td:nth-child(7)");
+
+        tdEnsaio.html("<input type='text' id='txtEnsaio' value='" + tdEnsaio.html() + "'/>");
+        tdNorma.html("<select class='custom-select mr-sm-2' id='tpNorma' name='tpNorma'><option Selected>" + tdNorma.html() + "</option></select>");
+        tdAmostra.html("<input type='text' class='form-control text-center number calculo' id='txtAmostra' value='" + tdAmostra.html() + "'/>");
+        tdPreco.html("<input type='text'   class='form-control money text-right' id='txtPreco' value='" + tdPreco.html() + "'/>");
+        tdTotal.html("<input type='text'   class='form-control money text-right  id='txtTotal' value = '" + tdTotal.html() + "' /  disabled> ");
+        tdDesconto.html("<input type='text' class='form-control' id='txtDesconto'  value='" + tdDesconto.html() + "'/>");
+        tdBotoes.html('<i class="fa fa-save text-navy mr-2 btnSalvar"></i>');
+
+        $(".btnSalvar").bind("click", Salvar);
+        $(".btnEditar").bind("click", Editar);
+        $(".btnExcluir").bind("click", Excluir);
+    };
+
+    function Salvar() {
+        var par = $(this).parent().parent(); //tr
+        var tdEnsaio = par.children("td:nth-child(1)");
+        var tdNorma = par.children("td:nth-child(2)");
+        var tdAmostra = par.children("td:nth-child(3)");
+        var tdPreco = par.children("td:nth-child(4)");
+        var tdTotal = par.children("td:nth-child(5)");
+        var tdDesconto = par.children("td:nth-child(6)");
+        var tdBotoes = par.children("td:nth-child(7)");
+
+        tdEnsaio.html(tdEnsaio.children("input[type=text]").val());
+        tdNorma.html(tdNorma.children("input[type=text]").val());
+        tdAmostra.html(tdAmostra.children("input[type=text]").val());
+        tdAmostra.html(tdPreco.children("input[type=text]").val());
+        tdAmostra.html(tdTotal.children("input[type=text]").val());
+        tdAmostra.html(tdDesconto.children("input[type=text]").val());
+        tdBotoes.html('<i class="fa fa-pencil text-navy mr-2 btnEditar"></i>' +
+            '<i class="fa fa-trash text-navy btnExcluir"></i>');
+
+        $(".btnEditar").bind("click", Editar);
+        $(".btnExcluir").bind("click", Excluir);
+        $(".btnSalvar").bind("click", Salvar);
+    };
+
+    function Excluir() {
+        var par = $(this).parent().parent(); //tr
+        par.remove();
+    };
 </script>
 <?php $v->end(); ?>
