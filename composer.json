@@ -26,6 +26,7 @@
     "league/plates": "v4.0.0-alpha",
     "dompdf/dompdf": "^0.8.3",
     "fpdf/fpdf": "^1.81",
-    "phpoffice/phpword": "v0.16.*"
+    "phpoffice/phpword": "v0.16.*",
+    "onokumus/metismenu": "dev-master"
   }
 }

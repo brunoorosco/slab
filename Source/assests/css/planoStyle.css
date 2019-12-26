@@ -151,3 +151,8 @@
 height: 29px;
 margin-bottom: 0;
 }
+
+.table #tb_pedidos tbody tbody tr td{
+    font-size: larger !important;
+
+}

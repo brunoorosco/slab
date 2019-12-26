@@ -17,13 +17,15 @@ if (!$autenticado = User::validarUsuario()) {
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <base href='<?= ROOT . ("/Source/assests/") ?>'>
 
+
+    <link href="css/plugins/metisMenu/metisMenu.css" rel="stylesheet">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- Toastr style -->
     <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    
-   
+
+
 
 
     <!-- Gritter -->
@@ -64,7 +66,13 @@ if (!$autenticado = User::validarUsuario()) {
 
 
                 <nav id="sidebar">
-                    <ul class="list-unstyled components">
+
+
+
+
+
+                
+                    <ul class="list-unstyled components" id="menumetis">
                         <li>
                             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-th-large"></i> Cadastro</a>
                             <ul class="collapse list-unstyled" id="pageSubmenu">
@@ -447,7 +455,7 @@ if (!$autenticado = User::validarUsuario()) {
     <script src="js/demo/peity-demo.js"></script>
 
     <!-- Custom and plugin javascript -->
-    <script src="js/inspinia.js"></script>
+    <!-- <script src="js/inspinia.js"></script> -->
     <script src="js/plugins/pace/pace.min.js"></script>
 
     <!-- jQuery UI -->
@@ -470,23 +478,21 @@ if (!$autenticado = User::validarUsuario()) {
 
     <script>
         $(document).ready(function() {
-            setTimeout(function() {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-                <?php
-                //  $app = \Slim\Slim::getInstance();
-                //  $flash = $app->flashData();
-                //  if ($flash['info']){
-                //     echo "toastr.success('$flash[info]', 'Resultado');";
-                //  } else if ($flash['error']){
-                //     echo "toastr.error('$flash[error]', 'Ops!');";
-                //  }
-                ?>
-            }, 1300);
+          
+
+            // Add body-small class if window less than 768px
+            if ($(this).width() < 769) {
+                $('body').addClass('body-small')
+            } else {
+                $('body').removeClass('body-small')
+            }
+
+
+
+            // $('#menumetis').metisMenu({
+            //     toggle: true // disable the auto collapse. Default: true.
+            // });
+
         });
     </script>
 </body>

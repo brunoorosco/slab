@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fbe7bd502db0330533b2e3167b41ab30",
+    "content-hash": "405de0d783c24bbffba077dd4ca3470d",
     "packages": [
         {
             "name": "coffeecode/datalayer",
@@ -279,6 +279,48 @@
                 "views"
             ],
             "time": "2018-01-31T07:20:23+00:00"
+        },
+        {
+            "name": "onokumus/metismenu",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/onokumus/metismenu.git",
+                "reference": "b96b99f6b2f52bdb8789a18a241cf5d681969b6d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/onokumus/metismenu/zipball/b96b99f6b2f52bdb8789a18a241cf5d681969b6d",
+                "reference": "b96b99f6b2f52bdb8789a18a241cf5d681969b6d",
+                "shasum": ""
+            },
+            "suggest": {
+                "components/jquery": ">=1.9"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Osman Nuri Okumus",
+                    "email": "onokumus@gmail.com",
+                    "homepage": "http://onokumus.com"
+                }
+            ],
+            "description": "A jQuery menu plugin",
+            "homepage": "https://github.com/onokumus/metisMenu",
+            "keywords": [
+                "JS",
+                "bootstrap",
+                "css",
+                "jquery",
+                "menu",
+                "plugin",
+                "web"
+            ],
+            "time": "2019-03-07T17:42:35+00:00"
         },
         {
             "name": "pclzip/pclzip",
@@ -653,7 +695,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "league/plates": 15
+        "league/plates": 15,
+        "onokumus/metismenu": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

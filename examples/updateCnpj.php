@@ -18,10 +18,10 @@ require_once '../Source/Models/Address.php';
 // }
 
 // var_dump(true);
-use Source\Models\User;
+use Source\Models\Empresa;
 use Source\Models\Address;
 
-$user = new User();
+$user = new Empresa();
 $list = $user->find()->fetch(true);
 // $list = $user->findById(1);
 //var_dump($list->Status);

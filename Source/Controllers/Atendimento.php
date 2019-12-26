@@ -22,6 +22,7 @@ class Atendimento
   {
     $this->view = Engine::create(__DIR__ . "/../../theme", "php");
   }
+  
   public function atendimento($data): void
   {
     $tecnico = (new FuncionarioModel())->find("CodFuncao = :cod", "cod=3")->order("Nome ASC")->fetch(true);
@@ -160,7 +161,7 @@ class Atendimento
     ]);
   }
 
-  public function autocarrega($data)
+  public function carregaNorma($data)
   {
     ob_clean();
     $codigo = (new EnsaioModel())->findById($data['data']);
@@ -169,6 +170,7 @@ class Atendimento
     $callback['Codigo'] = $normas->Codigo;
     $callback['Status'] = $normas->Status;
     $callback['valor'] = $codigo->Preco;
+    $callback['ano'] = $normas->ano;
 
 
     // var_dump(json_encode($callback));
