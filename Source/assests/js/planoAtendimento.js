@@ -7,7 +7,7 @@ $(document).ready(function () {
     var url = window.location.href;     // Retorna a url completa
     // console.log("url: " + url)
 
-    $(".calculo").bind("keyup", Calcular);
+    $(".calculo").bind("change", Calcular);
 
     /**VARIAVEIS DE LEITURA E CONFIGURAÇÃO DO SCRIPT */
     var option = {
@@ -46,7 +46,6 @@ $(document).ready(function () {
         var tr = $(this).parent().parent().index('tr');
         carregarNorma(form, celula);
     })
-
 
     $('#pesquisar').on('click', function (e) {
 
@@ -158,15 +157,15 @@ $(document).ready(function () {
         $("#tb_pedidos tbody").append(
             '<tr class="row justify-content-md-center" style="margin-right: 0px">' +
             '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-3 ">' +
-            '<select class="custom-select mr-sm-2 resultEnsaio" id="selLinha_' + id + '">' +
+            '<select class="custom-select mr-sm-2 resultEnsaio" id="ensaio_' + id + '">' +
             '</select>' +
             '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >' +
             '<select class="custom-select mr-sm-2" id="tpNorma_' + id + '" ></select>' +
             '</td>' +
-            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="quantAmostra" class="form-control text-center number calculo" id="quantAmostra_' + id + '" Type="text"></td>' +
-            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoUnit" class="form-control text-right calculo money2" id="precoUnit_' + id + '" Type="text"></td>' +
-            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoTotal" class="form-control money text-right" id="precoTotal_' + id + '" Type="text" placeholder="R$ 0.00" disabled></td>' +
-            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input type="text" name="desc" id="desc_' + id + '" class="form-control"></td>' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="quantAmostra" class="form-control text-center number calculo" id="quantAmostra_' + id + '" Type="text" value="1"/></td>' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoUnit" class="form-control text-right calculo money2" id="precoUnit_' + id + '" Type="text" value="200"/></td>' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoTotal" class="form-control money text-right soma" id="precoTotal_' + id + '" Type="text" placeholder="R$ 0.00" disabled/></td>' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input type="text" name="desc" id="desc_' + id + '" class="edtPercentual form-control text-right"/></td>' +
             '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center p-3">' +
             '<i class="fa fa-save text-navy mr-2 btnSalvar" style="cursor:pointer"></i>' +
             '<i class="fa fa-trash text-navy btnExcluir" style="cursor:pointer"></i>' +
@@ -177,6 +176,10 @@ $(document).ready(function () {
         $(".calculo").bind("keyup", Calcular);
         $(".btnExcluir").bind("click", Excluir);
         $(".resultEnsaio").bind('change', Ensaio);
+        $(".edtPercentual").bind('keyup', Desconto);
+
+        $("#ensaio_" + id).append('<option selected disabled>Tipos de Ensaio</option>');
+        //console.log(tdEnsaio.children('Select').append($("<option></option>").text('Tipos de Ensaio')));
 
         $.ajax({
             url: url + '/autoEnsaio',
@@ -184,23 +187,28 @@ $(document).ready(function () {
             dataType: "json",
         })
             .done(function (callback) {
+
                 for (i = 0; i < callback.length; i++) {
-                    $('.resultEnsaio').append('<option value=' + callback[i].Codigo + '>' + callback[i].nome + '</option>');
+
+                    //   $('.resultEnsaio').append('<option value=' + callback[i].Codigo + '>' + callback[i].nome + '</option>');
+                    $("#ensaio_" + id).append('<option value=' + callback[i].Codigo + '>' + callback[i].nome + '</option>');
                 }
                 //teste();
             })
 
         // console.log('O valor de' + total);
         //$('#precoTotal_' + id).val(total);
-        var linhas = $('#tb_pedidos tbody tr').length;
-        valorTotal = 0;
-        // console.log("linhas: " + linhas)
-        for (var i = linhas; linhas <= i; i--) {
-            // console.log($('#precoTotal_' + id).val())
-            var valorTotal = + parseInt($('#precoTotal_' + id).val());
-        }
+        $('.resultEnsaio').focus();
 
-        $('#valorTotal').val(valorTotal);
+        // var linhas = $('#tb_pedidos tbody tr').length;
+        // valorTotal = 0;
+        // // console.log("linhas: " + linhas)
+        // for (var i = linhas; linhas <= i; i--) {
+        //     // console.log($('#precoTotal_' + id).val())
+        //     var valorTotal = + parseInt($('#precoTotal_' + id).val());
+        // }
+
+        // $('#valorTotal').val(valorTotal);
     }
 
     function Editar() {
@@ -219,13 +227,6 @@ $(document).ready(function () {
         tdAmostra.children("input[type=text]").prop('disabled', false);
         tdPreco.children("input[type=text]").prop('disabled', false);
         tdDesconto.children("input[type=text]").prop('disabled', false);
-
-        // tdEnsaio.html("<select type='text' id='txtEnsaio' value='" + tdEnsaio.html() + "'/>");
-        // tdNorma.html("<select class='custom-select mr-sm-2' id='tpNorma' name='tpNorma'><option Selected>" + tdNorma.html() + "</option></select>");
-        // tdAmostra.html("<input type='text' class='form-control text-center number calculo' id='txtAmostra' value='" + tdAmostra.html() + "'/>");
-        // tdPreco.html("<input type='text'   class='form-control money text-right' id='txtPreco' value='" + tdPreco.html() + "'/>");
-        // tdTotal.html("<input type='text'   class='form-control money text-right  id='txtTotal' value = '" + tdTotal.html() + "' /  disabled> ");
-        // tdDesconto.html("<input type='text' class='form-control' id='txtDesconto'  value='" + tdDesconto.html() + "'/>");
         tdBotoes.html('<i class="fa fa-save text-navy mr-2 btnSalvar" style="cursor:pointer"></i>' +
             '<i class="fa fa-trash text-navy btnExcluir" style="cursor:pointer"></i>');
 
@@ -274,6 +275,7 @@ $(document).ready(function () {
     };
 
     function Ensaio() {
+        let norma, codNorma, precoUnitario, result;
         var par = $(this).parent().parent(); //tr
         var tdEnsaio = par.children("td:nth-child(1)");
         var tdNorma = par.children("td:nth-child(2)");
@@ -283,8 +285,17 @@ $(document).ready(function () {
         var tdDesconto = par.children("td:nth-child(6)");
         var tdBotoes = par.children("td:nth-child(7)");
 
-        var valor = tdEnsaio.children('Select').val();
 
+        //LIMPA AS OPÇÕES PARA INSERIR NOVAS
+        tdNorma.children('Select').html('');
+        tdPreco.children('input').val('');
+        tdTotal.children('input').val('');
+
+
+        var valor = tdEnsaio.children('Select').val();
+        quantAmostra = tdAmostra.children('input').val();
+        desc = tdDesconto.children('input').val();
+        desc = desc.toString().replace(",", ".");
 
         $.ajax({
             url: url + '/auto',
@@ -293,31 +304,21 @@ $(document).ready(function () {
             },
             type: "POST",
             dataType: "json",
+
         })
             .done(function (callback) {
-                norma = callback.nome+'/'+callback.ano;
+                norma = callback.nome + '/' + callback.ano;
                 precoUnitario = callback.valor;
+                codNorma = callback.Codigo
 
-                console.log(callback)
+                preco = precoUnitario.toString().replace(".", ",");
 
-                // };
+                //INSERI NOVAS OPÇÕES PARA INSERIR NOVAS
+                tdNorma.children('Select').append($("<option></option>").text(norma).val(codNorma));
+                tdPreco.children('input').val(preco) //mostra valor codigo da NOrma
+                total = calculoPreco(quantAmostra, precoUnitario, desc);
+                tdTotal.children('input').val(total)
             })
-            .fail(function (callback) {
-
-            })
-        //LIMPA AS OPÇÕES PARA INSERIR NOVAS
-        tdNorma.children('Select').html('');
-        tdPreco.children('input').html('');
-        
-        //INSERI NOVAS OPÇÕES PARA INSERIR NOVAS
-        tdNorma.children('Select').append($("<option selected></option>").text(norma));
-        tdPreco.children('input').val(precoUnitario) //mostra valor codigo da NOrma
-        
-        console.log("linha: " + par)
-        console.log("ensaio:" + valor) //mostra valor codigo de Ensaio
-        console.log("Numero de Amostra:" + tdAmostra.children('input').val()) //mostra valor codigo da NOrma
-    
-
     }
 
 });
@@ -328,13 +329,6 @@ function teste(select, val) {
     let tr = val.parent().index('tr');
     let trvalor = val;
     var quant = parseInt(td) + 1;
-
-    //console.log((document.getElementById("tb_pedidos").rows[tr].cells[0].innerHTML));
-    //    var x = document.getElementById("tb_pedidos").rows[tr].cells;
-    //    x[1].innerHTML = "teste";
-
-    //console.log('linha: ' + tr + '  celula:' + quant + '  valor:' + select);
-    carregarNorma(select, tr);
 }
 
 function carregarNorma(valor, celula) {
@@ -357,8 +351,10 @@ function carregarNorma(valor, celula) {
 
             $("#tpNorma_" + id).html('');
             $("#precoUnit_" + id).val('');
-            // $('#tpNorma').val(callback.nome);           
-            $("#tpNorma_" + id).append($("<option selected></option>").text(callback.nome).val(callback.Codigo));
+            // $('#tpNorma').val(callback.nome); 
+            //  tdNorma.children('Select').append($("<option selected class='disabled'></option>").text('Tipos de Ensaios'));          
+
+            $("#tpNorma_" + id).append($("<option ></option>").text(callback.nome).val(callback.Codigo));
             $("#precoUnit_" + id).val(callback.valor);
 
             // };
@@ -371,75 +367,118 @@ function carregarNorma(valor, celula) {
     Calcular();
 }
 
-// function carregaEnsaio() {
-//     $.ajax({
-//         url: url + '/autoEnsaio',
-//         type: "POST",
-//         dataType: "json",
-//     })
-//         .done(function (callback) {
-//             // console.log(callback.nome);
-//             $("#tpNorma_1").html('');
-//             // $('#tpNorma').val(callback.nome);           
-//             $("#tpNorma_1").append($("<option selected></option>").text(callback.nome).val(callback.Codigo));
-//             $("#precoUnit_1").val(callback.valor);
-
-//             // };
-//         })
-//         .fail(function (callback) {
-//             $("#tpNorma_1").html('');
-//         })
-// }
-
 function Calcular() {
 
     var par = $(this).parent().parent(); //tr
-    var tdEnsaio = par.children("td:nth-child(1)");
-    var tdNorma = par.children("td:nth-child(2)");
+
     var tdAmostra = par.children("td:nth-child(3)");
     var tdPreco = par.children("td:nth-child(4)");
     var tdTotal = par.children("td:nth-child(5)");
     var tdDesconto = par.children("td:nth-child(6)");
-    var tdBotoes = par.children("td:nth-child(7)");
 
-    console.log("linha: " + par)
-    console.log("ensaio:" + tdEnsaio.children('Select').val()) //mostra valor codigo de Ensaio
-    console.log("Norma:" + tdNorma.children('Select').val()) //mostra valor codigo da NOrma
-    console.log("Numero de Amostra:" + tdAmostra.children('input').val()) //mostra valor codigo da NOrma
-    console.log("Numero de Preco:" + tdPreco.children('input').val()) //mostra valor codigo da NOrma
+    precoUnit = tdPreco.children('input').val();
+    quantAmostra = tdAmostra.children('input').val();
+    desc = tdDesconto.children('input').val();
 
-    var id = $(this).attr('id');
+    //CONVERTER PARA PONTO FLUTUANTE
+    precoUnit = precoUnit.toString().replace(",", ".");
+    desc = desc.toString().replace(",", ".");
 
-    if (id != null) {
-
-        // id = id.filter(Number).join("");
-        // id = id.replace(/[^\d]+/g,'')
-        var somente_numeros = id.replace(/\D+/g, "");
-
-        console.log('calcular: ' + somente_numeros)
-
-        var unitario = $('#precoUnit_' + id).val();
-        //   unitario.toString().replace("." , ",");
-
-        unitario = parseInt(unitario.replace(/\D/g, ''));
-        console.log(unitario);
-
-        var quant = parseInt($('#quantAmostra_' + id).val());
-        console.log(quant);
-
-        if (isNaN(unitario))
-            unitario = 0
-
-        if (isNaN(quant))
-            quant = 0
+    total = calculoPreco(quantAmostra, precoUnit, desc);
+    tdTotal.children('input').val(total);
 
 
-        var total = (unitario * quant) / 100;
 
+}
 
-        var total = total.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        });
+function calculoPreco(quant, preco, desconto) {
+    if (isNaN(preco))
+        preco = 0
+
+    if (isNaN(quant))
+        quant = 0
+
+    if (isNaN(desconto))
+        desconto = 0
+
+    var total = ((preco * quant) - ((preco * quant) * desconto / 100));
+    calcularTotal();
+
+    var total = total.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    });
+
+    return total;
+}
+
+function Desconto() {
+    var par = $(this).parent().parent(); //tr
+    console.log(par)
+    var tdAmostra = par.children("td:nth-child(3)");
+    var tdPreco = par.children("td:nth-child(4)");
+    var tdTotal = par.children("td:nth-child(5)");
+    var tdDesconto = par.children("td:nth-child(6)");
+
+    var temp = $(this).val().charAt(0);
+    //Verificar se o primeiro caractere inserido é '-'
+    if (temp == '-') {
+        //Aplica a máscara para números negativos
+        $(".edtPercentual").mask("-99,99");
     }
+    //Verificar se o primeiro caractere inserido é número
+    else if (temp.charAt(0).match(/\d/)) {
+        //Aplica a máscara para números positivos
+        $(".edtPercentual").mask("99,99");
+    }
+    //Caso o primeiro caractere inserido seja um caractere inválido limpa o value do campo
+    else {
+        $(".edtPercentual").val('');
+    }
+
+    precoUnit = tdPreco.children('input').val();
+    quantAmostra = tdAmostra.children('input').val();
+    desc = tdDesconto.children('input').val();
+
+    //CONVERTER PARA PONTO FLUTUANTE
+    precoUnit = precoUnit.toString().replace(",", ".");
+    desc = desc.toString().replace(",", ".");
+
+    total = calculoPreco(quantAmostra, precoUnit, desc);
+    tdTotal.children('input').val(total);
+
+}
+
+
+function calcularTotal() {
+    var soma = 0;
+
+
+    var posicao = 4
+        , total = 0;
+
+    $('table tbody td').each(function (a, b) {
+        if (a == posicao) {
+            total += Number(b.innerHTML)
+            posicao += 7;
+        }
+        console.log(total)
+    });
+    // $( ".soma" ).each(function( indice, item ){
+    $('#tb_pedidos tbody tr:first td:nth-child(5)').each(function (indice, item) {
+
+
+
+        var valor = ($(item).children('input').val());
+
+        //  var valor = $(item).children("td:nth-child(5)");
+
+        console.log(valor);
+        //   console.log(tdTotal);
+        console.log('fim');
+        if (!isNaN(valor)) {
+            soma += valor;
+        }
+    });
+    $("#valorTotal").val(soma);
 }
