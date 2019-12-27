@@ -163,8 +163,8 @@ $(document).ready(function () {
             '<select class="custom-select mr-sm-2" id="tpNorma_' + id + '" ></select>' +
             '</td>' +
             '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="quantAmostra" class="form-control text-center number calculo" id="quantAmostra_' + id + '" Type="text" value="1"/></td>' +
-            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoUnit" class="form-control text-right calculo money2" id="precoUnit_' + id + '" Type="text" value="200"/></td>' +
-            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoTotal" class="form-control money text-right soma" id="precoTotal_' + id + '" Type="text" placeholder="R$ 0.00" disabled/></td>' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoUnit" class="form-control text-right calculo money2" id="precoUnit_' + id + '" Type="text"/></td>' +
+            '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoTotal" class="form-control text-right " id="precoTotal_' + id + '" type="text" disabled></td>' +
             '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input type="text" name="desc" id="desc_' + id + '" class="edtPercentual form-control text-right"/></td>' +
             '<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center p-3">' +
             '<i class="fa fa-save text-navy mr-2 btnSalvar" style="cursor:pointer"></i>' +
@@ -199,16 +199,6 @@ $(document).ready(function () {
         // console.log('O valor de' + total);
         //$('#precoTotal_' + id).val(total);
         $('.resultEnsaio').focus();
-
-        // var linhas = $('#tb_pedidos tbody tr').length;
-        // valorTotal = 0;
-        // // console.log("linhas: " + linhas)
-        // for (var i = linhas; linhas <= i; i--) {
-        //     // console.log($('#precoTotal_' + id).val())
-        //     var valorTotal = + parseInt($('#precoTotal_' + id).val());
-        // }
-
-        // $('#valorTotal').val(valorTotal);
     }
 
     function Editar() {
@@ -251,6 +241,7 @@ $(document).ready(function () {
         tdPreco.children("input[type=text]").prop('disabled', true);
         tdDesconto.children("input[type=text]").prop('disabled', true);
 
+        let tr = par.index('tr'); console.log(tr)
         console.log("ensaio:" + tdEnsaio.children('Select').val()) //mostra valor codigo de Ensaio
         console.log("Norma:" + tdNorma.children('Select').val()) //mostra valor codigo da NOrma
         console.log("Numero de Amostra:" + tdAmostra.children('input').val()) //mostra valor codigo da NOrma
@@ -261,6 +252,30 @@ $(document).ready(function () {
         //tdPreco.html(tdPreco.children("input[type=text]").val());
         //tdTotal.html(tdTotal.children("input[type=text]").val());
         // tdDesconto.html(tdDesconto.children("input[type=text]").val());
+        $.ajax({
+            url: url + '/auto',
+            data: {
+                'data': valor
+            },
+            type: "POST",
+            dataType: "json",
+
+        })
+            .done(function (callback) {
+                norma = callback.nome + '/' + callback.ano;
+                precoUnitario = callback.valor;
+                codNorma = callback.Codigo
+
+                preco = precoUnitario.toString().replace(".", ",");
+
+                //INSERI NOVAS OPÇÕES PARA INSERIR NOVAS
+                tdNorma.children('Select').append($("<option></option>").text(norma).val(codNorma));
+                tdPreco.children('input').val(preco) //mostra valor codigo da NOrma
+                total = calculoPreco(quantAmostra, precoUnitario, desc);
+                tdTotal.children('input').val(total)
+                Total()
+            })
+
         tdBotoes.html('<i class="fa fa-pencil text-navy mr-2 btnEditar"></i>' +
             '<i class="fa fa-trash text-navy btnExcluir"></i>');
 
@@ -268,6 +283,7 @@ $(document).ready(function () {
         $(".btnExcluir").bind("click", Excluir);
         $(".btnSalvar").bind("click", Salvar);
     };
+
 
     function Excluir() {
         var par = $(this).parent().parent(); //tr
@@ -318,6 +334,7 @@ $(document).ready(function () {
                 tdPreco.children('input').val(preco) //mostra valor codigo da NOrma
                 total = calculoPreco(quantAmostra, precoUnitario, desc);
                 tdTotal.children('input').val(total)
+                Total()
             })
     }
 
@@ -365,6 +382,7 @@ function carregarNorma(valor, celula) {
             //  console.log("falha");
         })
     Calcular();
+
 }
 
 function Calcular() {
@@ -386,8 +404,7 @@ function Calcular() {
 
     total = calculoPreco(quantAmostra, precoUnit, desc);
     tdTotal.children('input').val(total);
-
-
+    Total();
 
 }
 
@@ -402,7 +419,8 @@ function calculoPreco(quant, preco, desconto) {
         desconto = 0
 
     var total = ((preco * quant) - ((preco * quant) * desconto / 100));
-    calcularTotal();
+
+
 
     var total = total.toLocaleString('pt-BR', {
         style: 'currency',
@@ -414,7 +432,6 @@ function calculoPreco(quant, preco, desconto) {
 
 function Desconto() {
     var par = $(this).parent().parent(); //tr
-    console.log(par)
     var tdAmostra = par.children("td:nth-child(3)");
     var tdPreco = par.children("td:nth-child(4)");
     var tdTotal = par.children("td:nth-child(5)");
@@ -446,39 +463,26 @@ function Desconto() {
 
     total = calculoPreco(quantAmostra, precoUnit, desc);
     tdTotal.children('input').val(total);
-
+    Total();
 }
 
-
-function calcularTotal() {
+function Total() {
     var soma = 0;
+    $('#tb_pedidos tbody td:nth-child(5) ').each(function (a, b) {
+        var idElemento = $(this).find("input").val();
+        idElemento = idElemento.substring(3);
+        idElemento = idElemento.toString().replace(",", ".");
 
+        //  console.log(idElemento);
 
-    var posicao = 4
-        , total = 0;
+        soma += parseInt(idElemento);
 
-    $('table tbody td').each(function (a, b) {
-        if (a == posicao) {
-            total += Number(b.innerHTML)
-            posicao += 7;
-        }
-        console.log(total)
     });
-    // $( ".soma" ).each(function( indice, item ){
-    $('#tb_pedidos tbody tr:first td:nth-child(5)').each(function (indice, item) {
-
-
-
-        var valor = ($(item).children('input').val());
-
-        //  var valor = $(item).children("td:nth-child(5)");
-
-        console.log(valor);
-        //   console.log(tdTotal);
-        console.log('fim');
-        if (!isNaN(valor)) {
-            soma += valor;
-        }
+    var total = soma.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
     });
-    $("#valorTotal").val(soma);
+
+    $("#valorTotal").val(total);
+    return
 }

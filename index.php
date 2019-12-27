@@ -16,9 +16,8 @@ else
 session_start();
 
 Db::conectar($dbname, $user, $password, $host);
-
-         
-         
+       
+        
 /**
  * APP
  */
@@ -103,9 +102,9 @@ $route->group("equipamento");
 $route->get("/", "EquipController:todos");
 $route->get("/add", "EquipController:incluir");
 $route->post("/add", "EquipController:adicionar");
-$route->post("/edit/{id}", "EquipController:editar");
+$route->get("/editar/{id}", "EquipController:editar");
 $route->post("/excluir", "EquipController:excluir");
-$route->get("/{id}/editar", "EquipController:editar");
+$route->post("/edit", "EquipController:editar");
 /**
  * controller: FuncionarioController
  * Funcionarios

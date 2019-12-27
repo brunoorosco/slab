@@ -134,10 +134,12 @@ class Atendimento
     $empresas = (new Empresa())->find()->fetch(true);
     $norma = (new NormaModel())->find()->fetch(true);
 
+   // var_dump($planos);
     echo $this->view->render(ROTA . "planos", [
       "title" => "Ordem de Serv | " . SITE,
       "planos" => $planos,
       "empresas" => $empresas,
+      "normas" => $norma
 
     ]);
   }

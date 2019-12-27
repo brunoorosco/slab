@@ -93,4 +93,10 @@ class PlanoModel extends DataLayer
         unlink($file); // deletes the temporary file
         return true;
     }
+    
+    public function planoEmpresa()
+    {
+      return (new Empresa())->find("Codigo = :uid","uid={$this->codigo}")->fetch(true);
+      
+    }
 }

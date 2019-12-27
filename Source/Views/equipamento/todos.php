@@ -40,38 +40,35 @@
                                 <th>Id</th>
                                 <th>Nome</th>
                                 <th>Nº Equip.</th>
-                                <th>Fabricante</th>
+                                <!-- <th>Fabricante</th> -->
                                 <th>Per. calibração</th>
                                 <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
-                        
+
                             <?php
-                          
+
                             foreach ($equips as $equi) :
 
-                                ?>
-                             
+                            ?>
+
                                 <tr>
                                     <td class="text-left" scope="row"><?= $equi->Codigo ?></td>
                                     <td class="text-left" scope="row"><?= $equi->Nome ?></td>
-                                   <td class="text-left" scope="row"><?= $equi->Nequipamento ?></td>
-                                    <td class="text-left" scope="row"><?= $equi->Fabricante ?></td>
+                                    <td class="text-left" scope="row"><?= $equi->Nequipamento ?></td>
+                                    <!-- <td class="text-left" scope="row"><?= $equi->Fabricante ?></td> -->
                                     <td class="text-left" scope="row"><?= $equi->PeriodCalibracao ?></td>
                                     <td>
                                         <!--<a href="<?= url("equipamento/") . $equi->Codigo ?>/editar">
                                         <i class="fa fa-pencil text-navy"></i>
                                     </a>-->
-                                        <a data-action="<?= url("equipamento/") ?>/editar" data-id=<?= $equi->Codigo ?>>
+                                        <a data-action="<?= url("equipamento/editar") ?>" data-id=<?= $equi->Codigo ?>>
                                             <i class="fa fa-pencil text-navy"></i>
                                         </a>
-                                        <a data-action="<?= url("equipamento/excluir") ?>" data-id=<?= $equi->Codigo ?> data-nome=<?= $func->Nome ?>>
+                                        <a data-action="<?= url("equipamento/excluir") ?>" data-id=<?= $equi->Codigo ?> data-nome=<?= $equi->Nome ?> data-func="exc">
                                             <i class="fa fa-trash text-navy"></i>
                                         </a>
-                                        <!-- <a href="<?= url("equipamento/") . $func->Codigo ?>/excluir">
-                                        <i class="fa fa-trash text-navy"></i>
-                                    </a> -->
                                     </td>
                                 </tr>
 
@@ -126,49 +123,54 @@
 
             var tr = $(this).closest('tr');
             var id = $(this).data('id');
+            var func = $(this).data('func');
+            if (func === "exc") {
+                swal({
+                        title: "Deseja realmente excluir este equipameno?",
+                        text: data.nome,
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "Cancel",
+                                value: null,
+                                visible: true,
+                                className: "",
+                                closeModal: true,
+                            },
+                            confirm: {
+                                text: "OK",
+                                value: true,
+                                visible: true,
+                                className: "",
+                                closeModal: true,
 
-            swal({
-                    title: "Deseja realmente excluir este equipamento?",
-                    text: data.Nome,
-                    icon: "warning",
-                    buttons: {
-                        cancel: {
-                            text: "Cancel",
-                            value: null,
-                            visible: true,
-                            className: "",
-                            closeModal: true,
+                            },
                         },
-                        confirm: {
-                            text: "OK",
-                            value: true,
-                            visible: true,
-                            className: "",
-                            closeModal: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                url: data.action,
+                                data: data,
+                                type: 'POST',
 
-                        },
-                    },
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            url: data.action,
-                            data: data,
-                            type: 'POST',
+                            }).done(function(resp) {
 
-                        }).done(function(resp) {
+                                tr.fadeOut('slow', function() {});
 
-                            tr.fadeOut('slow', function() {});
+                            }).fail(function(resp) {
 
-                        }).fail(function(resp) {
-
-                        })
+                            })
 
 
 
-                    }
-                })
+                        }
+                    })
+            } else {
+                // console.log(data.action+'/'+data.id)
+                window.location.href = data.action + '/' + data.id; //carrega pagina de edição
+            }
         })
 
 
