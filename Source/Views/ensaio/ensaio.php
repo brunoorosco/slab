@@ -60,7 +60,7 @@
                                     if ($ensaio->codNorma) {
                                         foreach ($ensaio->ensaioNorma() as $normas) :
                                     ?>
-                                            <td class="text-left" scope="row"><?= $normas->Nome?></td>
+                                            <td class="text-left" scope="row"><?= $normas->Nome ?></td>
                                         <?php
                                         endforeach;
                                     } else { ?>
@@ -73,21 +73,14 @@
                                     <td class="text-left" scope="row"><?= $ensaio->Carga ?></td>
                                     <td class="text-left" scope="row">R$ <?= $ensaio->Preco ?></td>
                                     <td>
-                                        <!--<a href="<?= url("empresa/") . $ensaio->Codigo ?>/editar">
-                                        <i class="fa fa-pencil text-navy"></i>
-                                    </a>-->
                                         <a data-action="<?= url("ensaio/editar") ?>" data-id=<?= $ensaio->Codigo ?> data-func="edit">
                                             <i class="fa fa-pencil text-navy"></i>
                                         </a>
                                         <a data-action="<?= url("ensaio/excluir") ?>" data-id=<?= $ensaio->Codigo ?> data-nome=<?= $ensaio->Nome ?> data-func="exc">
                                             <i class="fa fa-trash text-navy"></i>
                                         </a>
-                                        <!-- <a href="<?= url("empresa/") . $ensaio->Codigo ?>/excluir">
-                                        <i class="fa fa-trash text-navy"></i>
-                                    </a> -->
                                     </td>
                                 </tr>
-
                             <?php
                             endforeach;
                             ?>
@@ -107,6 +100,7 @@
 
 <script>
     $(document).ready(function() {
+
         $('#tabelaEnsaio').DataTable({
             "language": {
                 "lengthMenu": "Mostrar _MENU_ itens p/ Pág.",
@@ -122,6 +116,7 @@
             },
 
         });
+
 
         function load(action) {
             var load_div = $(".ajax_load");

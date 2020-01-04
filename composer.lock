@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "405de0d783c24bbffba077dd4ca3470d",
+    "content-hash": "a33e410da252c2237b7feb8bddd05d23",
     "packages": [
         {
             "name": "coffeecode/datalayer",
@@ -54,6 +54,55 @@
                 "upinside"
             ],
             "time": "2019-10-29T13:34:17+00:00"
+        },
+        {
+            "name": "coffeecode/optimizer",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robsonvleite/optimizer.git",
+                "reference": "23d3a65cc8210ce6febec4701a5108cdf8b4674b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robsonvleite/optimizer/zipball/23d3a65cc8210ce6febec4701a5108cdf8b4674b",
+                "reference": "23d3a65cc8210ce6febec4701a5108cdf8b4674b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "php": "^7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CoffeeCode\\Optimizer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robson V. Leite",
+                    "email": "cursos@upinside.com.br",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Optimizer makes it easy to bookmark your site tags, open graph and twitter card",
+            "homepage": "http://www.upinside.com.br",
+            "keywords": [
+                "Coffeecode",
+                "Facebook Tags",
+                "SMO",
+                "meta tags",
+                "open graph",
+                "seo",
+                "twitter card",
+                "upinside"
+            ],
+            "time": "2019-03-12T14:37:11+00:00"
         },
         {
             "name": "coffeecode/router",
@@ -286,12 +335,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/onokumus/metismenu.git",
-                "reference": "b96b99f6b2f52bdb8789a18a241cf5d681969b6d"
+                "reference": "85f027f2eb9cb6e9352093ace833e9702d86fe67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/onokumus/metismenu/zipball/b96b99f6b2f52bdb8789a18a241cf5d681969b6d",
-                "reference": "b96b99f6b2f52bdb8789a18a241cf5d681969b6d",
+                "url": "https://api.github.com/repos/onokumus/metismenu/zipball/85f027f2eb9cb6e9352093ace833e9702d86fe67",
+                "reference": "85f027f2eb9cb6e9352093ace833e9702d86fe67",
                 "shasum": ""
             },
             "suggest": {
@@ -320,7 +369,7 @@
                 "plugin",
                 "web"
             ],
-            "time": "2019-03-07T17:42:35+00:00"
+            "time": "2019-12-28T20:34:12+00:00"
         },
         {
             "name": "pclzip/pclzip",
@@ -688,6 +737,7 @@
                 "escaper",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-escaper",
             "time": "2019-09-05T20:03:20+00:00"
         }
     ],

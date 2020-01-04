@@ -2,18 +2,14 @@
 
 namespace Source\Controllers;
 
-use League\Plates\Engine;
 use Source\Models\FuncionarioModel;
 
-define("ROTA","../Source/Views/funcionario/"); 
-
-class FuncionarioController
+class FuncionarioController extends Controller
 {
-    private $view;
-
-    public function __construct()
+    public function __construct($router)
     {
-        $this->view = Engine::create(__DIR__."/../../theme","php");
+        parent::__construct($router);
+        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
     }
 
     public function todos($email):void
@@ -22,7 +18,7 @@ class FuncionarioController
        //$user = User::login($email,$senha);
        $funcionarios = (new FuncionarioModel())->find()->fetch(true);
       // var_dump($comps);
-       echo $this->view->render(ROTA."todos",[
+       echo $this->view->render("../funcionario/todos",[
            "title" => "Funcionários | ". SITE,
            "funcs" => $funcionarios
            
@@ -33,7 +29,7 @@ class FuncionarioController
        // echo $email;
        //$user = User::login($email,$senha);
      //$users = (new User())->find()->fetch(true);
-       echo $this->view->render(ROTA."novo",[
+       echo $this->view->render("../funcionario/novo",[
            "title" => "Home | ". SITE
            
        ]);
@@ -60,6 +56,14 @@ class FuncionarioController
         }
         $callback = true;
         echo json_encode($callback);
+    }
+
+    public function conta()
+    {
+        echo $this->view->render("../funcionario/conta",[
+            "title" => "Profile | ". SITE,
+            
+        ]);
     }
 
 }

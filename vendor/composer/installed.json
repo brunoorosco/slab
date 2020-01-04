@@ -51,6 +51,57 @@
         ]
     },
     {
+        "name": "coffeecode/optimizer",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/robsonvleite/optimizer.git",
+            "reference": "23d3a65cc8210ce6febec4701a5108cdf8b4674b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/robsonvleite/optimizer/zipball/23d3a65cc8210ce6febec4701a5108cdf8b4674b",
+            "reference": "23d3a65cc8210ce6febec4701a5108cdf8b4674b",
+            "shasum": ""
+        },
+        "require": {
+            "ext-simplexml": "*",
+            "php": "^7.2"
+        },
+        "time": "2019-03-12T14:37:11+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "CoffeeCode\\Optimizer\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Robson V. Leite",
+                "email": "cursos@upinside.com.br",
+                "role": "Developer"
+            }
+        ],
+        "description": "Optimizer makes it easy to bookmark your site tags, open graph and twitter card",
+        "homepage": "http://www.upinside.com.br",
+        "keywords": [
+            "Coffeecode",
+            "Facebook Tags",
+            "SMO",
+            "meta tags",
+            "open graph",
+            "seo",
+            "twitter card",
+            "upinside"
+        ]
+    },
+    {
         "name": "coffeecode/router",
         "version": "1.0.7",
         "version_normalized": "1.0.7.0",
@@ -290,18 +341,18 @@
         "source": {
             "type": "git",
             "url": "https://github.com/onokumus/metismenu.git",
-            "reference": "b96b99f6b2f52bdb8789a18a241cf5d681969b6d"
+            "reference": "85f027f2eb9cb6e9352093ace833e9702d86fe67"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/onokumus/metismenu/zipball/b96b99f6b2f52bdb8789a18a241cf5d681969b6d",
-            "reference": "b96b99f6b2f52bdb8789a18a241cf5d681969b6d",
+            "url": "https://api.github.com/repos/onokumus/metismenu/zipball/85f027f2eb9cb6e9352093ace833e9702d86fe67",
+            "reference": "85f027f2eb9cb6e9352093ace833e9702d86fe67",
             "shasum": ""
         },
         "suggest": {
             "components/jquery": ">=1.9"
         },
-        "time": "2019-03-07T17:42:35+00:00",
+        "time": "2019-12-28T20:34:12+00:00",
         "type": "library",
         "installation-source": "source",
         "notification-url": "https://packagist.org/downloads/",
@@ -707,6 +758,7 @@
             "ZendFramework",
             "escaper",
             "zf"
-        ]
+        ],
+        "abandoned": "laminas/laminas-escaper"
     }
 ]

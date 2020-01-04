@@ -24,7 +24,8 @@ class EnsaioModel extends DataLayer
        
     public function ensaioNorma()
     {
-      return (new NormaModel())->find("Codigo = :uid","uid={$this->codNorma}")->fetch(true);
+     //   return $this->codNorma;      
+     return (new NormaModel())->find("Codigo = :uid","uid={$this->codNorma}")->fetch(true);
       
     }
     // public function ensaioNorma($data)

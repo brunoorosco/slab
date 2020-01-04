@@ -26,8 +26,6 @@ if (!$autenticado = User::validarUsuario()) {
     <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
 
 
-
-
     <!-- Gritter -->
     <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
@@ -52,7 +50,7 @@ if (!$autenticado = User::validarUsuario()) {
                                     </span>
                                     <span class="text-light">Assistente de Ensaios <b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu profile animated fadeInRight m-t-xs">
-                                <li><a href="profile.html">Minha Conta</a></li>
+                                <li><a href="<?= url('func/conta')?>">Minha Conta</a></li>
                                 <li><a href="mailbox.html">Email</a></li>
                                 <li class="divider"></li>
                                 <li><a href="<?= url("logout"); ?>">Logout</a></li>

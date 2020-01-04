@@ -2,18 +2,14 @@
 
 namespace Source\Controllers;
 
-use League\Plates\Engine;
 use Source\Models\EquipModel;
 
-define("ROTA", "../Source/Views/equipamento/");
-
-class EquipController
+class EquipController extends Controller
 {
-    private $view;
-
-    public function __construct()
+    public function __construct($router)
     {
-        $this->view = Engine::create(__DIR__ . "/../../theme", "php");
+        parent::__construct($router);
+        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
     }
 
     public function todos($email): void
@@ -22,7 +18,7 @@ class EquipController
         //$user = User::login($email,$senha);
         $equipamentos = (new EquipModel())->find()->fetch(true);
         // var_dump($comps);
-        echo $this->view->render(ROTA . "todos", [
+        echo $this->view->render("../equipamento/todos", [
             "title" => "Equipamentos | " . SITE,
             "equips" => $equipamentos
 
@@ -84,7 +80,7 @@ class EquipController
     public function editar($data): void
     {
         $equipamentos = (new EquipModel())->findById("{$data["id"]}");
-        echo $this->view->render(ROTA . "editEquipamento", [
+        echo $this->view->render("../equipamento/editEquipamento", [
             "title" => "Equipamentos  | " . SITE,
             "equipamento" => $equipamentos
         ]);

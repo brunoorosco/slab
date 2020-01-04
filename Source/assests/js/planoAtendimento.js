@@ -246,6 +246,7 @@ $(document).ready(function () {
         console.log("Norma:" + tdNorma.children('Select').val()) //mostra valor codigo da NOrma
         console.log("Numero de Amostra:" + tdAmostra.children('input').val()) //mostra valor codigo da NOrma
         console.log("Numero de Preco:" + tdPreco.children('input').val()) //mostra valor codigo da NOrma
+        console.log("Desconto:" + tdDesconto.children('input').val()) //mostra valor codigo da NOrma
         //tdEnsaio.html(tdEnsaio.children("Select").val());
         //tdNorma.html(tdNorma.children("Select").val());
         //tdAmostra.html(tdAmostra.children("input[type=text]").val());
@@ -253,27 +254,23 @@ $(document).ready(function () {
         //tdTotal.html(tdTotal.children("input[type=text]").val());
         // tdDesconto.html(tdDesconto.children("input[type=text]").val());
         $.ajax({
-            url: url + '/auto',
+            url: url + '/os',
             data: {
-                'data': valor
+                'item': tr,
+                'codEnsaio':  tdEnsaio.children('Select').val(),
+                'codNorma': tdNorma.children('Select').val(),
+                'amostra': tdAmostra.children('input').val(),
+                'preco': tdPreco.children('input').val(),
+                'desconto':  tdDesconto.children('input').val(),
+                'codSequencial': $('#nProposta').val() +'-'+ $('#anoProposta').val()
+                
             },
             type: "POST",
             dataType: "json",
 
         })
             .done(function (callback) {
-                norma = callback.nome + '/' + callback.ano;
-                precoUnitario = callback.valor;
-                codNorma = callback.Codigo
-
-                preco = precoUnitario.toString().replace(".", ",");
-
-                //INSERI NOVAS OPÇÕES PARA INSERIR NOVAS
-                tdNorma.children('Select').append($("<option></option>").text(norma).val(codNorma));
-                tdPreco.children('input').val(preco) //mostra valor codigo da NOrma
-                total = calculoPreco(quantAmostra, precoUnitario, desc);
-                tdTotal.children('input').val(total)
-                Total()
+                 swal(callback.message, "", callback.action);
             })
 
         tdBotoes.html('<i class="fa fa-pencil text-navy mr-2 btnEditar"></i>' +

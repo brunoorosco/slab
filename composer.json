@@ -27,6 +27,7 @@
     "dompdf/dompdf": "^0.8.3",
     "fpdf/fpdf": "^1.81",
     "phpoffice/phpword": "v0.16.*",
-    "onokumus/metismenu": "dev-master"
+    "onokumus/metismenu": "dev-master",
+    "coffeecode/optimizer": "^1.0"
   }
 }

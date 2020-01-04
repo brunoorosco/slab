@@ -39,8 +39,8 @@
                     <div class="form-group col-2">
                         <label for="message-text" class="control-span">Nº Sequencial:</label>
                         <div class="input-group">
-                            <input name="nProposta" type="text" class="form-control col" id="nProposta" placeholder="Nº Proposta">
-                            <input name="nPropostaAno" type="text" disabled class="form-control" placeholder="/ <?= date('Y') ?>">
+                            <input name="nProposta"    type="text" class="form-control col" id="nProposta"   placeholder="Nº Proposta">
+                            <input name="nPropostaAno" type="text" class="form-control"     id="anoProposta" value="/ <?= date('Y') ?>" disabled  >
                         </div>
                     </div>
                     <div class="form-group col-2">
@@ -215,7 +215,7 @@
 <script src="js/maskara.js"></script>
 <script src="js/moment.js"></script>
 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <script src="js/planoAtendimento.js"></script>
 
 <?php $v->end(); ?>

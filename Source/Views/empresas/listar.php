@@ -10,6 +10,7 @@
 
     <div class="row">
         <div class="col-lg-12">
+
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Empresas</h5>
@@ -51,7 +52,7 @@
                                 if (strlen($empresa->CNPJ) == 14) {
                                     $cnpj = vsprintf("%s%s.%s%s%s.%s%s%s/%s%s%s%s-%s%s", str_split($empresa->CNPJ));
                                 } else $cnpj = $empresa->CNPJ;
-                                ?>
+                            ?>
 
                                 <tr>
                                     <td class="text-left" scope="row"><?= $empresa->Codigo ?></td>
@@ -94,7 +95,9 @@
 <script>
     $(document).ready(function() {
         $('#tabelaEmpresa').DataTable({
-            "order": [[ 0, "desc" ]],//o primeiro argumento serve pra selecionar a coluna e o segundo para informa se decrecente ou crescente
+            "order": [
+                [0, "desc"]
+            ], //o primeiro argumento serve pra selecionar a coluna e o segundo para informa se decrecente ou crescente
             "language": {
                 "lengthMenu": "Mostrar _MENU_ itens p/ Pág.",
                 "zeroRecords": "Não foi possivel encontrar nenhum registro",
@@ -172,7 +175,7 @@
                         }
                     })
             } else {
-                window.location.href = data.action+'/'+data.id; 
+                window.location.href = data.action + '/' + data.id;
             }
         })
 

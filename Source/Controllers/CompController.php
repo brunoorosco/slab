@@ -2,18 +2,16 @@
 
 namespace Source\Controllers;
 
-use League\Plates\Engine;
 use Source\Models\CompModel;
 
-define("ROTA","../Source/Views/composicao/"); 
+//define("ROTA","../Source/Views/composicao/"); 
 
-class CompController
+class CompController extends Controller
 {
-    private $view;
-
-    public function __construct()
+    public function __construct($router)
     {
-        $this->view = Engine::create(__DIR__."/../../theme","php");
+        parent::__construct($router);
+        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
     }
 
     public function home($email):void
@@ -22,7 +20,7 @@ class CompController
        //$user = User::login($email,$senha);
        $comps = (new CompModel())->find()->fetch(true);
       // var_dump($comps);
-       echo $this->view->render(ROTA."listar",[
+       echo $this->view->render("../composicao/listar",[
            "title" => "Composições | ". SITE,
            "composicoes" => $comps
            
@@ -33,7 +31,7 @@ class CompController
        // echo $email;
        //$user = User::login($email,$senha);
      //$users = (new User())->find()->fetch(true);
-       echo $this->view->render(ROTA."add",[
+       echo $this->view->render("../composicao/add",[
            "title" => "Home | ". SITE
            
        ]);

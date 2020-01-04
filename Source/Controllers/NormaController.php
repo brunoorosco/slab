@@ -2,18 +2,14 @@
 
 namespace Source\Controllers;
 
-use League\Plates\Engine;
 use Source\Models\NormaModel;
 
-define("ROTA","../Source/Views/normas/"); 
-
-class NormaController
+class NormaController extends Controller
 {
-    private $view;
-
-    public function __construct()
+    public function __construct($router)
     {
-        $this->view = Engine::create(__DIR__."/../../theme","php");
+        parent::__construct($router);
+        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
     }
 
     /** RESPONSAVEL POR CRIAR TABELA COM OS DADOS DO BANCO */
@@ -23,7 +19,7 @@ class NormaController
        //$user = User::login($email,$senha);
        $normas = (new NormaModel())->find()->fetch(true);
       // var_dump($comps);
-       echo $this->view->render(ROTA."normas",[
+       echo $this->view->render("../normas/normas",[
            "title" => "Normas | ". SITE,
            "normas" => $normas
            
@@ -88,7 +84,7 @@ class NormaController
     public function editar($data):void
     {
         $normas = (new NormaModel())->findById("{$data["id"]}");
-       echo $this->view->render(ROTA."editNorma",[
+       echo $this->view->render("../normas/editNorma",[
            "title" => "Normas  | ".SITE,
            "norma" => $normas
        ]);

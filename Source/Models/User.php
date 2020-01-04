@@ -114,6 +114,7 @@ class User extends DataLayer
         }
     }
 
+    
     //   if(!isset($_SESSION))session_start(); //verifica se a sessão aberta
 
     //   function autenticar($login, $senha) {

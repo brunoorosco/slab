@@ -6,26 +6,24 @@ use League\Plates\Engine;
 use Source\Models\EnsaioModel;
 use Source\Models\NormaModel;
 
-define("ROTA", "../Source/Views/ensaio/");
 
-class EnsaioController
+class EnsaioController extends Controller
 {
-    private $view;
-
-    public function __construct()
+    public function __construct($router)
     {
-        $this->view = Engine::create(__DIR__ . "/../../theme", "php");
+        parent::__construct($router);
+        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
     }
 
     public function ensaios($ensaio): void
     {
-        $ensaios = (new EnsaioModel())->find()->fetch(true);           
-      
-        echo $this->view->render(ROTA . "ensaio", [
+        $ensaios = (new EnsaioModel())->find()->fetch(true);
+
+        echo $this->view->render("../ensaio/ensaio", [
             "title" => "Ensaios  | " . SITE,
             "ensaios" => $ensaios,
-           
-        
+
+
         ]);
     }
     public function adicionar($data): void
@@ -43,10 +41,11 @@ class EnsaioController
         }
     }
 
-    public function atualizar($data){
-        $atualizar = $this->update_create($data,"update");
+    public function atualizar($data)
+    {
+        $atualizar = $this->update_create($data, "update");
         //if ($empresa->save()) {
-            if($atualizar){
+        if ($atualizar) {
             $callback["message"] = "Ensaio atualizado com sucesso!";
             $callback["action"] = "success";
             echo json_encode($callback);
@@ -58,15 +57,14 @@ class EnsaioController
     }
 
     public function update_create($data, $func): bool
-    {   
+    {
 
         $norma = (new NormaModel())->find("Nome = :name", "name={$data['nomeNorma']}")->fetch(false);
-        if(!$norma)return false;
-      
+        if (!$norma) return false;
+
 
         if ($func === "update") {
             $ensaio = (new EnsaioModel())->findById($data['Codigo']);
-           
         } else {
             $ensaio = new EnsaioModel();
         }
@@ -85,25 +83,25 @@ class EnsaioController
         $ensaio->Carga = $jobData["qtHoras"];
         $ensaio->Preco = $jobData["preco"];
         $ensaio->Status = $jobData["status"];
-       // $ensaio->Status = $jobData["status"];
-       
+        // $ensaio->Status = $jobData["status"];
+
         if ($ensaio->save()) return true;
         else return false;
     }
 
     public function editar($data): void
-    { /** não esquecer de inserir uma coluna com a cod de norma no ensaio */
+    {
+        /** não esquecer de inserir uma coluna com a cod de norma no ensaio */
         $ens = new EnsaioModel();
         $ensaio = $ens->findById("{$data["id"]}");
 
-        if($ensaio->codNorma)
-        {
+        if ($ensaio->codNorma) {
             $norma = (new NormaModel())->findById($ensaio->codNorma);
         }
 
-     //   $norma = $ens->ensaioNorma($ensaio);
+        //   $norma = $ens->ensaioNorma($ensaio);
 
-        echo $this->view->render(ROTA."edit", [
+        echo $this->view->render("../ensaio/edit", [
             "title" => "Ensaios  | " . SITE,
             "ensaio" => $ensaio,
             "norma" => $norma

@@ -2,23 +2,21 @@
 
 namespace Source\Controllers;
 
-use League\Plates\Engine;
 use Source\Models\Empresa;
 use Source\Models\User;
 
-class WebEmpresa
+class WebEmpresa extends Controller
 {
-    private $view;
-
-    public function __construct()
+    public function __construct($router)
     {
-        $this->view = Engine::create(__DIR__ . "/../../theme", "php");
-        
+        parent::__construct($router);
+        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
     }
+
     public function empresa($data): void
     {
         $empresas = (new Empresa())->find()->order("Codigo DESC")->fetch(true);
-        echo $this->view->render("empresas/listar", [
+        echo $this->view->render("../empresas/listar", [
             "title" => "Empresas | " . SITE,
             "empresas" => $empresas
         ]);
@@ -26,7 +24,7 @@ class WebEmpresa
 
     public function incluir($data): void
     {
-        echo $this->view->render("empresas/add", [
+        echo $this->view->render("../empresas/add", [
             "title" => "Cad. Empresa | " . SITE
 
         ]);

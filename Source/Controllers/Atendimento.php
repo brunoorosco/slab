@@ -2,7 +2,6 @@
 
 namespace Source\Controllers;
 
-use League\Plates\Engine;
 use Source\Models\Orcamento;
 use Source\Models\Empresa;
 use Source\Models\PlanoModel;
@@ -12,16 +11,15 @@ use Phpoffice\PhpWord;
 use Source\Models\NormaModel;
 use Source\Models\EnsaioModel;
 
-define("ROTA", "../Source/Views/atendimento/");
+//define("ROTA", "../Source/Views/atendimento/");
 
-class Atendimento
+class Atendimento extends Controller
 {
-  private $view;
-
-  public function __construct()
-  {
-    $this->view = Engine::create(__DIR__ . "/../../theme", "php");
-  }
+   public function __construct($router)
+    {
+        parent::__construct($router);
+        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
+    }
   
   public function atendimento($data): void
   {
@@ -31,7 +29,7 @@ class Atendimento
 
 
 
-    echo $this->view->render(ROTA . "planoAtendimento", [
+    echo $this->view->render("../atendimento/planoAtendimento", [
       "title" => "Ordem de Serv | " . SITE,
       "tecnicos" => $tecnico,
       "normas" => $normas,
@@ -44,7 +42,7 @@ class Atendimento
   {
 
     //    $users = (new User())->find()->fetch(true);
-    echo $this->view->render(ROTA . "printPlano", [
+    echo $this->view->render("../atendimento/printPlano", [
       "title" => "Ordem de Serv | " . SITE,
       //  "users" => $users
     ]);
@@ -135,7 +133,7 @@ class Atendimento
     $norma = (new NormaModel())->find()->fetch(true);
 
    // var_dump($planos);
-    echo $this->view->render(ROTA . "planos", [
+    echo $this->view->render("../atendimento/planos", [
       "title" => "Ordem de Serv | " . SITE,
       "planos" => $planos,
       "empresas" => $empresas,
@@ -147,7 +145,7 @@ class Atendimento
   {
 
     //var_dump($data);
-    echo $this->view->render(ROTA . "printEtiquetas", [
+    echo $this->view->render("../atendimento/printEtiquetas", [
       "title" => "Etiquetas | " . SITE
 
     ]);
@@ -157,7 +155,7 @@ class Atendimento
   {
 
     //var_dump($data);
-    echo $this->view->render(ROTA . "buscaEtiqueta", [
+    echo $this->view->render("../atendimento/buscaEtiqueta", [
       "title" => "Etiquetas | " . SITE
 
     ]);
