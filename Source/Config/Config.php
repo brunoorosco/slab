@@ -1,9 +1,15 @@
 <?php
 
-define("ROOT", "https://".$_SERVER['SERVER_NAME']."/SLAB");
-
-
-define("SITE", "#S-LAB");
+define(
+    "SITE",
+    [
+        "name" => "#S-LAB",
+        "desc" => "Sistema Laboratorial de Medição e Calibração",
+        "domain" => "localhost/",
+        "locale" => "pt-br",
+        "root" => "https://" . $_SERVER['SERVER_NAME'] . "/SLAB"
+    ]
+);
 //echo $_SERVER['SERVER_NAME'];
 
 if ($_SERVER['SERVER_NAME'] != 'www.localhost') {
@@ -44,8 +50,8 @@ if ($_SERVER['SERVER_NAME'] != 'www.localhost') {
 function url(string $uri = null): string
 {
     if ($uri) {
-        return ROOT . "/{$uri}";
+        return SITE['root'] . "/{$uri}";
     }
 
-    return ROOT;
+    return SITE['root'];
 }

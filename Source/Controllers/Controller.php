@@ -26,8 +26,6 @@ abstract class Controller
         $this->view->addData(["router" => $this->router]);
 
         //$this->seo = new Optimizer();
-
-
     }
 
     public function ajaxResponse(string $param, array $values): string

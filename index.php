@@ -3,22 +3,23 @@ ob_start();
 session_start();
 
 require __DIR__ . "/vendor/autoload.php";
-require __DIR__ . "/Source/Config/Db.php";
+// require __DIR__ . "/Source/Config/Db.php";
 
 use  CoffeeCode\Router\Router;
+use Source\Models\OrcamentoModel;
 
-$route = new Router(ROOT);
+$route = new Router(SITE['root']);
 
 // if(!isset($_SESSION))session_start(); //verifica se a sessão aberta
 
 // Conectar com o banco de dados
-if ($_SERVER['SERVER_NAME'] == 'localhost')
-    require './Source/Config/config_dev.php';
-else
-    require './Source/Config/config_prod.php';
+// if ($_SERVER['SERVER_NAME'] == 'localhost')
+//     require './Source/Config/config_dev.php';
+// else
+//     require './Source/Config/config_prod.php';
 
 
-Db::conectar($dbname, $user, $password, $host);
+// Db::conectar($dbname, $user, $password, $host);
        
         
 /**
@@ -59,6 +60,7 @@ $route->post("/empresa", "webEmpresa:buscar");
 $route->post("/autoEnsaio", "Atendimento:carregaEnsaio");
 $route->post("/auto", "Atendimento:carregaNorma");
 $route->post("/os", "OrcamentoController:adicionar");
+$route->post("/os/excluir", "OrcamentoController:excluir");
 
 
 /**

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    '7e9bd612cc444b3eed788ebbe46263a0' => $vendorDir . '/laminas/laminas-zendframework-bridge/src/autoload.php',
     'e471bf351add62873bc0289ccd6a937f' => $vendorDir . '/league/plates/src/Template/match.php',
     '152c98af9456eeb8f53697d6a7dfd689' => $vendorDir . '/league/plates/src/Extension/Data/data.php',
     'e20239a76b73b9912f51f0005956d1db' => $vendorDir . '/league/plates/src/Extension/Path/path.php',
@@ -15,4 +16,5 @@ return array(
     'afa76803f24616d7599be3b7b0846adc' => $vendorDir . '/league/plates/src/Extension/Folders/folders.php',
     '16c5be35e32c6cf916d875518b909210' => $vendorDir . '/league/plates/src/Util/util.php',
     '3cd37d82344873f3e8144f52d9d30f94' => $baseDir . '/source/Config/Config.php',
+    '9eac226e1c3c75ff85d0bb95d1041f0d' => $baseDir . '/source/Config/Helpers.php',
 );

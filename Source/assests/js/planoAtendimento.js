@@ -257,24 +257,24 @@ $(document).ready(function () {
             url: url + '/os',
             data: {
                 'item': tr,
-                'codEnsaio':  tdEnsaio.children('Select').val(),
+                'codEnsaio': tdEnsaio.children('Select').val(),
                 'codNorma': tdNorma.children('Select').val(),
                 'amostra': tdAmostra.children('input').val(),
                 'preco': tdPreco.children('input').val(),
-                'desconto':  tdDesconto.children('input').val(),
-                'codSequencial': $('#nProposta').val() +'-'+ $('#anoProposta').val()
-                
+                'desconto': tdDesconto.children('input').val(),
+                'codSequencial': $('#nProposta').val() + '-' + $('#anoProposta').val()
+
             },
             type: "POST",
             dataType: "json",
 
         })
             .done(function (callback) {
-                 swal(callback.message, "", callback.action);
+                swal(callback.message, "", callback.action);
             })
 
-        tdBotoes.html('<i class="fa fa-pencil text-navy mr-2 btnEditar"></i>' +
-            '<i class="fa fa-trash text-navy btnExcluir"></i>');
+        tdBotoes.html('<i class="fa fa-pencil text-navy mr-2 btnEditar" style="cursor:pointer"></i>' +
+            '<i class="fa fa-trash text-navy btnExcluir" style="cursor:pointer"></i>');
 
         $(".btnEditar").bind("click", Editar);
         $(".btnExcluir").bind("click", Excluir);
@@ -283,8 +283,23 @@ $(document).ready(function () {
 
 
     function Excluir() {
-        var par = $(this).parent().parent(); //tr
-        par.remove();
+        var linha = $(this).parent().parent(); //tr
+        var codSequencial = $('#nProposta').val() + '-' + $('#anoProposta').val()
+        tr = linha.index('tr');
+        $.ajax({
+            url: url + '/os/excluir',
+            data: {
+                item: tr,
+                codSequencial: codSequencial,
+            },
+            type: "POST",
+            dataType: "json",
+        })
+            .done(function (callback) {
+                //swal(callback.message, "", callback.action);
+                //alert(callback);
+                linha.remove();
+            })
     };
 
     function Ensaio() {

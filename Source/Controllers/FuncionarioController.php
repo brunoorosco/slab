@@ -19,7 +19,7 @@ class FuncionarioController extends Controller
        $funcionarios = (new FuncionarioModel())->find()->fetch(true);
       // var_dump($comps);
        echo $this->view->render("../funcionario/todos",[
-           "title" => "Funcionários | ". SITE,
+           "title" => "Funcionários | ". SITE['name'],
            "funcs" => $funcionarios
            
        ]);
@@ -30,7 +30,7 @@ class FuncionarioController extends Controller
        //$user = User::login($email,$senha);
      //$users = (new User())->find()->fetch(true);
        echo $this->view->render("../funcionario/novo",[
-           "title" => "Home | ". SITE
+           "title" => "Home | ". SITE['name']
            
        ]);
     }
@@ -61,7 +61,7 @@ class FuncionarioController extends Controller
     public function conta()
     {
         echo $this->view->render("../funcionario/conta",[
-            "title" => "Profile | ". SITE,
+            "title" => "Profile | ". SITE['name'],
             
         ]);
     }

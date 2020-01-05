@@ -21,7 +21,7 @@ class CompController extends Controller
        $comps = (new CompModel())->find()->fetch(true);
       // var_dump($comps);
        echo $this->view->render("../composicao/listar",[
-           "title" => "Composições | ". SITE,
+           "title" => "Composições | ". SITE['name'],
            "composicoes" => $comps
            
        ]);
@@ -32,7 +32,7 @@ class CompController extends Controller
        //$user = User::login($email,$senha);
      //$users = (new User())->find()->fetch(true);
        echo $this->view->render("../composicao/add",[
-           "title" => "Home | ". SITE
+           "title" => "Home | ". SITE['name']
            
        ]);
     }

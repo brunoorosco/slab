@@ -19,7 +19,7 @@ class EquipController extends Controller
         $equipamentos = (new EquipModel())->find()->fetch(true);
         // var_dump($comps);
         echo $this->view->render("../equipamento/todos", [
-            "title" => "Equipamentos | " . SITE,
+            "title" => "Equipamentos | " . SITE['name'],
             "equips" => $equipamentos
 
         ]);
@@ -81,7 +81,7 @@ class EquipController extends Controller
     {
         $equipamentos = (new EquipModel())->findById("{$data["id"]}");
         echo $this->view->render("../equipamento/editEquipamento", [
-            "title" => "Equipamentos  | " . SITE,
+            "title" => "Equipamentos  | " . SITE['name'],
             "equipamento" => $equipamentos
         ]);
     }

@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit957562f4c4be68de0fad397e19f0a507
 {
     public static $files = array (
+        '7e9bd612cc444b3eed788ebbe46263a0' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/autoload.php',
         'e471bf351add62873bc0289ccd6a937f' => __DIR__ . '/..' . '/league/plates/src/Template/match.php',
         '152c98af9456eeb8f53697d6a7dfd689' => __DIR__ . '/..' . '/league/plates/src/Extension/Data/data.php',
         'e20239a76b73b9912f51f0005956d1db' => __DIR__ . '/..' . '/league/plates/src/Extension/Path/path.php',
@@ -16,13 +17,10 @@ class ComposerStaticInit957562f4c4be68de0fad397e19f0a507
         'afa76803f24616d7599be3b7b0846adc' => __DIR__ . '/..' . '/league/plates/src/Extension/Folders/folders.php',
         '16c5be35e32c6cf916d875518b909210' => __DIR__ . '/..' . '/league/plates/src/Util/util.php',
         '3cd37d82344873f3e8144f52d9d30f94' => __DIR__ . '/../..' . '/source/Config/Config.php',
+        '9eac226e1c3c75ff85d0bb95d1041f0d' => __DIR__ . '/../..' . '/source/Config/Helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'Z' => 
-        array (
-            'Zend\\Escaper\\' => 13,
-        ),
         'S' => 
         array (
             'Svg\\' => 4,
@@ -36,6 +34,8 @@ class ComposerStaticInit957562f4c4be68de0fad397e19f0a507
         'L' => 
         array (
             'League\\Plates\\' => 14,
+            'Laminas\\ZendFrameworkBridge\\' => 28,
+            'Laminas\\Escaper\\' => 16,
         ),
         'F' => 
         array (
@@ -55,10 +55,6 @@ class ComposerStaticInit957562f4c4be68de0fad397e19f0a507
     );
 
     public static $prefixDirsPsr4 = array (
-        'Zend\\Escaper\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/zendframework/zend-escaper/src',
-        ),
         'Svg\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
@@ -78,6 +74,14 @@ class ComposerStaticInit957562f4c4be68de0fad397e19f0a507
         'League\\Plates\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/plates/src',
+        ),
+        'Laminas\\ZendFrameworkBridge\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src',
+        ),
+        'Laminas\\Escaper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-escaper/src',
         ),
         'Fpdf\\' => 
         array (

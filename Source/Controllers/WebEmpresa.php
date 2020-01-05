@@ -17,7 +17,7 @@ class WebEmpresa extends Controller
     {
         $empresas = (new Empresa())->find()->order("Codigo DESC")->fetch(true);
         echo $this->view->render("../empresas/listar", [
-            "title" => "Empresas | " . SITE,
+            "title" => "Empresas | " . SITE['name'],
             "empresas" => $empresas
         ]);
     }
@@ -25,7 +25,7 @@ class WebEmpresa extends Controller
     public function incluir($data): void
     {
         echo $this->view->render("../empresas/add", [
-            "title" => "Cad. Empresa | " . SITE
+            "title" => "Cad. Empresa | " . SITE['name']
 
         ]);
     }
@@ -148,7 +148,7 @@ class WebEmpresa extends Controller
     {
         $empresa = (new Empresa())->findById("{$data["id"]}");
         echo $this->view->render("empresas/edit", [
-            "title" => "{$data["id"]} | " . SITE,
+            "title" => "{$data["id"]} | " . SITE['name'],
             "empresa" => $empresa
 
         ]);

@@ -20,7 +20,7 @@ class NormaController extends Controller
        $normas = (new NormaModel())->find()->fetch(true);
       // var_dump($comps);
        echo $this->view->render("../normas/normas",[
-           "title" => "Normas | ". SITE,
+           "title" => "Normas | ". SITE['name'],
            "normas" => $normas
            
        ]);
@@ -85,7 +85,7 @@ class NormaController extends Controller
     {
         $normas = (new NormaModel())->findById("{$data["id"]}");
        echo $this->view->render("../normas/editNorma",[
-           "title" => "Normas  | ".SITE,
+           "title" => "Normas  | ".SITE['name'],
            "norma" => $normas
        ]);
     }

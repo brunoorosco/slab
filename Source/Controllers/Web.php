@@ -20,7 +20,7 @@ class Web extends Controller
         parent::__construct($router);
 
         // if (!empty($_SESSION["usuario"])) {
-        //     $this->router->redirect("web.login");
+        //     $this->router->redirect("web.home");
         // }
     }
 
@@ -30,13 +30,13 @@ class Web extends Controller
 
         if ($autenticado != 0) {
             echo $this->view->render("home", [
-                "title" => "Home | " . SITE,
+                "title" => "Home | " . SITE['name'],
 
 
             ]);
         } else {
             echo $this->view->render("home", [
-                "title" => "Home | " . SITE,
+                "title" => "Home | " . SITE['name'],
             ]);
         }
     }
@@ -52,12 +52,12 @@ class Web extends Controller
             $user = $model->findById($_SESSION['codUsuario']);
             //  var_dump($user);
             echo $this->view->render("../home", [
-                "title" => "Home | " . SITE,
+                "title" => "Home | " . SITE['name'],
                 "user" => $user
             ]);
         } else {
             echo $this->view->render("home", [
-                "title" => "Login | " . SITE,
+                "title" => "Login | " . SITE['name'],
                 "error" => "Usuário ou senha Incorreto!"
                 //   "autentic" => $autenticado
             ]);
@@ -68,15 +68,15 @@ class Web extends Controller
 
     public function logout($data): void
     {
-
-        $inicio = User::sair();
-        // $users = (new User())->find()->fetch(true);
-        // var_dump($autenticado); 
-        if ($inicio)
-            echo $this->view->render("home", [
-                "title" => "Login | " . SITE,
-                //   "autentic" => $autenticado
-            ]);
+            echo "<h1>loi</h1>";
+        // $inicio = User::sair();
+        // // $users = (new User())->find()->fetch(true);
+        // // var_dump($autenticado); 
+        // if ($inicio)
+        //     echo $this->view->render("home", [
+        //         "title" => "Login | " . SITE,
+        //         //   "autentic" => $autenticado
+        //     ]);
     }
 
 
@@ -85,7 +85,7 @@ class Web extends Controller
     {
         echo "<h1>Contato</h1>";
         //var_dump($data);
-        $url = ROOT;
+        $url = SITE['root'];
         require __DIR__ . "../../Views/contato.php";
     }
 
@@ -94,7 +94,7 @@ class Web extends Controller
     {
 
         echo $this->view->render("error", [
-            "title" => "Erro | {$data["errcode"]}" . SITE,
+            "title" => "Erro | {$data["errcode"]}" . SITE['name'],
             "error" => $data["errcode"]
         ]);
     }

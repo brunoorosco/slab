@@ -11,26 +11,23 @@ use Phpoffice\PhpWord;
 use Source\Models\NormaModel;
 use Source\Models\EnsaioModel;
 
-//define("ROTA", "../Source/Views/atendimento/");
-
 class Atendimento extends Controller
 {
-   public function __construct($router)
-    {
-        parent::__construct($router);
-        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
-    }
-  
+  public function __construct($router)
+  {
+    parent::__construct($router);
+    // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
+  }
+
   public function atendimento($data): void
   {
     $tecnico = (new FuncionarioModel())->find("CodFuncao = :cod", "cod=3")->order("Nome ASC")->fetch(true);
     $ensaios = (new EnsaioModel())->find()->order("Nome ASC")->fetch(true);
     $normas = (new NormaModel())->find()->order("Nome ASC")->fetch(true);
-
-
+    $planos = (new PlanoModel())->find()->fetch(true);
 
     echo $this->view->render("../atendimento/planoAtendimento", [
-      "title" => "Ordem de Serv | " . SITE,
+      "title" => "Ordem de Serv | " . SITE['name'],
       "tecnicos" => $tecnico,
       "normas" => $normas,
       "ensaios" => $ensaios,
@@ -40,13 +37,13 @@ class Atendimento extends Controller
 
   public function imprimirPlano($data): void
   {
-
-    //    $users = (new User())->find()->fetch(true);
+    // $users = (new User())->find()->fetch(true);
     echo $this->view->render("../atendimento/printPlano", [
-      "title" => "Ordem de Serv | " . SITE,
-      //  "users" => $users
+      "title" => "Ordem de Serv | " . SITE['name'],
+    //"users" => $users
     ]);
   }
+
   public function adicionar($data): void
   {
     $criar = $this->update_create($data, "create");
@@ -109,8 +106,6 @@ class Atendimento extends Controller
     $ensaio->FormaRecebimento = $jobData["tipoSolicitacao"];
     $ensaio->Usuario = $_SESSION['codUsuario'];
 
-
-    // var_dump($ensaio);
     if ($ensaio->save()) {
       $ensaio->ResponsavelAnalise = $tecnico->Nome;
       $ensaio->ResponsavelAtendimento = $tecnico->Nome;
@@ -132,9 +127,9 @@ class Atendimento extends Controller
     $empresas = (new Empresa())->find()->fetch(true);
     $norma = (new NormaModel())->find()->fetch(true);
 
-   // var_dump($planos);
+    // var_dump($planos);
     echo $this->view->render("../atendimento/planos", [
-      "title" => "Ordem de Serv | " . SITE,
+      "title" => "Ordem de Serv | " . SITE['name'],
       "planos" => $planos,
       "empresas" => $empresas,
       "normas" => $norma
@@ -146,7 +141,7 @@ class Atendimento extends Controller
 
     //var_dump($data);
     echo $this->view->render("../atendimento/printEtiquetas", [
-      "title" => "Etiquetas | " . SITE
+      "title" => "Etiquetas | " . SITE['name']
 
     ]);
   }
@@ -156,7 +151,7 @@ class Atendimento extends Controller
 
     //var_dump($data);
     echo $this->view->render("../atendimento/buscaEtiqueta", [
-      "title" => "Etiquetas | " . SITE
+      "title" => "Etiquetas | " . SITE['name']
 
     ]);
   }

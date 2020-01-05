@@ -146,7 +146,7 @@
                                         <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Valor Unitário</th>
                                         <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Valor Total</th>
                                         <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Desc. (%)</th>
-                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center"> <a data-action="<?= url("plano/servico/edit") ?>" data-id=<?= $plano->Codigo ?> data-func="edit" id="adicionar">
+                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center"> <a data-action="<?= url("plano/servico/edit") ?>"   data-func="edit" id="adicionar">
                                                 <i class="fa fa-plus-circle text-navy mr-2"></i>
                                             </a></th>
                                     </tr>
