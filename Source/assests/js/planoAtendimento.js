@@ -262,7 +262,7 @@ $(document).ready(function () {
                 'amostra': tdAmostra.children('input').val(),
                 'preco': tdPreco.children('input').val(),
                 'desconto': tdDesconto.children('input').val(),
-                'codSequencial': $('#nProposta').val() + '-' + $('#anoProposta').val()
+                'codSequencial': $('#nProposta').val() + $('#anoProposta').val()
 
             },
             type: "POST",
@@ -284,7 +284,7 @@ $(document).ready(function () {
 
     function Excluir() {
         var linha = $(this).parent().parent(); //tr
-        var codSequencial = $('#nProposta').val() + '-' + $('#anoProposta').val()
+        var codSequencial = $('#nProposta').val() + $('#anoProposta').val()
         tr = linha.index('tr');
         $.ajax({
             url: url + '/os/excluir',
@@ -298,7 +298,7 @@ $(document).ready(function () {
             .done(function (callback) {
                 //swal(callback.message, "", callback.action);
                 //alert(callback);
-                linha.remove();
+                linha.fadeOut().remove()
             })
     };
 
