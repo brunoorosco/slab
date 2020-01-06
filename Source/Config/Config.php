@@ -43,15 +43,30 @@ if ($_SERVER['SERVER_NAME'] != 'www.localhost') {
         ]
     ]);
 }
-/**
- * @param string|null $uri
- * @return string
- */
-function url(string $uri = null): string
+
+function url(string $param = null): string
 {
-    if ($uri) {
-        return SITE['root'] . "/{$uri}";
+    if ($param ) {
+        //  return SITE[$param];
+        return SITE['root'] . "/{$param}";
     }
 
     return SITE['root'];
 }
+
+
+/**
+ * SOCIAL
+ */
+define("SOCIAL", [
+    "facebook_page" => "",
+    "facebook_author" => "",
+    "facebook_appId" => "",
+    "twitter_creater" => "",
+    "twitter_site" => ""
+]);
+
+/**
+ * MAIL CONNECT
+ */
+define ("MAIL",[]);

@@ -2,7 +2,6 @@
 
 namespace Source\Controllers;
 
-use League\Plates\Engine;
 use Source\Models\User;
 use Source\Models\FuncionarioModel;
 //use helper\Seguranca;
@@ -68,15 +67,15 @@ class Web extends Controller
 
     public function logout($data): void
     {
-            echo "<h1>loi</h1>";
-        // $inicio = User::sair();
-        // // $users = (new User())->find()->fetch(true);
-        // // var_dump($autenticado); 
-        // if ($inicio)
-        //     echo $this->view->render("home", [
-        //         "title" => "Login | " . SITE,
-        //         //   "autentic" => $autenticado
-        //     ]);
+        
+        $inicio = User::sair();
+        // $users = (new User())->find()->fetch(true);
+        // var_dump($autenticado); 
+        if ($inicio)
+            echo $this->view->render("home", [
+                "title" => "Login | " . SITE['name'],
+                //   "autentic" => $autenticado
+            ]);
     }
 
 

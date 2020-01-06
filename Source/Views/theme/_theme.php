@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title><?= $title; ?></title>
-    <base href='<?= ROOT . ("/Source/assests/") ?>'>
+    <base href='<?= SITE['root'] . ("/Source/assests/") ?>'>
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?= url("theme/style.css"); ?>" />
+    <link rel="stylesheet" href="../Views/theme/style.css"/>
 </head>
 
 <body>
@@ -31,11 +31,11 @@
         <?= $v->section("content"); ?>
     </main>
     <footer class="main_footer">
-        <?= SITE; ?> - Todos os Direitos Reservados
+        <?= SITE['name'] ?> - Todos os Direitos Reservados
 
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <?= $v->section("scripts"); ?>
 </body>
 

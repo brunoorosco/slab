@@ -3,23 +3,22 @@ ob_start();
 session_start();
 
 require __DIR__ . "/vendor/autoload.php";
-// require __DIR__ . "/Source/Config/Db.php";
+ require __DIR__ . "/Source/Config/Db.php";
 
 use  CoffeeCode\Router\Router;
-use Source\Models\OrcamentoModel;
 
 $route = new Router(SITE['root']);
 
 // if(!isset($_SESSION))session_start(); //verifica se a sessão aberta
 
 // Conectar com o banco de dados
-// if ($_SERVER['SERVER_NAME'] == 'localhost')
-//     require './Source/Config/config_dev.php';
-// else
-//     require './Source/Config/config_prod.php';
+if ($_SERVER['SERVER_NAME'] == 'localhost')
+    require './Source/Config/config_dev.php';
+else
+    require './Source/Config/config_prod.php';
 
 
-// Db::conectar($dbname, $user, $password, $host);
+ Db::conectar($dbname, $user, $password, $host);
        
         
 /**
@@ -32,13 +31,13 @@ $route->namespace("Source\Controllers");
  */
 $route->group(null);
 //$route->get("/", "Web:home");
-$route->get("/", "Web:home", "web.home");
-$route->get("/login", "Web:logout", "web.logout");
-$route->get("/contato", "Web:contact", "web.contato");
-$route->get("/teste", "Web:layout", "web.layout");
-$route->post("/login", "Web:login", "web.login");
-$route->get("/home","Web:inicio", "web.inicio");
-$route->get("/logout","Web:logout", "web.logout");
+$route->get("/", "Web:home");
+$route->get("/login", "Web:logout");
+$route->get("/contato", "Web:contact");
+$route->get("/teste", "Web:layout");
+$route->post("/login", "Web:login");
+$route->get("/home","Web:inicio");
+$route->get("/logout","Web:logout");
 
 /**
  * web
