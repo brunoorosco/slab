@@ -14,9 +14,9 @@ function site(string $param = null): string
     return SITE['root'];
 }
 
-function assests(string $param):string
+function assest(string $param):string
 {
-    return SITE['name']."/Views/assests/{$param}";
+    return SITE['root']."/Source/Views/assests/{$param}";
 }
 
 function flash(string $type = null, string $message = null ): ?string 

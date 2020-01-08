@@ -1,7 +1,7 @@
 <?php $v->layout("layout2"); ?>
 
 <?php $v->start("css"); ?>
-<link rel="stylesheet" href="<?= url('Source/assests/css/planoStyle.css'); ?>">
+<link rel="stylesheet" href="<?= assest('css/planoStyle.css'); ?>">
 
 <?php $v->end(); ?>
 
@@ -39,8 +39,8 @@
                     <div class="form-group col-2">
                         <label for="message-text" class="control-span">Nº Sequencial:</label>
                         <div class="input-group">
-                            <input name="nProposta"    type="text" class="form-control col" id="nProposta"   placeholder="Nº Proposta">
-                            <input name="nPropostaAno" type="text" class="form-control"     id="anoProposta" value="/ <?= date('Y') ?>" disabled  >
+                            <input name="nProposta"    type="text" class="form-control col" id="nProposta"   placeholder="Nº Proposta" value="<?= $plano ?>">
+                            <input name="nPropostaAno" type="text" class="form-control"     id="anoProposta" value="/<?= date('Y') ?>" readonly >
                         </div>
                     </div>
                     <div class="form-group col-2">
@@ -152,36 +152,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- <tr class="row justify-content-md-center" style="margin-right: 0px">
-                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
-                                            <select class="custom-select mr-sm-2 ensaio" id="tpEnsaio_1" name="tpEnsaio">
-                                                <option selected Disabled>Tipos de ENsaio</option>
-                                                <?php
-                                                foreach ($ensaios as $ensaio) : ?>
-                                                    <option value="<?= $ensaio->Codigo ?>"><?= $ensaio->Nome ?></option>
-                                                <?php
-                                                endforeach; ?>
-                                            </select>
-                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                           
-                                            <select class="custom-select mr-sm-2 tpNorma" id="tpNorma_1" name="tpNorma">
-
-
-                                            </select>
-                                        </td>
-                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="quantAmostra_1" class="form-control text-center number calculo" id="quantAmostra_1" Type="text"></td>
-                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoUnit_1" class="form-control text-right calculo money2" id="precoUnit_1" Type="text"></td>
-                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input name="precoTotal_1" class="form-control money text-right" id="precoTotal_1" Type="text" placeholder="R$ 0.00" disabled></td>
-                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-1"><input type="text" name="desc" id="desc_1" class="form-control" maxlength="100"></td>
-                                        <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center p-3">
-                                            <i class="fa fa-save text-navy mr-2 btnSalvar" style="cursor:pointer"></i>
-
-                                            <a data-action="<?= url("plano/excluir") ?>" data-id=<?= $plano->Codigo ?> data-nome=<?= $plano->Nome ?> data-func="exc">
-                                                <i class="fa fa-trash text-navy"></i>
-                                            </a></td>
-                                    </tr> -->
-
-                                </tbody>
+                                  
+                                 </tbody>
 
                             </table>
                         </div>

@@ -6,8 +6,10 @@ define(
         "name" => "#S-LAB",
         "desc" => "Sistema Laboratorial de Medição e Calibração",
         "domain" => "localhost/",
+        //"domain" => "slab.sp.senai.br/",
         "locale" => "pt-br",
         "root" => "https://" . $_SERVER['SERVER_NAME'] . "/SLAB"
+        //"root" => "https://slab.sp.senai.br"
     ]
 );
 //echo $_SERVER['SERVER_NAME'];

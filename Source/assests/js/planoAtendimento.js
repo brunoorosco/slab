@@ -283,14 +283,18 @@ $(document).ready(function () {
 
 
     function Excluir() {
+
         var linha = $(this).parent().parent(); //tr
+        var tdEnsaio = linha.children("td:nth-child(1)");
         var codSequencial = $('#nProposta').val() + $('#anoProposta').val()
         tr = linha.index('tr');
         $.ajax({
             url: url + '/os/excluir',
             data: {
-                item: tr,
-                codSequencial: codSequencial,
+                'item': tr,
+                'codSequencial': codSequencial,
+                'codEnsaio': tdEnsaio.children('Select').val(),
+
             },
             type: "POST",
             dataType: "json",

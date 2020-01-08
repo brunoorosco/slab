@@ -1,7 +1,7 @@
 <?php $v->layout("layout2"); ?>
 
 <?php $v->start("css"); ?>
-<link rel="stylesheet" href="<?= url('Source/assests/css/datatables.css'); ?>">
+<link rel="stylesheet" href="<?= assest('css/datatables.css'); ?>">
 
 <?php $v->end(); ?>
 
@@ -94,7 +94,7 @@
     $(document).ready(function() {
         $('#tabelaPlano').DataTable({
             "order": [
-                [0, "desc"]
+                [2]
             ], //o primeiro argumento serve pra selecionar a coluna e o segundo para informa se decrecente ou crescente
             "language": {
                 "lengthMenu": "Mostrar _MENU_ itens p/ Pág.",

@@ -24,13 +24,18 @@ class Atendimento extends Controller
     $tecnico = (new FuncionarioModel())->find("CodFuncao = :cod", "cod=3")->order("Nome ASC")->fetch(true);
     $ensaios = (new EnsaioModel())->find()->order("Nome ASC")->fetch(true);
     $normas = (new NormaModel())->find()->order("Nome ASC")->fetch(true);
-    $planos = (new PlanoModel())->find()->fetch(true);
-
+    //CARREGA O uLTIMO NUMERO SEQUENCIAL
+    $planos = (new PlanoModel())->find()->limit(1)->order("codigo DESC")->fetch(false);
+    //EXTRAI SOMENTE O VALOR DA OS SEM O ANO E DEPOIS SOMA 1
+    $numberOS = substr($planos->Sequencial, 0, strpos($planos->Sequencial, '/'));
+    $numberOS++;
+   
     echo $this->view->render("../atendimento/planoAtendimento", [
       "title" => "Ordem de Serv | " . SITE['name'],
       "tecnicos" => $tecnico,
       "normas" => $normas,
       "ensaios" => $ensaios,
+      "plano" => $numberOS
 
     ]);
   }
@@ -94,7 +99,7 @@ class Atendimento extends Controller
     $dataResp = date("Y-m-d", strtotime(str_replace('/', '-', $jobData["dataResposta"])));
     // Exibe alguma coisa como: Monday
 
-    $ensaio->Sequencial = $jobData["nProposta"];
+    $ensaio->Sequencial = $jobData["nProposta"].$jobData["nPropostaAno"];
     $ensaio->CodNomeEmpr = $jobData["codEmpresa"];
     $ensaio->DataInicio = $dataInicio;
     $ensaio->DataFim = $datafinal;
@@ -133,9 +138,9 @@ class Atendimento extends Controller
       "planos" => $planos,
       "empresas" => $empresas,
       "normas" => $norma
-
     ]);
   }
+
   public function etiqueta($data)
   {
 
