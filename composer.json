@@ -29,7 +29,6 @@
     "fpdf/fpdf": "^1.81",
     "phpoffice/phpword": "v0.16.*",
     "onokumus/metismenu": "dev-master",
-    "coffeecode/optimizer": "^1.0",
     "laminas/laminas-escaper": "^2.6"
   }
 }

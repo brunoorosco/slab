@@ -75,6 +75,7 @@ class Web extends Controller
             echo $this->view->render("home", [
                 "title" => "Login | " . SITE['name'],
                 //   "autentic" => $autenticado
+                "error" => null
             ]);
     }
 
