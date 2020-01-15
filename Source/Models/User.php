@@ -10,7 +10,7 @@ class User extends DataLayer
 {
     public function __construct()
     {
-        parent::__construct("funcionarios", ["email", "usuario"]);
+        $_SESSION['codUsuario'];       
     }
 
     function autenticar($data)
@@ -19,6 +19,8 @@ class User extends DataLayer
         $usuario = ($data['user']);
 
         $model = new FuncionarioModel();
+        var_dump($model);
+       
         $user = $model->find(
             "Senha = :s AND Usuario = :u",
             "s={$senhaCriptografada} & u={$usuario}"

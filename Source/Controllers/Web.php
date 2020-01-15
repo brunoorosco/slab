@@ -17,7 +17,6 @@ class Web extends Controller
         //  new Seguranca();
         //$this->view = Engine::create(__DIR__ . "/../Views/theme", "php");
         parent::__construct($router);
-
         // if (!empty($_SESSION["usuario"])) {
         //     $this->router->redirect("web.home");
         // }
@@ -30,12 +29,12 @@ class Web extends Controller
         if ($autenticado != 0) {
             echo $this->view->render("home", [
                 "title" => "Home | " . SITE['name'],
-
-
+                 "error" => null//provisorio
             ]);
         } else {
             echo $this->view->render("home", [
                 "title" => "Home | " . SITE['name'],
+                "error" => null //provisorio
             ]);
         }
     }
@@ -43,24 +42,32 @@ class Web extends Controller
 
     public function login($data): void
     {
-        $model = new FuncionarioModel();
-        $autenticado = User::autenticar($data);
-        $this->view->addData(['name' => 'Jonathan']);
-        // var_dump($autenticado); 
-        if ($autenticado != 0) {
-            $user = $model->findById($_SESSION['codUsuario']);
-            //  var_dump($user);
+      
+        // $model = new FuncionarioModel();
+        // $autenticado = User::autenticar($data);
+        // $this->view->addData(['name' => 'Jonathan']);
+        //  var_dump($autenticado); 
+        // if ($autenticado != 0) {
+        //     $user = $model->findById($_SESSION['codUsuario']);
+        //     //  var_dump($user);
+        //     echo $this->view->render("../home", [
+        //         "title" => "Home | " . SITE['name'],
+        //         "user" => $user
+        //     ]);
+        // } else {
+        //     echo $this->view->render("home", [
+        //         "title" => "Login | " . SITE['name'],
+        //         "error" => "Usuário ou senha Incorreto!"
+        //         //   "autentic" => $autenticado
+        //     ]);
+        // }
+
+
+
             echo $this->view->render("../home", [
                 "title" => "Home | " . SITE['name'],
-                "user" => $user
+                "user" => "Bruno"
             ]);
-        } else {
-            echo $this->view->render("home", [
-                "title" => "Login | " . SITE['name'],
-                "error" => "Usuário ou senha Incorreto!"
-                //   "autentic" => $autenticado
-            ]);
-        }
     }
 
     
@@ -70,8 +77,7 @@ class Web extends Controller
         
         $inicio = User::sair();
         // $users = (new User())->find()->fetch(true);
-        // var_dump($autenticado); 
-        if ($inicio)
+         if ($inicio)
             echo $this->view->render("home", [
                 "title" => "Login | " . SITE['name'],
                 //   "autentic" => $autenticado
