@@ -3,42 +3,35 @@ ob_start();
 session_start();
 
 require __DIR__ . "/vendor/autoload.php";
-//require __DIR__ . "/Source/Config/Db.php";
-
 use  CoffeeCode\Router\Router;
 
-//phpinfo();
-$route = new Router(SITE['root']);
-
-// if(!isset($_SESSION))session_start(); //verifica se a sessão aberta
-
-// Conectar com o banco de dados
-// if ($_SERVER['SERVER_NAME'] == 'localhost')
-//     require './Source/Config/config_dev.php';
-// else
-//     require './Source/Config/config_prod.php';
-
-
- //Db::conectar($dbname, $user, $password, $host);
-       
-        
-/**
- * APP
- */
+$route = new Router(url());
 $route->namespace("Source\Controllers");
 
 /**
  * web
  */
 $route->group(null);
-//$route->get("/", "Web:home");
-$route->get("/", "Web:home", "web.home");
-$route->get("/login", "Web:logout", "web.login");
-$route->get("/contato", "Web:contact");
-$route->get("/teste", "Web:layout");
-$route->post("/login", "Web:login");
-$route->get("/home","Web:inicio");
-$route->get("/logout","Web:logout", "web.logout");
+$route->get("/", "Web:login","web.login");
+$route->get("/cadastrar", "Web:register","web.register");
+$route->get("/recuperar", "Web:forget", "web.forget");
+$route->get("/senha/{email}/{forget}", "Web:reset", "web.reset");
+/**
+ * Auth
+ */
+$route->group(null);
+$route->post("/login", "Auth:login","auth.login");
+$route->post("/register", "Auth:register","auth.register");
+$route->post("/forget", "Auth:forget", "auth.forget");
+$route->post("/reset", "Auth:reset", "auth.reset");
+
+/**
+ * App
+ */
+$route->group("/app");
+$route->get("/", "App:home","app.home");
+$route->get("/sair", "App:logoff","app.logoff");
+
 
 /**
  * web

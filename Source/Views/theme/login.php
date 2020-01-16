@@ -1,4 +1,4 @@
-<?php $v->layout("_theme"); ?>
+<?php $v->layout("theme/_theme"); ?>
 
 <?php $v->start("css"); ?>
 
@@ -12,14 +12,17 @@
                     <h4 class="display-4 py-2 text-truncate">Acesso ao S-Lab </h4>
 
                     <div class="px-2">
-                        <form id="formLogin" action="<?= url("login") ?>" class="justify-content-center" method="post">
+                        <div class="login_form_callback">
+                            <?= flash(); ?>
+                        </div>
+                        <form id="formLogin" action="<?= $router->route("auth.login"); ?>" class="justify-content-center" method="post" autocomplete="off">
                             <div class="form-group">
                                 <label class="sr-only">Usuário</label>
                                 <input type="text" name="user" class="form-control" placeholder="Usuário">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only">Senha</label>
-                                <input type="password" name="senha" class="form-control" placeholder="Senha">
+                                <input type="password" name="passwd" class="form-control" placeholder="Senha">
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
                         </form>
@@ -43,30 +46,6 @@
             $("#error").removeAttr("style").hide();
         }, 5000);
 
-        // $("#formLogin").submit(function(e) {
-        //     e.preventDefault();
-        //     var form = $(this);
-        //     $.ajax({
-        //             url: form.attr("action"),
-        //             data: form.serialize(),
-        //             type: "POST",
-        //             dataType: "json",
-        //         })
-        //         .done(function(callback) {
-        //             console.log(callback.Usuario);
-        //             // swal({
-        //             //     title: callback.message,
-        //             //     text: " ",
-        //             //     icon: 'success',
-        //             //     timer: 3000
-        //             // });
-        //             $('#formLogin')[0].reset();
-
-        //         }).fail(function(callback) {
-        //             console.log(callback.message);
-        //             $('#formLogin')[0].reset();
-        //         })
-        // })
     });
 </script>
 <?php $v->end(); ?>

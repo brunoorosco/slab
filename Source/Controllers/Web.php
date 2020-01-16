@@ -2,114 +2,90 @@
 
 namespace Source\Controllers;
 
-use Source\Models\User;
-use Source\Models\FuncionarioModel;
-
 class Web extends Controller
 {
-    /** @var User */
-    protected $Usuario;
-
     public function __construct($router)
     {
         parent::__construct($router);
-                
-        if (empty($_SESSION["usuario"]) || !$this->Usuario = (new User())->findById($_SESSION["usuario"])) {
-            unset($_SESSION["usuario"]);
-            var_dump($this->Usuario);
-        //     flash("error", "Acesso negado!");
-            $this->router->redirect("web.login");
-         }
-    }
 
-    public function home($email): void
-    {
-
-        echo $this->view->render("home", [
-                    "title" => "Home | " . SITE['name'],
-                    "error" => null //provisorio
-     ]);
-
-        // $autenticado = User::validarUsuario();
-
-        // if ($autenticado != 0) {
-        //     echo $this->view->render("home", [
-        //         "title" => "Home | " . SITE['name'],
-        //         "error" => null //provisorio
-        //     ]);
-        // } else {
-        //     echo $this->view->render("home", [
-        //         "title" => "Home | " . SITE['name'],
-        //         "error" => null //provisorio
-        //     ]);
-        // }
-    }
-
-
-    public function login($data): void
-    {
-
-        $model = new FuncionarioModel();
-        $autenticado = User::autenticar($data);
-        if ($autenticado != 0) {
-            $user = $model->findById($_SESSION['codUsuario']);
-            //  var_dump($user);
-            echo $this->view->render("../home", [
-                "title" => "Home | " . SITE['name'],
-                "user" => $user
-            ]);
-        } else {
-            echo $this->view->render("home", [
-                "title" => "Login | " . SITE['name'],
-                "error" => "Usuário ou senha Incorreto!"
-                //   "autentic" => $autenticado
-            ]);
+        if (!empty($_SESSION["usuario"])) {
+            $this->router->redirect('app.home');
         }
+    }
 
+    public function login(): void
+    {
+        $head = $this->seo->optimize(
+            "Faça login para continuar " . site("name"), //title
+            site("desc"), //descrição
+            $this->router->route("web.login"), //url
+            routeImage("Login") //image          
+        )->render(); //transforma tudo em string
 
-
-        echo $this->view->render("../home", [
-            "title" => "Home | " . SITE['name'],
-            "user" => "Bruno"
+        echo $this->view->render("theme/login", [
+            "head" => $head
         ]);
     }
 
-
-
-    public function logout($data): void
+    public function register($data): void
     {
+        $head = $this->seo->optimize(
+            "Crie sua conta no " . site("name"), //title
+            site("desc"), //descrição
+            $this->router->route("web.register"), //url
+            routeImage("Register") //image
+            //image
+        )->render(); //transforma tudo em string
 
-        $inicio = User::sair();
-        // $users = (new User())->find()->fetch(true);
-        if ($inicio) {
-            flash("info","Você saiu com sucesso!");
-            $this->router->redirect("web.home");
+        $form_user = new \stdClass(); //cria uma classe anonima
+        $form_user->first_name = null;
+        $form_user->last_name = null;
+        $form_user->email = null;
 
-            // echo $this->view->render("home", [
-            //     "title" => "Login | " . SITE['name'],
-            //     //   "autentic" => $autenticado
-            //     "error" => null
-            // ]);
-        }
+        echo $this->view->render("theme/register", [
+            "head" => $head,
+            "user" => $form_user
+        ]);
     }
-
-
-
-    public function contato($data): void
+    public function forget(): void
     {
-        echo "<h1>Contato</h1>";
-        //var_dump($data);
-        $url = SITE['root'];
-        require __DIR__ . "../../Views/contato.php";
+        $head = $this->seo->optimize(
+            "Recupere sua senha " . site("name"), //title
+            site("desc"), //descrição
+            $this->router->route("web.forget"), //url
+            routeImage("Forget") //image
+        )->render(); //transforma tudo em string
+
+        echo $this->view->render("theme/forget", [
+            "head" => $head
+        ]);
     }
+    public function reset($data): void
+    {
+        $head = $this->seo->optimize(
+            "Crie sua nova senha " . site("name"), //title
+            site("desc"), //descrição
+            $this->router->route("web.reset"), //url
+            routeImage("Reset")
+        )->render(); //transforma tudo em string
 
-
+        echo $this->view->render("theme/reset", [
+            "head" => $head
+        ]);
+    }
     public function error($data): void
     {
+        $error = filter_var($data["errcode"], FILTER_VALIDATE_INT);
+        $head = $this->seo->optimize(
+            "Ooooopsss {$error} | " . site("name"), //title
+            site("desc"), //descrição
+            $this->router->route("web.error", ["errcode" => $error]), //url
+            routeImage($error)
+        )->render(); //transforma tudo em string
 
-        echo $this->view->render("error", [
-            "title" => "Erro | {$data["errcode"]}" . SITE['name'],
-            "error" => $data["errcode"]
+        echo $this->view->render("theme/error", [
+            "head" => $head,
+            "error" => $error
         ]);
     }
 }

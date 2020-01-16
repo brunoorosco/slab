@@ -3,7 +3,6 @@
 
 namespace Source\Models;
 
-use Db;
 use CoffeeCode\DataLayer\DataLayer;
 use Exception;
 

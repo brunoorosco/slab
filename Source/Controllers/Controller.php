@@ -2,9 +2,9 @@
 
 namespace Source\Controllers;
 
-use League\Plates\Engine;
 use CoffeeCode\Router\Router;
-use CoffeCode\Optimizer\Optimizer;
+use CoffeeCode\Optimizer\Optimizer;
+use League\Plates\Engine;
 
 
 abstract class Controller
@@ -21,11 +21,15 @@ abstract class Controller
     public function __construct($router)
     {
         $this->router = $router;
-        $this->view = Engine::create(dirname(__DIR__, 2)."/Views","php");
-        // $this->view = Engine::create(__DIR__ . "/../Views/theme", "php");
+        $this->view = Engine::create(dirname(__DIR__, 1)."/Views","php");
+       
         $this->view->addData(["router" => $this->router]);
 
-        //$this->seo = new Optimizer();
+        $this->seo = new Optimizer();
+        $this->seo->openGraph(site("name"),site("locale"),"article");
+        // ->publisher("","")
+        // ->twitterCard(" "," "," ")
+        // ->facebook(" ");
     }
 
     public function ajaxResponse(string $param, array $values): string
