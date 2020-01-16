@@ -8,13 +8,13 @@ define(
         "domain" => "localhost/",
         //"domain" => "slab.sp.senai.br/",
         "locale" => "pt-br",
-        "root" => "http://10.104.66.120/slab"
+        "root" => "http://192.168.0.108/slab"
         //"root" => "https://slab.sp.senai.br"
     ]
 );
     define("DATA_LAYER_CONFIG", [
         "driver" => "mysql",
-        "host" => "10.104.66.120",
+        "host" => "192.168.0.108",
         "port" => "3306",
         "dbname" => "slab",
         "username" => "brunoorosco",

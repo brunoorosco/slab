@@ -32,13 +32,13 @@ $route->namespace("Source\Controllers");
  */
 $route->group(null);
 //$route->get("/", "Web:home");
-$route->get("/", "Web:home");
-$route->get("/login", "Web:logout");
+$route->get("/", "Web:home", "web.home");
+$route->get("/login", "Web:logout", "web.login");
 $route->get("/contato", "Web:contact");
 $route->get("/teste", "Web:layout");
 $route->post("/login", "Web:login");
 $route->get("/home","Web:inicio");
-$route->get("/logout","Web:logout");
+$route->get("/logout","Web:logout", "web.logout");
 
 /**
  * web

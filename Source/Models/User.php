@@ -3,6 +3,7 @@
 namespace Source\Models;
 
 use CoffeeCode\DataLayer\DataLayer;
+use Exception;
 use Source\Models\FuncionarioModel;
 
 
@@ -10,7 +11,7 @@ class User extends DataLayer
 {
     public function __construct()
     {
-        $_SESSION['codUsuario'];       
+        $_SESSION['codUsuario'];
     }
 
     function autenticar($data)
@@ -20,31 +21,49 @@ class User extends DataLayer
 
         $model = new FuncionarioModel();
         var_dump($model);
-       
+
         $user = $model->find(
             "Senha = :s AND Usuario = :u",
             "s={$senhaCriptografada} & u={$usuario}"
         )->fetch();
 
-       
-       // return $user;
+
+        // return $user;
         if ($user != null) {
             $codigoUsuario = $user->Codigo;
             $_SESSION['usuario'] = $user->Usuario;
             $_SESSION['codUsuario'] = $codigoUsuario;
             $_SESSION['userName'] = $user->Nome;
-          
+
             return true;
         } else {
             $codigoUsuario = 0;
             $callback["message"] = "Usuario ou Senha incorretos!";
             $callback["action"] = "error";
-           return false;
+            return false;
         }
-       
-      
     }
 
+    protected function validaEmail(): bool
+    {
+        if(empty($this->email) || !filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+            $this->fail = new Exception("Informe um e-mail válido");
+            return false;
+        }
+        
+        $userByEmail = null;
+
+        if(!$this->id){
+            $userByEmail = $this->find("Email = :email","email={$this->email}")->count();
+        }else{
+            $userByEmail = $this->find("Email = :email AND Codigo != :id", "email={$this->email} & id={$this->id}")->count();
+        }
+
+        if($userByEmail){
+            $this->fail = new Exception("O e-mail informado já esta em uso");
+        }
+        return true;
+    }
 
     public static function validarUsuario()
     {
@@ -116,7 +135,7 @@ class User extends DataLayer
         }
     }
 
-    
+
     //   if(!isset($_SESSION))session_start(); //verifica se a sessão aberta
 
     //   function autenticar($login, $senha) {
