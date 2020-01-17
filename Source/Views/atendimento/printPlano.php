@@ -1,6 +1,6 @@
-<?php  $v->layout("layout2");
+<?php  $v->layout("theme/sidebar");
 
-$file = './Source/assests/plano.docx';
+$file = asset('plano.docx');
 
 $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor($file);
 

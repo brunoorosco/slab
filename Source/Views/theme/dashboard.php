@@ -1,4 +1,4 @@
-<?php $v->layout("theme/layout2"); ?>
+<?php $v->layout("theme/sidebar"); ?>
 
 <div class="page">
     <?php if ($user->photo): ?>

@@ -1,4 +1,4 @@
-<?php $v->layout("layout2"); ?>
+<?php $v->layout("theme/sidebar"); ?>
 <!-- CADASTRO DE EMPRESAS -->
 
 <div class="container-fluid">
@@ -146,7 +146,7 @@
                         <div class="row">
                             <div class="col ">
                                 <button class="btn btn-success" id="bt_atualizar" name="btn_atualizar">Atualizar</button>
-                                <input type="button" class="btn btn-secondary" id="bt_cancelar" name="btn_cancelar" value="Voltar" />
+                                <a type="button" class="btn btn-light" href="<?=url('empresa')?>">Voltar</a>
                             </div>
                         </div>
                     </form>
@@ -157,56 +157,55 @@
 </div>
 
 <?php $v->start("js"); ?>
-<script src="./App/Views/empresas/js/validacao.js"></script>
-<script src="./App/Views/empresas/js/cep.js"></script>
-<script src="js/sweetalert.min.js"></script>
-<script src="js/jquery.mask.min.js"></script>
-<script src="js/maskara.js"></script>
+<script src="<?= asset('js/validacao.js')?>"></script>
+<script src="<?= asset('js/cep.js')?>"></script>
+<script src="<?= asset('js/sweetalert.min.js')?>"></script>
+<script src="<?= asset('js/jquery.mask.min.js')?>"></script>
+<script src="<?= asset('js/maskara.js')?>"></script>
 
 <script>
     $(document).ready(function() {
 
-        $.ajax({
-            url: "edit",
-            method: 'post',
-            dataType: 'jsonp', // Em requisições AJAX para outro domínio é necessário usar o formato "jsonp" que é o único aceito pelos navegadores por questão de segurança
-            complete: function(xhr) {
+        // $.ajax({
+        //     url: "edit",
+        //     method: 'post',
+        //     dataType: 'json', // Em requisições AJAX para outro domínio é necessário usar o formato "jsonp" que é o único aceito pelos navegadores por questão de segurança
+        //     complete: function(xhr) {
 
-                // Aqui recuperamos o json retornado
-                response = xhr.responseJSON;
-                console.log(xhr)
-                // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
-                if (response.status == 'OK') {
+        //         // Aqui recuperamos o json retornado
+        //         response = xhr;
+        //                     // Na documentação desta API tem esse campo status que retorna "OK" caso a consulta tenha sido efetuada com sucesso
+        //         if (response.status == '200') {
 
-                    // Agora preenchemos os campos com os valores retornados
-                    $('#razao').val(response.nome);
-                    $('#txt_email').val(response.email);
-                    $('#txt_endereco').val(response.logradouro);
+        //             // Agora preenchemos os campos com os valores retornados
+        //             $('#razao').val(response.nome);
+        //             $('#txt_email').val(response.email);
+        //             $('#txt_endereco').val(response.logradouro);
 
-                    $('#txt_numero').val(response.numero);
-                    $('#txt_bairro').val(response.bairro);
+        //             $('#txt_numero').val(response.numero);
+        //             $('#txt_bairro').val(response.bairro);
 
-                    $('#txt_estado').val(response.uf);
-                    $('#logradouro').val(response.logradouro);
-                    cep = response.cep;
-                    $('#txt_cep').val(cep.replace('.', ''));
+        //             $('#txt_estado').val(response.uf);
+        //             $('#logradouro').val(response.logradouro);
+        //             cep = response.cep;
+        //             $('#txt_cep').val(cep.replace('.', ''));
 
 
-                    $('#txt_estado').val(response.uf);
-                    $('#txt_cidade').val(response.municipio);
+        //             $('#txt_estado').val(response.uf);
+        //             $('#txt_cidade').val(response.municipio);
 
-                    tel = response.telefone;
-                    tels = tel.split("/");
-                    tels.sort();
-                    $('#txt_telefone1').val(tels[0]);
-                    $('#txt_telefone2').val(tels[1]);
+        //             tel = response.telefone;
+        //             tels = tel.split("/");
+        //             tels.sort();
+        //             $('#txt_telefone1').val(tels[0]);
+        //             $('#txt_telefone2').val(tels[1]);
 
-                    // Aqui exibimos uma mensagem caso tenha ocorrido algum erro
-                } else {
-                    swal(response.message, "", "error"); // Neste caso estamos imprimindo a mensagem que a própria API retorna
-                }
-            }
-        })
+        //             // Aqui exibimos uma mensagem caso tenha ocorrido algum erro
+        //         } else {
+        //             swal(response.message, "", "error"); // Neste caso estamos imprimindo a mensagem que a própria API retorna
+        //         }
+        //     }
+        // })
 
 
         $("#form_cadEmpresas").submit(function(e) {

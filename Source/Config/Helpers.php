@@ -10,7 +10,6 @@ function site(string $param = null): string
         //  return SITE[$param];
         return SITE['root'] . "/{$param}";
     }
-
     return SITE['root'];
 }
 function routeImage(string $imageUrl): string

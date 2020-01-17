@@ -35,6 +35,9 @@ class Auth extends Controller
         }
 
         $_SESSION["user"] = $user->Codigo;
+        $_SESSION["userName"] = $user->Nome;
+        $_SESSION["userJob"] = $user->Codigo;
+
         echo $this->ajaxResponse("redirect",["url" => $this->router->route("app.home")]);
     }
 

@@ -1,7 +1,7 @@
-<?php $v->layout("layout2"); ?>
+<?php $v->layout("theme/sidebar"); ?>
 
 <?php $v->start("css"); ?>
-<link rel="stylesheet" href="<?= assest('css/datatables.css'); ?>">
+<link rel="stylesheet" href="<?= asset('css/datatables.css'); ?>">
 
 <?php $v->end(); ?>
 

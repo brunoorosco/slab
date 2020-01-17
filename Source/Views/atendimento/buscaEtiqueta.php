@@ -1,8 +1,8 @@
-<?php $v->layout("layout2"); ?>
+<?php $v->layout("theme/layout2"); ?>
 
 
 <?php $v->start("css"); ?>
-<link rel="stylesheet" href="<?= url('Source/assests/etiqueta.css'); ?>">
+<link rel="stylesheet" href="<?= asset('etiqueta.css'); ?>">
 <?php $v->end(); ?>
 
 <div class="container-fluid">

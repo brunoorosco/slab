@@ -1,1 +1,1 @@
-<?php $v->layout("layout2"); ?>
+<?php $v->layout("theme/layout2"); ?>

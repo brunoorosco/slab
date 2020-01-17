@@ -1,7 +1,8 @@
-<?php $v->layout("layout2"); ?>
+<?php $v->layout("theme/sidebar"); ?>
 
 <?php $v->start("css"); ?>
-<link rel="stylesheet" href="<?= url('Source/assests/css/datatables.css'); ?>">
+
+<link rel="stylesheet" href="<?= asset('css/datatables.css'); ?>">
 
 <?php $v->end(); ?>
 
@@ -61,18 +62,14 @@
                                     <td class="text-left" scope="row"><?= $empresa->Telefone ?></td>
                                     <td class="text-left cnpj" id="cnpj" scope="row"><?= $cnpj ?></td>
                                     <td class="text-center">
-                                        <!--<a href="<?= url("empresa/") . $empresa->Codigo ?>/editar">
-                                        <i class="fa fa-pencil text-navy"></i>
-                                    </a>-->
+
                                         <a data-action="<?= url("empresa/edit") ?>" data-id=<?= $empresa->Codigo ?> data-func="edit">
                                             <i class="fa fa-pencil text-navy"></i>
                                         </a>
                                         <a data-action="<?= url("empresa/excluir") ?>" data-id=<?= $empresa->Codigo ?> data-nome=<?= $empresa->Nome ?> data-func="exc">
                                             <i class="fa fa-trash text-navy"></i>
                                         </a>
-                                        <!-- <a href="<?= url("empresa/") . $empresa->Codigo ?>/excluir">
-                                        <i class="fa fa-trash text-navy"></i>
-                                    </a> -->
+
                                     </td>
                                 </tr>
 
@@ -89,8 +86,8 @@
 </div>
 
 <?php $v->start("js"); ?>
-<script src="js/sweetalert.min.js"></script>
-<script src="js/datatables.min.js"></script>
+<script src="<?= asset('js/sweetalert.min.js') ?>"></script>
+<script src="<?= asset('js/datatables.min.js') ?>"></script>
 
 <script>
     $(document).ready(function() {

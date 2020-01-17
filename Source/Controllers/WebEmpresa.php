@@ -3,20 +3,29 @@
 namespace Source\Controllers;
 
 use Source\Models\Empresa;
-use Source\Models\User;
+use Source\Models\FuncionarioModel;
+
 
 class WebEmpresa extends Controller
 {
-    public function __construct($router)
-    {
-        parent::__construct($router);
-        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
-    }
+     /** @var FuncionarioModal   */
+     protected $user;
+
+     public function __construct($router)
+     {
+         parent::__construct($router);
+         if (empty($_SESSION["user"]) || !$this->user = (new FuncionarioModel())->findById($_SESSION["user"])) {
+             unset($_SESSION["user"]);
+            
+             flash("error", "Acesso negado!");
+             $this->router->redirect("web.login");
+         }
+     }
 
     public function empresa($data): void
     {
         $empresas = (new Empresa())->find()->order("Codigo DESC")->fetch(true);
-        echo $this->view->render("../empresas/listar", [
+        echo $this->view->render("empresas/listar", [
             "title" => "Empresas | " . SITE['name'],
             "empresas" => $empresas
         ]);
@@ -24,7 +33,7 @@ class WebEmpresa extends Controller
 
     public function incluir($data): void
     {
-        echo $this->view->render("../empresas/add", [
+        echo $this->view->render("empresas/add", [
             "title" => "Cad. Empresa | " . SITE['name']
 
         ]);

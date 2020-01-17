@@ -13,10 +13,18 @@ use Source\Models\EnsaioModel;
 
 class Atendimento extends Controller
 {
+  /** @var FuncionarioModal   */
+  protected $user;
+
   public function __construct($router)
   {
     parent::__construct($router);
-    // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
+    if (empty($_SESSION["user"]) || !$this->user = (new FuncionarioModel())->findById($_SESSION["user"])) {
+      unset($_SESSION["user"]);
+     
+      flash("error", "Acesso negado!");
+      $this->router->redirect("web.login");
+  }
   }
 
   public function atendimento($data): void
@@ -30,7 +38,7 @@ class Atendimento extends Controller
     $numberOS = substr($planos->Sequencial, 0, strpos($planos->Sequencial, '/'));
     $numberOS++;
    
-    echo $this->view->render("../atendimento/planoAtendimento", [
+    echo $this->view->render("atendimento/planoAtendimento", [
       "title" => "Ordem de Serv | " . SITE['name'],
       "tecnicos" => $tecnico,
       "normas" => $normas,
@@ -43,7 +51,7 @@ class Atendimento extends Controller
   public function imprimirPlano($data): void
   {
     // $users = (new User())->find()->fetch(true);
-    echo $this->view->render("../atendimento/printPlano", [
+    echo $this->view->render("atendimento/printPlano", [
       "title" => "Ordem de Serv | " . SITE['name'],
     //"users" => $users
     ]);
@@ -133,7 +141,7 @@ class Atendimento extends Controller
     $norma = (new NormaModel())->find()->fetch(true);
 
     // var_dump($planos);
-    echo $this->view->render("../atendimento/planos", [
+    echo $this->view->render("atendimento/planos", [
       "title" => "Ordem de Serv | " . SITE['name'],
       "planos" => $planos,
       "empresas" => $empresas,
@@ -145,7 +153,7 @@ class Atendimento extends Controller
   {
 
     //var_dump($data);
-    echo $this->view->render("../atendimento/printEtiquetas", [
+    echo $this->view->render("atendimento/printEtiquetas", [
       "title" => "Etiquetas | " . SITE['name']
 
     ]);
@@ -155,7 +163,7 @@ class Atendimento extends Controller
   {
 
     //var_dump($data);
-    echo $this->view->render("../atendimento/buscaEtiqueta", [
+    echo $this->view->render("atendimento/buscaEtiqueta", [
       "title" => "Etiquetas | " . SITE['name']
 
     ]);

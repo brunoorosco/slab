@@ -2,7 +2,8 @@
 
 namespace Source\Controllers;
 
-use League\Plates\Engine;
+
+use Source\Models\FuncionarioModel;
 use Source\Models\EnsaioModel;
 use Source\Models\NormaModel;
 
@@ -12,7 +13,12 @@ class EnsaioController extends Controller
     public function __construct($router)
     {
         parent::__construct($router);
-        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
+        if (empty($_SESSION["user"]) || !$this->user = (new FuncionarioModel())->findById($_SESSION["user"])) {
+            unset($_SESSION["user"]);
+           
+            flash("error", "Acesso negado!");
+            $this->router->redirect("web.login");
+        }
     }
 
     public function ensaios($ensaio): void

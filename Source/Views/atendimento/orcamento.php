@@ -1,4 +1,4 @@
-<?php $v->layout("layout2"); ?>
+<?php $v->layout("theme/layout2"); ?>
 
 <!-- GERAR SOLICITAÃ‡Ã•ES DE ENSAIO -->
 <form name="frm_solicitacao" method="post" action="index.php">

@@ -1,4 +1,4 @@
-<?php $v->layout("layout"); ?>
+<?php $v->layout("theme/sidebar"); ?>
 
 <div class="container-fluid">
   <div class="card">

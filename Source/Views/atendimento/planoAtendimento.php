@@ -1,7 +1,7 @@
-<?php $v->layout("layout2"); ?>
+<?php $v->layout("theme/sidebar"); ?>
 
 <?php $v->start("css"); ?>
-<link rel="stylesheet" href="<?= assest('css/planoStyle.css'); ?>">
+<link rel="stylesheet" href="<?= asset('css/planoStyle.css'); ?>">
 
 <?php $v->end(); ?>
 
@@ -182,12 +182,12 @@
 </div>
 
 <?php $v->start("js"); ?>
-<script src="js/sweetalert.min.js"></script>
-<script src="js/jquery.mask.min.js"></script>
-<script src="js/maskara.js"></script>
-<script src="js/moment.js"></script>
+<script src="<?= asset('js/sweetalert.min.js')?>"></script>
+<script src="<?= asset('js/jquery.mask.min.js')?>"></script>
+<script src="<?= asset('js/maskara.js')?>"></script>
+<script src="<?= asset('js/moment.js')?>"></script>
 
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-<script src="js/planoAtendimento.js"></script>
+<script src="<?= asset('js/planoAtendimento.js')?>"></script>
 
 <?php $v->end(); ?>

@@ -3,13 +3,20 @@
 namespace Source\Controllers;
 
 use Source\Models\NormaModel;
+use Source\Models\FuncionarioModel;
 
 class NormaController extends Controller
 {
     public function __construct($router)
     {
         parent::__construct($router);
-        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
+        if (empty($_SESSION["user"]) || !$this->user = (new FuncionarioModel())->findById($_SESSION["user"])) {
+            unset($_SESSION["user"]);
+           
+            flash("error", "Acesso negado!");
+            $this->router->redirect("web.login");
+        }
+        
     }
 
     /** RESPONSAVEL POR CRIAR TABELA COM OS DADOS DO BANCO */

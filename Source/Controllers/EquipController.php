@@ -3,13 +3,19 @@
 namespace Source\Controllers;
 
 use Source\Models\EquipModel;
+use Source\Models\FuncionarioModel;
 
 class EquipController extends Controller
 {
     public function __construct($router)
     {
         parent::__construct($router);
-        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
+        if (empty($_SESSION["user"]) || !$this->user = (new FuncionarioModel())->findById($_SESSION["user"])) {
+            unset($_SESSION["user"]);
+           
+            flash("error", "Acesso negado!");
+            $this->router->redirect("web.login");
+        }
     }
 
     public function todos($email): void
@@ -18,7 +24,7 @@ class EquipController extends Controller
         //$user = User::login($email,$senha);
         $equipamentos = (new EquipModel())->find()->fetch(true);
         // var_dump($comps);
-        echo $this->view->render("../equipamento/todos", [
+        echo $this->view->render("equipamento/todos", [
             "title" => "Equipamentos | " . SITE['name'],
             "equips" => $equipamentos
 
@@ -80,7 +86,7 @@ class EquipController extends Controller
     public function editar($data): void
     {
         $equipamentos = (new EquipModel())->findById("{$data["id"]}");
-        echo $this->view->render("../equipamento/editEquipamento", [
+        echo $this->view->render("equipamento/editEquipamento", [
             "title" => "Equipamentos  | " . SITE['name'],
             "equipamento" => $equipamentos
         ]);

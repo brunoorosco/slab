@@ -45,7 +45,7 @@ $route->get("/busca","Atendimento:buscaEtiqueta");
  * web
  * Atendimento de empresas
  */
-$route->group("atendimento");
+$route->group("/atendimento");
 $route->get("/", "Atendimento:atendimento");
 $route->get("/plano", "Atendimento:plano");
 $route->post("/plano", "Atendimento:adicionar");
@@ -60,7 +60,7 @@ $route->post("/os/excluir", "OrcamentoController:excluir");
  * controller: Composicao
  * Composições
  */
-$route->group("comp");
+$route->group("/comp");
 $route->get("/", "CompController:home");
 $route->get("/add", "CompController:incluir");
 $route->post("/add", "CompController:adicionar");
@@ -72,7 +72,7 @@ $route->get("/{id}/editar", "CompController:editar");
  * webEmpresa
  * Empresa
  */
-$route->group("empresa");
+$route->group("/empresa");
 $route->get("/", "WebEmpresa:empresa");
 $route->get("/add", "WebEmpresa:incluir");
 $route->post("/add", "WebEmpresa:adicionar");
@@ -85,7 +85,7 @@ $route->get("/{id}/editar", "WebEmpresa:editar");
  * NormaController
  * acesso responsavel pelas normas 
  */
-$route->group("ensaio");
+$route->group("/ensaio");
 $route->get("/","EnsaioController:ensaios");
 $route->post("/add","EnsaioController:adicionar");
 $route->get("/editar/{id}","EnsaioController:editar");
