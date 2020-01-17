@@ -7,14 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title><?= $title; ?></title>
-    <base href='<?= SITE['root'] . ("/Source/assests/") ?>'>
-
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="../Views/theme/style.css"/>
+  
+    <link href="<?= asset('bootstrap/css/bootstrap.min.css')?>" rel="stylesheet">
+    <link href="<?= asset('font-awesome/css/font-awesome.css')?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= asset('css/style.css')?>"/>
 </head>
 
-<body>
+<body class="login">
     <nav class="main_nav">
         <?php if ($v->section("sidebar")) :
             echo $v->section("sidebar");

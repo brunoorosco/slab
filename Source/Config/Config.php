@@ -8,7 +8,7 @@ define(
         "domain" => "localhost/",
         //"domain" => "slab.sp.senai.br/",
         "locale" => "pt-br",
-        "root" => "http://10.104.66.120/slab"
+        "root" => "https://localhost/slab"
         //"root" => "https://slab.sp.senai.br"
     ]
 );
@@ -21,7 +21,7 @@ if ($_SERVER["SERVER_NAME"] == "localhost") {
 
 define("DATA_LAYER_CONFIG", [
     "driver" => "mysql",
-    "host" => "10.104.66.120" ,
+    "host" => "localhost" ,
     "port" => "3306",
     "dbname" => "slab",
     "username" => "brunoorosco",

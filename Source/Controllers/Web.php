@@ -8,7 +8,7 @@ class Web extends Controller
     {
         parent::__construct($router);
 
-        if (!empty($_SESSION["usuario"])) {
+        if (!empty($_SESSION["user"])) {
             $this->router->redirect('app.home');
         }
     }
@@ -23,7 +23,8 @@ class Web extends Controller
         )->render(); //transforma tudo em string
 
         echo $this->view->render("theme/login", [
-            "head" => $head
+            "head" => $head,
+            "title" => "Login"
         ]);
     }
 

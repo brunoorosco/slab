@@ -1,6 +1,7 @@
 <?php $v->layout("theme/_theme"); ?>
 
 <?php $v->start("css"); ?>
+<link href="<?= asset('css/style.css') ?>" rel="stylesheet">
 
 <?php $v->end(); ?>
 
@@ -15,7 +16,7 @@
                         <div class="login_form_callback">
                             <?= flash(); ?>
                         </div>
-                        <form id="formLogin" action="<?= $router->route("auth.login"); ?>" class="justify-content-center" method="post" autocomplete="off">
+                        <form class="form" action="<?= $router->route("auth.login"); ?>" class="justify-content-center" method="post" autocomplete="off">
                             <div class="form-group">
                                 <label class="sr-only">Usuário</label>
                                 <input type="text" name="user" class="form-control" placeholder="Usuário">
@@ -24,10 +25,13 @@
                                 <label class="sr-only">Senha</label>
                                 <input type="password" name="passwd" class="form-control" placeholder="Senha">
                             </div>
-                            <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+                            <button type="submit" class="btn btn-success btn-lg">Entrar</button>
+                            <div class="rec">
+                                <a href="<?= $router->route("web.forget"); ?>" title="Recuperar Senha">Recuperar Senha</a>
+                            </div>
                         </form>
                         <br>
-                        <div class="text-danger " id="error"><?= $error ?></div>
+                        <!-- <div class="text-danger " id="error"><?= $error ?></div> -->
                     </div>
                 </div>
             </div>
@@ -37,15 +41,6 @@
 
 
 <?php $v->start("scripts"); ?>
-<script>
-    $(document).ready(function() {
+<script src="<?= asset("js/form.js"); ?>"></script>
 
-        $('#formLogin')[0].reset();
-
-        setInterval(function() {
-            $("#error").removeAttr("style").hide();
-        }, 5000);
-
-    });
-</script>
 <?php $v->end(); ?>

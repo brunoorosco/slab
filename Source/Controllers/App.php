@@ -16,22 +16,23 @@ class App extends Controller
             unset($_SESSION["user"]);
            
             flash("error", "Acesso negado!");
-            $this->router->redirect("web.login");
+           // $this->router->redirect("web.login");
         }
     }
 
     public function home(): void
     {
-        $head = $this->seo->optimize(
+         $head = $this->seo->optimize(
             "Bem vind@ {$this->user->Nome} | ". site("name"), //title
             site("desc"), //descrição
             $this->router->route("app.home"), //url
             routeImage("Home") //image
         )->render(); //transforma tudo em string
 
-        echo $this->view->render("home", [
+        echo $this->view->render("theme/dashboard", [
              "head" => $head ,
-             "user" => $this->user
+             "user" => $this->user,
+             "title" => "DashBoard"
         ]);
     }
 
@@ -40,7 +41,7 @@ class App extends Controller
     {
         unset($_SESSION['user']);
 
-        flash("info", "Você saiu comm sucesso, volte logo {$this->user->Nome}");
+        flash("info", "Você saiu com sucesso, volte logo {$this->user->Nome}");
 
         $this->router->redirect("web.login");
     }

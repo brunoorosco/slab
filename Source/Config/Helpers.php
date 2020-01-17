@@ -20,8 +20,8 @@ function routeImage(string $imageUrl): string
 
 function asset(string $param, $time = true): string
 {
-    $file = SITE['root'] . "/Views/assets/{$param}"; 
-    $fileOnDir = dirname(__DIR__, 1)."/Views/assets/{$param}";
+    $file = SITE['root'] . "/Source/Views/assets/{$param}"; 
+    $fileOnDir = dirname(__DIR__, 1)."/Source/Views/assets/{$param}";
 
     if($time && file_exists($fileOnDir)){
         $file .= "?time=" . filemtime($fileOnDir);

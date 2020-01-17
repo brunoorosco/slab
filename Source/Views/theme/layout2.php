@@ -1,12 +1,3 @@
-<?php
-
-use Source\Models\User;
-
-if (!$autenticado = User::validarUsuario()) {
-    header("location:" . url());
-};
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -14,24 +5,20 @@ if (!$autenticado = User::validarUsuario()) {
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <base href='<?= SITE['root'] . ("/Source/assests/") ?>'>
-
-
-    <link href="css/plugins/metisMenu/metisMenu.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-
+    <link rel="shortcut icon" href="<?= asset('Favicon.ico') ?>" type="image/x-icon">
+   
+    <link href='<?= asset('bootstrap/css/bootstrap.min.css') ?>' rel="stylesheet">
+    <link href='<?= asset('font-awesome/css/font-awesome.css') ?>' rel="stylesheet">
+    
     <!-- Toastr style -->
-    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
-
+    <link href="<?= asset('css/plugins/toastr/toastr.min.css') ?>" rel="stylesheet">
 
     <!-- Gritter -->
-    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <link href="<?= asset('js/plugins/gritter/jquery.gritter.css') ?>" rel="stylesheet">
 
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/_style.css" rel="stylesheet">
+    <link href="<?= asset('css/animate.css') ?>" rel="stylesheet">
+    <link href="<?= asset('css/style.css') ?>" rel="stylesheet">
+    <link href="<?= asset('css/_style.css') ?>" rel="stylesheet">
     <?= $v->section("css"); ?>
     <title><?= $v->e($title) ?></title>
 </head>
@@ -43,17 +30,17 @@ if (!$autenticado = User::validarUsuario()) {
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element"> <span>
-                                <img alt="image" class="img-circle" src="./img/avatar-2.png" width="45" />
+                                <img alt="image" class="img-circle" src="<?= asset('img/avatar-2.png')?>" width="45" />
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?= $_SESSION['userName'] ?></strong>
+                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?= $user->Nome ?></strong>
                                     </span>
                                     <span class="text-light">Assistente de Ensaios <b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu profile animated fadeInRight m-t-xs">
                                 <li><a href="<?= url('func/conta')?>">Minha Conta</a></li>
                                 <li><a href="mailbox.html">Email</a></li>
                                 <li class="divider"></li>
-                                <li><a href="<?= url("logout"); ?>">Logout</a></li>
+                                <li><a href="<?= $router->route("app.logoff"); ?>">Logout</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -210,7 +197,7 @@ if (!$autenticado = User::validarUsuario()) {
 
 
                         <li>
-                            <a href="<?= url("logout"); ?>">
+                            <a href="<?= $router->route("app.logoff"); ?>">
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>
@@ -439,37 +426,37 @@ if (!$autenticado = User::validarUsuario()) {
     </div>
 
     <!-- Mainly scripts -->
-    <script src="js/jquery-3.4.1.js"></script>
+    <script src="<?= asset('js/jquery-3.4.1.js')?>"></script>
 
-    <script src="js/popper.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?= asset('js/popper.js')?>"></script>
+    <script src="<?= asset('bootstrap/js/bootstrap.min.js')?>"></script>
 
 
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="<?= asset('js/plugins/metisMenu/jquery.metisMenu.js')?>"></script>
+    <script src="<?= asset('js/plugins/slimscroll/jquery.slimscroll.min.js')?>"></script>
 
     <!-- Peity -->
-    <script src="js/plugins/peity/jquery.peity.min.js"></script>
-    <script src="js/demo/peity-demo.js"></script>
+    <script src="<?= asset('js/plugins/peity/jquery.peity.min.js')?>"></script>
+    <script src="<?= asset('js/demo/peity-demo.js')?>"></script>
 
     <!-- Custom and plugin javascript -->
     <!-- <script src="js/inspinia.js"></script> -->
-    <script src="js/plugins/pace/pace.min.js"></script>
+    <script src="<?= asset('js/plugins/pace/pace.min.js')?>"></script>
 
     <!-- jQuery UI -->
-    <script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="<?= asset('js/plugins/jquery-ui/jquery-ui.min.js')?>"></script>
 
     <!-- GITTER -->
-    <script src="js/plugins/gritter/jquery.gritter.min.js"></script>
+    <script src="<?= asset('js/plugins/gritter/jquery.gritter.min.js')?>"></script>
 
     <!-- Sparkline -->
-    <script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="<?= asset('js/plugins/sparkline/jquery.sparkline.min.js')?>"></script>
 
     <!-- Sparkline demo data  -->
-    <script src="js/demo/sparkline-demo.js"></script>
+    <script src="<?= asset('js/demo/sparkline-demo.js')?>"></script>
 
     <!-- Toastr -->
-    <script src="js/plugins/toastr/toastr.min.js"></script>
+    <script src="<?= asset('js/plugins/toastr/toastr.min.js')?>"></script>
 
     <?= $v->section("js"); ?>
 
