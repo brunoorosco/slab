@@ -110,25 +110,22 @@
             </li>
             <li class="sidebar-dropdown">
               <a href="#">
-                <i class="fa fa-gem"></i>
-                <span>Components</span>
+                <i class="fa fa-print"></i>
+                <span>Impressão</span>
               </a>
               <div class="sidebar-submenu">
                 <ul>
                   <li>
-                    <a href="#">General</a>
+                    <a href="#">Etiquetas</a>
                   </li>
                   <li>
-                    <a href="#">Panels</a>
+                    <a href="#">Plano</a>
                   </li>
                   <li>
                     <a href="#">Tables</a>
                   </li>
                   <li>
                     <a href="#">Icons</a>
-                  </li>
-                  <li>
-                    <a href="#">Forms</a>
                   </li>
                 </ul>
               </div>
