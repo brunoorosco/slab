@@ -9,6 +9,7 @@
   <link href='<?= asset('bootstrap/css/bootstrap.min.css') ?>' rel="stylesheet">
   <link href='<?= asset('font-awesome/css/font-awesome.css') ?>' rel="stylesheet">
   <link href="<?= asset('css/sidebar.css') ?>" rel="stylesheet">
+  <link href="<?= asset('css/tabela.css') ?>" rel="stylesheet">
   <!-- Toastr style -->
   <link href="<?= asset('css/plugins/toastr/toastr.min.css') ?>" rel="stylesheet">
 

@@ -9,7 +9,12 @@ class FuncionarioController extends Controller
     public function __construct($router)
     {
         parent::__construct($router);
-        // $this->view = Engine::create(__DIR__ . "/../../theme", "php");
+        if (empty($_SESSION["user"]) || !$this->user = (new FuncionarioModel())->findById($_SESSION["user"])) {
+            unset($_SESSION["user"]);
+           
+            flash("error", "Acesso negado!");
+            $this->router->redirect("web.login");
+        }
     }
 
     public function todos($email):void
@@ -18,7 +23,7 @@ class FuncionarioController extends Controller
        //$user = User::login($email,$senha);
        $funcionarios = (new FuncionarioModel())->find()->fetch(true);
       // var_dump($comps);
-       echo $this->view->render("../funcionario/todos",[
+       echo $this->view->render("funcionario/todos",[
            "title" => "Funcionários | ". SITE['name'],
            "funcs" => $funcionarios
            
@@ -29,21 +34,11 @@ class FuncionarioController extends Controller
        // echo $email;
        //$user = User::login($email,$senha);
      //$users = (new User())->find()->fetch(true);
-       echo $this->view->render("../funcionario/novo",[
+       echo $this->view->render("funcionario/novo",[
            "title" => "Home | ". SITE['name']
            
        ]);
     }
-
-    public function editar($data):void
-    {
-      // $users = (new User())->find()->fetch(true);
-       echo $this->view->render("login/login",[
-           "title" => "Login | ",
-           
-       ]);
-    }
-
     public function excluir($data):void
     {
         if (empty($data["id"])) return;
@@ -60,7 +55,7 @@ class FuncionarioController extends Controller
 
     public function conta()
     {
-        echo $this->view->render("../funcionario/conta",[
+        echo $this->view->render("funcionario/conta",[
             "title" => "Profile | ". SITE['name'],
             
         ]);

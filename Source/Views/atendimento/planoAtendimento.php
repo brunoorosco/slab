@@ -14,7 +14,7 @@
                 ?>
             </h5>
 
-            <div class="ibox-tools">
+            <div class="ibox-tools text-right">
                 <a class="collapse-link">
                     <i class="fa fa-chevron-up"></i>
                 </a>

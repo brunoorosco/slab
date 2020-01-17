@@ -482,3 +482,7 @@
       border-right: none;
   }
   
+  .ibox-tools {
+    text-align: right;
+    margin-bottom: 10px;
+  }

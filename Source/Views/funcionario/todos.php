@@ -1,7 +1,7 @@
-<?php $v->layout("layout2"); ?>
+<?php $v->layout("theme/sidebar"); ?>
 
 <?php $v->start("css"); ?>
-<link rel="stylesheet" href="<?= url('Source/assests/css/datatables.css'); ?>">
+<link rel="stylesheet" href="<?= asset('css/datatables.css'); ?>">
 
 <?php $v->end(); ?>
 
@@ -46,32 +46,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                        
+
                             <?php
-                          
+
                             foreach ($funcs as $func) :
 
-                                ?>
-                             
+                            ?>
+
                                 <tr>
                                     <td class="text-left" scope="row"><?= $func->Codigo ?></td>
                                     <td class="text-left" scope="row"><?= $func->Nome ?></td>
-                                   <td class="text-left" scope="row"><?= $func->Usuario ?></td>
+                                    <td class="text-left" scope="row"><?= $func->Usuario ?></td>
                                     <td class="text-left" scope="row"><?= $func->CodFuncao ?></td>
                                     <td class="text-left" scope="row"><?= $func->Status ?></td>
                                     <td>
-                                        <!--<a href="<?= url("func/") . $func->Codigo ?>/editar">
-                                        <i class="fa fa-pencil text-navy"></i>
-                                    </a>-->
                                         <a data-action="<?= url("func/") ?>/editar" data-id=<?= $func->Codigo ?>>
                                             <i class="fa fa-pencil text-navy"></i>
                                         </a>
                                         <a data-action="<?= url("func/excluir") ?>" data-id=<?= $func->Codigo ?> data-nome=<?= $func->Nome ?>>
                                             <i class="fa fa-trash text-navy"></i>
                                         </a>
-                                        <!-- <a href="<?= url("func/") . $func->Codigo ?>/excluir">
-                                        <i class="fa fa-trash text-navy"></i>
-                                    </a> -->
                                     </td>
                                 </tr>
 
@@ -88,8 +82,8 @@
 </div>
 
 <?php $v->start("js"); ?>
-<script src="js/sweetalert.min.js"></script>
-<script src="js/datatables.min.js"></script>
+<script src="<?= asset('js/sweetalert.min.js') ?>"></script>
+<script src="<?= asset('js/datatables.min.js') ?>"></script>
 
 <script>
     $(document).ready(function() {

@@ -87,8 +87,8 @@
 </div>
 
 <?php $v->start("js"); ?>
-<script src="js/sweetalert.min.js"></script>
-<script src="js/datatables.min.js"></script>
+<script src="<?= asset('js/sweetalert.min.js')?>"></script>
+<script src="<?= asset('js/datatables.min.js')?>"></script>
 
 <script>
     $(document).ready(function() {
