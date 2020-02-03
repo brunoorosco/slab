@@ -3235,7 +3235,8 @@ a.forum-item-title:hover {
 }
 body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: #222 url('https://unsplash.it/1920/1080/?random') center center no-repeat !important;
+  /* background: #222 url('https://unsplash.it/1920/1080/?random') center center no-repeat !important; */
+  background: #222 url('../img/laboratorio.png') center center no-repeat !important;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -8172,7 +8173,8 @@ form:before {
 }
 
 .login body{
-  background: #222 url('https://unsplash.it/1920/1080/?random') center center no-repeat !important;
+ /* background: #222 url('https://unsplash.it/1920/1080/?random') center center no-repeat !important;*/
+  background: #222 url('../img/laboratorio.png') center center no-repeat !important;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
