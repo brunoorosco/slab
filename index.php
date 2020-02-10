@@ -53,8 +53,13 @@ $route->post("/empresa", "webEmpresa:buscar");
 $route->post("/autoEnsaio", "Atendimento:carregaEnsaio");
 $route->post("/auto", "Atendimento:carregaNorma");
 $route->post("/os", "OrcamentoController:adicionar");
-$route->post("/os/excluir", "OrcamentoController:excluir");
+//$route->post("/plano/excluir", "OrcamentoController:excluir");
 
+
+
+$route->group("/plano");
+$route->delete("/excluir", "PlanoController:excluir");
+$route->get("/{id}", "PlanoController:view");
 
 /**
  * controller: Composicao

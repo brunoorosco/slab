@@ -80,9 +80,10 @@ class OrcamentoController extends Controller
     /** RESPONSAVEL POR Excluir item do Orçamento */
     public function excluir($data)
     {
-       // var_dump($data);
+       
+       //var_dump($data);
        //LÊ O VALOR DO REGISTRO PARA QUE POSSA SER ATUALIZADO O VALOR DE ITENS
-       $itensPedidoEnsaio = (new PlanoModel())->find("Sequencial = :codSeq", "codSeq={$data['codSequencial']}")->fetch(false) ; 
+       $itensPedidoEnsaio = (new PlanoModel())->find("Codigo = :codSeq", "codSeq={$data['id']}")->fetch(false) ; 
        //var_dump($itensPedidoEnsaio->itens);
        
        $os = new OrcamentoModel();

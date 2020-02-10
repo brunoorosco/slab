@@ -26,7 +26,7 @@ class NormaController extends Controller
        //$user = User::login($email,$senha);
        $normas = (new NormaModel())->find()->fetch(true);
       // var_dump($comps);
-       echo $this->view->render("../normas/normas",[
+       echo $this->view->render("normas/normas",[
            "title" => "Normas | ". SITE['name'],
            "normas" => $normas
            
@@ -91,7 +91,7 @@ class NormaController extends Controller
     public function editar($data):void
     {
         $normas = (new NormaModel())->findById("{$data["id"]}");
-       echo $this->view->render("../normas/editNorma",[
+       echo $this->view->render("normas/editNorma",[
            "title" => "Normas  | ".SITE['name'],
            "norma" => $normas
        ]);

@@ -1,4 +1,4 @@
-<?php $v->layout("layout2"); ?>
+<?php $v->layout(SITE['theme']); ?>
 <!-- EDIÇÃO DE ENSAIOS -->
 
 <div class="container-fluid">

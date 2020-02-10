@@ -1,4 +1,4 @@
-<?php $v->layout("theme/sidebar"); ?>
+<?php $v->layout(SITE['theme']); ?>
 
 <?php $v->start("css"); ?>
 

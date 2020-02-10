@@ -1,4 +1,4 @@
-<?php $v->layout("theme/sidebar"); ?>
+<?php $v->layout(SITE['theme']); ?>
 
 <?php $v->start("css"); ?>
 <link rel="stylesheet" href="<?= asset('css/planoStyle.css'); ?>">
@@ -39,8 +39,8 @@
                     <div class="form-group col-2">
                         <label for="message-text" class="control-span">Nº Sequencial:</label>
                         <div class="input-group">
-                            <input name="nProposta"    type="text" class="form-control col" id="nProposta"   placeholder="Nº Proposta" value="<?= $plano ?>">
-                            <input name="nPropostaAno" type="text" class="form-control"     id="anoProposta" value="/<?= date('Y') ?>" readonly >
+                            <input name="nProposta" type="text" class="form-control col" id="nProposta" placeholder="Nº Proposta" value="<?= $plano ?>">
+                            <input name="nPropostaAno" type="text" class="form-control" id="anoProposta" value="/<?= date('Y') ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group col-2">
@@ -146,14 +146,14 @@
                                         <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Valor Unitário</th>
                                         <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Valor Total</th>
                                         <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Desc. (%)</th>
-                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center"> <a data-action="<?= url("plano/servico/edit") ?>"   data-func="edit" id="adicionar">
+                                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center"> <a data-action="<?= url("plano/servico/edit") ?>" data-func="edit" id="adicionar">
                                                 <i class="fa fa-plus-circle text-navy mr-2"></i>
                                             </a></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  
-                                 </tbody>
+
+                                </tbody>
 
                             </table>
                         </div>
@@ -182,12 +182,12 @@
 </div>
 
 <?php $v->start("js"); ?>
-<script src="<?= asset('js/sweetalert.min.js')?>"></script>
-<script src="<?= asset('js/jquery.mask.min.js')?>"></script>
-<script src="<?= asset('js/maskara.js')?>"></script>
-<script src="<?= asset('js/moment.js')?>"></script>
+<script src="<?= asset('js/sweetalert.min.js') ?>"></script>
+<script src="<?= asset('js/jquery.mask.min.js') ?>"></script>
+<script src="<?= asset('js/maskara.js') ?>"></script>
+<script src="<?= asset('js/moment.js') ?>"></script>
 
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-<script src="<?= asset('js/planoAtendimento.js')?>"></script>
+<script src="<?= asset('js/planoAtendimento.js') ?>"></script>
 
 <?php $v->end(); ?>

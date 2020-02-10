@@ -1,4 +1,4 @@
-<?php $v->layout("theme/sidebar"); ?>
+<?php $v->layout(SITE['theme']); ?>
 
 <?php $v->start("css"); ?>
 <link rel="stylesheet" href="<?= asset('css/datatables.css'); ?>">
@@ -59,17 +59,17 @@
                                     <td class="text-left" scope="row"><?= $plano->DataCadastro ?></td>
                                     <td class="text-left" scope="row"><?= $plano->Status ?></td>
                                     <td class="text-left" scope="row"><?= $plano->Status ?></td>
-                                
+
                                     <td class="text-center">
+                                        <a data-id=<?= $plano->Codigo ?> data-toggle="modal" data-target="#orcamentoModal">
+                                            <i class="fa fa-eye text-navy"></i>
+                                        </a>
                                         <a data-action="<?= url("plano/edit") ?>" data-id=<?= $plano->Codigo ?> data-func="edit">
                                             <i class="fa fa-pencil text-navy"></i>
                                         </a>
-                                        <a data-action="<?= url("plano/excluir") ?>" data-id=<?= $plano->Codigo ?> data-nome=<?= $plano->Nome ?> data-func="exc">
+                                        <a data-action="<?= url("plano/excluir") ?>" data-id=<?= $plano->Codigo ?> data-func="exc">
                                             <i class="fa fa-trash text-navy"></i>
                                         </a>
-                                        <!-- <a href="<?= url("plano/") . $plano->Codigo ?>/excluir">
-                                        <i class="fa fa-trash text-navy"></i>
-                                    </a> -->
                                     </td>
                                 </tr>
 
@@ -86,9 +86,38 @@
     </div>
 </div>
 
+<div class="modal fade" id="orcamentoModal" tabindex="-1" role="dialog" aria-labelledby="orcamentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> </h5>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <thead>
+                    <tr class="row justify-content-md-center" style="margin-right: 0px">
+                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-3">Descricao do Ensaio</th>
+                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Norma</th>
+                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Amostras</th>
+                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Valor Unitário</th>
+                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Valor Total</th>
+                        <th class="col-xs-2 col-sm-2 col-md-2 col-lg-1">Desc. (%)</th>
+                    </tr>
+                </thead>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php $v->start("js"); ?>
-<script src="<?= asset('js/sweetalert.min.js')?>"></script>
-<script src="<?= asset('js/datatables.min.js')?>"></script>
+<script src="<?= asset('js/sweetalert.min.js') ?>"></script>
+<script src="<?= asset('js/datatables.min.js') ?>"></script>
 
 <script>
     $(document).ready(function() {
@@ -111,6 +140,17 @@
 
         });
 
+        //tratamento do modal 
+        $('#orcamentoModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var id = button.data('id') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('Plano de Atendimento: ' + id)
+
+        })
+
         function load(action) {
             var load_div = $(".ajax_load");
             if (action === "open") {
@@ -130,7 +170,7 @@
             var id = $(this).data('id');
 
             var func = $(this).data('func');
-            // console.log(func);
+            console.log(data);
             // alert(data.action); //returna -> https://localhost/www/SLAB/empresa/editar
             if (func === "exc") {
                 swal({
@@ -161,7 +201,7 @@
                             $.ajax({
                                 url: data.action,
                                 data: data,
-                                type: 'POST',
+                                type: 'DELETE',
 
                             }).done(function(resp) {
 

@@ -1,4 +1,4 @@
-<?php $v->layout("layout2"); ?>
+<?php $v->layout("theme/sidebar"); ?>
 <!-- EDIÇÃO DE ENSAIOS -->
 
 <div class="container">

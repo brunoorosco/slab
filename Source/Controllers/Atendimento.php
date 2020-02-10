@@ -2,7 +2,6 @@
 
 namespace Source\Controllers;
 
-use Source\Models\Orcamento;
 use Source\Models\Empresa;
 use Source\Models\PlanoModel;
 use Source\Models\FuncionarioModel;
@@ -10,6 +9,7 @@ use PhpOffice\Common;
 use Phpoffice\PhpWord;
 use Source\Models\NormaModel;
 use Source\Models\EnsaioModel;
+use Source\Models\OrcamentoModel;
 
 class Atendimento extends Controller
 {
@@ -203,4 +203,6 @@ class Atendimento extends Controller
 
     echo (json_encode($callback));
   }
+
+ 
 }

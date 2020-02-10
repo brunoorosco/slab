@@ -25,7 +25,7 @@ class EnsaioController extends Controller
     {
         $ensaios = (new EnsaioModel())->find()->fetch(true);
 
-        echo $this->view->render("../ensaio/ensaio", [
+        echo $this->view->render("ensaio/ensaio", [
             "title" => "Ensaios  | " . SITE['name'],
             "ensaios" => $ensaios,
 
@@ -107,7 +107,7 @@ class EnsaioController extends Controller
 
         //   $norma = $ens->ensaioNorma($ensaio);
 
-        echo $this->view->render("../ensaio/edit", [
+        echo $this->view->render("ensaio/edit", [
             "title" => "Ensaios  | " . SITE['name'],
             "ensaio" => $ensaio,
             "norma" => $norma

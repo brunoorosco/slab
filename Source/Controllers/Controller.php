@@ -5,7 +5,6 @@ namespace Source\Controllers;
 use CoffeeCode\Router\Router;
 use CoffeeCode\Optimizer\Optimizer;
 use League\Plates\Engine;
-use Source\Models\FuncionarioModel;
 
 
 abstract class Controller

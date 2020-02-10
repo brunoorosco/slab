@@ -1,4 +1,4 @@
-<?php $v->layout("layout2"); ?>
+<?php $v->layout("theme/sidebar"); ?>
 <!-- CADASTRO DE EMPRESAS -->
 
 <div class="container-fluid">
@@ -233,11 +233,11 @@
 </div>
 
 <?php $v->start("js"); ?>
-<script src="./App/Views/empresas/js/validacao.js"></script>
-<script src="./App/Views/empresas/js/cep.js"></script>
-<script src="js/sweetalert.min.js"></script>
-<script src="js/jquery.mask.min.js"></script>
-<script src="js/maskara.js"></script>
+<script src= "<?= asset('js/validacao.js')?>" ></script>
+<script src= "<?= asset('js/cep.js')?>" ></script>
+<script src= "<?= asset('js/sweetalert.min.js')?>" ></script>
+<script src= "<?= asset('js/jquery.mask.min.js')?>" ></script>
+<script src= "<?= asset('js/maskara.js')?>" ></script>
 
 <script>
     $(document).ready(function() {

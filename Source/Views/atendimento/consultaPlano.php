@@ -1,1 +1,1 @@
-<?php $v->layout("theme/layout2"); ?>
+<?php $v->layout(SITE['theme']); ?>

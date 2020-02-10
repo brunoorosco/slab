@@ -45,7 +45,7 @@ class PlanoModel extends DataLayer
         $dataResp = date("d/m/Y", strtotime(str_replace('-', '/', $infoPlano->DataResposta)));
         $cnpj = vsprintf("%s%s.%s%s%s.%s%s%s/%s%s%s%s-%s%s", str_split($infoEmpresa->CNPJ));
 
-        $file = './Source/assests/plano.docx';
+        $file = './Source/Views/assets/plano.docx';
 
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor($file);
         $fontStyle = new \PhpOffice\PhpWord\Style\Font();
